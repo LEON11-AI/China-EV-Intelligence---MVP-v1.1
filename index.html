@@ -94,6 +94,15 @@
         .nav-links a:hover {
             color: var(--accent-blue);
         }
+        
+        /* --- MODIFICATION START --- */
+        /* 新增：右侧操作区样式 */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem; /* 控制语言切换和登录按钮之间的间距 */
+        }
+        /* --- MODIFICATION END --- */
 
         .login-btn {
             background-color: transparent;
@@ -114,7 +123,9 @@
         .lang-switcher {
             display: flex;
             align-items: center;
-            margin-left: 1.5rem;
+            /* --- MODIFICATION START --- */
+            /* margin-left: 1.5rem;  <-- 移除了这里的左边距，由nav-actions的gap统一控制 */
+            /* --- MODIFICATION END --- */
             cursor: pointer;
             color: var(--text-secondary);
             transition: color 0.3s ease;
@@ -683,24 +694,32 @@
 <body>
     <!-- 导航栏 -->
     <header>
+        <!-- --- MODIFICATION START --- -->
         <div class="container">
             <nav>
                 <div class="logo">
                     <span data-i18n="siteTitle">China EV Intelligence</span>
                 </div>
+                
+                <!-- 主要导航链接 -->
                 <ul class="nav-links">
                     <li><a href="#" class="nav-link" data-page="home" data-i18n="navHome">Home</a></li>
                     <li><a href="#" class="nav-link" data-page="intelligence" data-i18n="navIntelligence">Intelligence</a></li>
                     <li><a href="#" class="nav-link" data-page="database" data-i18n="navDatabase">Focused Database</a></li>
                     <li><a href="#" class="nav-link" data-page="pricing" data-i18n="navPricing">Pricing</a></li>
-                    <li class="lang-switcher lang-en">
+                </ul>
+
+                <!-- 右侧操作区 -->
+                <div class="nav-actions">
+                    <div class="lang-switcher lang-en">
                         <div class="lang-flag"></div>
                         <span class="lang-text" data-i18n="language">English</span>
-                    </li>
+                    </div>
                     <button class="login-btn" data-i18n="login">Login</button>
-                </ul>
+                </div>
             </nav>
         </div>
+        <!-- --- MODIFICATION END --- -->
     </header>
 
     <!-- 主页内容 -->
@@ -1367,3 +1386,4 @@
     </script>
 </body>
 </html>
+--- END OF FILE index.html ---
