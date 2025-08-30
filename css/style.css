@@ -314,12 +314,8 @@ footer {
 
 /* 页面内容区域 */
 .page-content {
-    display: none;
+    /* display: none; */ /* We manage visibility in each page now */
     padding: 2rem 0;
-}
-
-.page-content.active {
-    display: block;
 }
 
 /* 车型卡片样式 */
@@ -448,13 +444,14 @@ footer {
     border-color: var(--accent-blue);
 }
 
-/* === 最终视觉优化：品牌Logo (v2) === */
+/* === 最终视觉优化：品牌Logo (v3 - Surgical Adjustment) === */
 .brands-grid {
     display: flex; /* 改用 Flexbox 来获得更好的对齐控制 */
     flex-wrap: wrap;
     justify-content: center; /* 水平居中所有Logo */
     align-items: center;   /* 垂直居中所有Logo */
-    gap: 3rem; /* 稍微增加Logo之间的间距 */
+    gap: 3.5rem; /* 进一步增加Logo之间的间距 */
+    padding: 1rem 0; /* 增加一些垂直内边距 */
 }
 
 .brand-logo { 
@@ -462,8 +459,8 @@ footer {
 } /* 隐藏旧的文字logo */
 
 .brand-logo-img {
-    max-height: 35px;  /* 将标准从“固定高度”改为“最大高度”，更灵活 */
-    max-width: 120px; /* 限制最大宽度 */
+    height: 28px;  /* 设定一个统一的基准高度，针对“细长型”Logo */
+    max-width: 130px; /* 限制最大宽度 */
     object-fit: contain;
     filter: grayscale(100%) brightness(150%);
     opacity: 0.7;
@@ -474,3 +471,15 @@ footer {
     filter: none;
     opacity: 1;
 }
+
+/* --- “手术刀式”微调开始 --- */
+/* 为理想这种“方块型”Logo，稍微增加高度以匹配视觉重量 */
+.brand-logo-img[alt="Li Auto Logo"] {
+    height: 45px;
+}
+
+/* 为小米这种“徽章型”Logo，显著增加高度 */
+.brand-logo-img[alt="Xiaomi Logo"] {
+    height: 40px;
+}
+/* --- “手术刀式”微调结束 --- */
