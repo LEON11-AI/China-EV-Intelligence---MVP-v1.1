@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 标题将由JS动态设置 -->
+    <title>Model Details - Volt China</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="intelligence.html">Intelligence</a></li>
+                    <li><a href="database.html">Focused Database</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <div class="nav-actions"><div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div><button class="login-btn">Login</button></div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content" style="display: block;">
+            <div class="container" id="detail-content-container">
+                <!-- 详情内容将由JS动态插入到这里 -->
+                <!-- Loading State -->
+                <p id="loading-message" style="color: var(--text-secondary); text-align: center; padding: 4rem 0;">Loading model data...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contentContainer = document.getElementById('detail-content-container');
+        const loadingMessage = document.getElementById('loading-message');
+
+        // 1. 从URL中获取车型ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const modelId = urlParams.get('id');
+
+        if (!modelId) {
+            displayError('No model ID provided.');
+            return;
+        }
+
+        // 2. 加载所有模型数据并找到匹配的那个
+        fetch('/data/models.json')
+            .then(response => response.json())
+            .then(models => {
+                const model = models.find(m => m.id === modelId);
+                if (model) {
+                    renderModelDetails(model);
+                } else {
+                    displayError(`Model with ID "${modelId}" not found.`);
+                }
+            })
+            .catch(error => {
+                console.error('Error loading model data:', error);
+                displayError('Failed to load model data.');
+            });
+
+        function displayError(message) {
+            loadingMessage.style.color = 'var(--accent-orange)';
+            loadingMessage.textContent = `Error: ${message}`;
+        }
+
+        // 3. 渲染详情页的函数
+        function renderModelDetails(model) {
+            // 更新页面标题
+            document.title = `${model.brand} ${model.model_name} - Volt China`;
+            
+            // 生成HTML
+            const detailHTML = `
+                <a href="database.html" class="back-button">&larr; Back to Database</a>
+                <div class="model-detail">
+                    <div class="detail-header">
+                        <h2 class="detail-title">${model.brand} ${model.model_name}</h2>
+                        <p class="detail-subtitle">${model.subtitle}</p>
+                        <div class="model-status">${model.status}</div>
+                    </div>
+                    <div class="detail-image" style="background-image: url('${model.image_detail}'); background-size: cover; background-position: center;">
+                        <!-- 图片作为背景 -->
+                    </div>
+                    <div class="detail-content">
+                        <div class="ceo-note">
+                            <h3>Chief Experience Officer's Note</h3>
+                            <p>${model.ceo_note}</p>
+                            <div class="author-byline">
+                                <img src="images/leon.jpg" alt="Leon" class="author-avatar">
+                                <div class="author-info">
+                                    <strong>By Leon</strong>
+                                    <span>Founder of Volt China, reporting from Guangzhou.</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3 class="section-heading">Key Specifications</h3>
+                            <div class="specs-grid">
+                                <div class="spec-card"><div class="spec-name">Range (CLTC)</div><div class="spec-value">${model.key_specs.range_cltc}</div></div>
+                                <div class="spec-card"><div class="spec-name">0-100 km/h</div><div class="spec-value">${model.key_specs.zero_to_100}</div></div>
+                                <div class="spec-card"><div class="spec-name">Power</div><div class="spec-value">${model.key_specs.power_kw}</div></div>
+                                <div class="spec-card"><div class="spec-name">Battery Capacity</div><div class="spec-value">${model.key_specs.battery_kwh}</div></div>
+                                <div class="spec-card"><div class="spec-name">Estimated Price</div><div class="spec-value">${model.key_specs.price_usd_estimated}</div></div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3 class="section-heading">Full Specifications</h3>
+                            <div class="specs-grid">
+                                <div class="spec-card"><div class="spec-name">Dimensions</div><div class="spec-value">${model.full_specs.dimensions}</div></div>
+                                <div class="spec-card"><div class="spec-name">Wheelbase</div><div class="spec-value">${model.full_specs.wheelbase}</div></div>
+                                <div class="spec-card"><div class="spec-name">Powertrain</div><div class="spec-value">${model.full_specs.powertrain}</div></div>
+                                <div class="spec-card"><div class="spec-name">Battery</div><div class="spec-value">${model.full_specs.battery}</div></div>
+                                <div class="spec-card"><div class="spec-name">Charging</div><div class="spec-value">${model.full_specs.charging}</div></div>
+                                <div class="spec-card"><div class="spec-name">ADAS</div><div class="spec-value">${model.full_specs.adas}</div></div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3 class="section-heading">Market Plan</h3>
+                            <div class="specs-grid">
+                                <div class="spec-card"><div class="spec-name">China Launch</div><div class="spec-value">${model.market_plan.china_launch}</div></div>
+                                <div class="spec-card"><div class="spec-name">Global Rollout</div><div class="spec-value">${model.market_plan.global_rollout}</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            // 将生成的HTML插入到页面中
+            contentContainer.innerHTML = detailHTML;
+        }
+    });
+    </script>
+</body>
+</html>

@@ -14,7 +14,6 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
-                <!-- === UPDATED NAVIGATION === -->
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="intelligence.html">Intelligence</a></li>
@@ -22,7 +21,6 @@
                     <li><a href="pricing.html">Pricing</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
-                <!-- === END OF UPDATE === -->
                 <div class="nav-actions">
                     <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
                     <button class="login-btn">Login</button>
@@ -44,9 +42,7 @@
                         <button class="filter-option" data-brand="BYD">BYD</button>
                     </div>
                 </div>
-                <div class="models-grid" id="models-grid-container">
-                    <!-- 车型卡片将由JS动态插入到这里 -->
-                </div>
+                <div class="models-grid" id="models-grid-container"></div>
             </div>
         </section>
     </main>
@@ -87,32 +83,24 @@
                 return;
             }
             models.forEach(model => {
+                // === MODIFICATION START: Updated the button link ===
                 const card = `
                     <div class="model-card">
-                        <div class="model-image" style="background-image: url('${model.image}'); background-size: cover; background-position: center;">
-                        </div>
+                        <div class="model-image" style="background-image: url('${model.image_card}'); background-size: cover; background-position: center;"></div>
                         <div class="model-content">
                             <h3 class="model-title">${model.model_name}</h3>
                             <div class="model-brand">${model.brand}</div>
                             <div class="model-status">${model.status}</div>
                             <div class="model-specs">
-                                <div class="spec-item">
-                                    <span class="spec-label">Range (CLTC):</span>
-                                    <span class="spec-value">${model.key_specs.range_cltc}</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">0-100 km/h:</span>
-                                    <span class="spec-value">${model.key_specs.zero_to_100}</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">Power:</span>
-                                    <span class="spec-value">${model.key_specs.power_kw}</span>
-                                </div>
+                                <div class="spec-item"><span class="spec-label">Range (CLTC):</span><span class="spec-value">${model.key_specs.range_cltc}</span></div>
+                                <div class="spec-item"><span class="spec-label">0-100 km/h:</span><span class="spec-value">${model.key_specs.zero_to_100}</span></div>
+                                <div class="spec-item"><span class="spec-label">Power:</span><span class="spec-value">${model.key_specs.power_kw}</span></div>
                             </div>
-                            <a href="#" class="view-details" data-model="${model.id}">View Details</a>
+                            <a href="model-detail.html?id=${model.id}" class="view-details">View Details</a>
                         </div>
                     </div>
                 `;
+                // === MODIFICATION END ===
                 gridContainer.innerHTML += card;
             });
         }
