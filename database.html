@@ -14,13 +14,15 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
+                <!-- === UPDATED NAVIGATION === -->
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Intelligence</a></li>
+                    <li><a href="intelligence.html">Intelligence</a></li>
                     <li><a href="database.html">Focused Database</a></li>
-                    <li><a href="#">Pricing</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
+                <!-- === END OF UPDATE === -->
                 <div class="nav-actions">
                     <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
                     <button class="login-btn">Login</button>
@@ -65,23 +67,21 @@
     document.addEventListener('DOMContentLoaded', () => {
         const gridContainer = document.getElementById('models-grid-container');
         const filterOptions = document.querySelectorAll('.filter-option');
-        let allModelsData = []; // 用来存储所有车型的数据
+        let allModelsData = [];
 
-        // 1. 从 data/models.json 加载数据
         fetch('/data/models.json')
             .then(response => response.json())
             .then(data => {
                 allModelsData = data;
-                renderModels(allModelsData); // 初始渲染所有车型
+                renderModels(allModelsData);
             })
             .catch(error => {
                 console.error('Error loading model data:', error);
                 gridContainer.innerHTML = '<p style="color: var(--text-secondary);">Failed to load model data. Please try again later.</p>';
             });
 
-        // 2. 渲染车型卡片的函数
         function renderModels(models) {
-            gridContainer.innerHTML = ''; // 清空现有内容
+            gridContainer.innerHTML = '';
             if (models.length === 0) {
                 gridContainer.innerHTML = '<p style="color: var(--text-secondary);">No models found for this brand.</p>';
                 return;
@@ -90,7 +90,6 @@
                 const card = `
                     <div class="model-card">
                         <div class="model-image" style="background-image: url('${model.image}'); background-size: cover; background-position: center;">
-                            <!-- 图片作为背景 -->
                         </div>
                         <div class="model-content">
                             <h3 class="model-title">${model.model_name}</h3>
@@ -118,15 +117,11 @@
             });
         }
 
-        // 3. 筛选功能
         filterOptions.forEach(button => {
             button.addEventListener('click', () => {
-                // 更新按钮的激活状态
                 filterOptions.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-
                 const selectedBrand = button.getAttribute('data-brand');
-                
                 if (selectedBrand === 'All') {
                     renderModels(allModelsData);
                 } else {
