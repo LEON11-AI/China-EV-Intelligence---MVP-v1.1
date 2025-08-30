@@ -689,12 +689,45 @@
         .back-button:hover {
             color: var(--text-primary);
         }
+
+        /* === NEW: Author Byline Styles === */
+        .author-byline {
+            display: flex;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.4;
+        }
+
+        .author-info strong {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .author-info span {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
     <!-- 导航栏 -->
     <header>
-        <!-- --- MODIFICATION START --- -->
         <div class="container">
             <nav>
                 <div class="logo">
@@ -707,6 +740,8 @@
                     <li><a href="#" class="nav-link" data-page="intelligence" data-i18n="navIntelligence">Intelligence</a></li>
                     <li><a href="#" class="nav-link" data-page="database" data-i18n="navDatabase">Focused Database</a></li>
                     <li><a href="#" class="nav-link" data-page="pricing" data-i18n="navPricing">Pricing</a></li>
+                    <!-- NEW: About Link -->
+                    <li><a href="about.html">About</a></li>
                 </ul>
 
                 <!-- 右侧操作区 -->
@@ -719,7 +754,6 @@
                 </div>
             </nav>
         </div>
-        <!-- --- MODIFICATION END --- -->
     </header>
 
     <!-- 主页内容 -->
@@ -961,6 +995,14 @@
                         <div class="ceo-note">
                             <h3 data-i18n="ceoNoteTitle">Chief Experience Officer's Note</h3>
                             <p>This isn't just a car, it's a statement from a tech giant. Pay close attention to its smart cockpit integration and how it challenges Tesla's software dominance. Its real-world battery performance will be the key.</p>
+                            <!-- NEW: Author Byline -->
+                            <div class="author-byline">
+                                <img src="images/leon.jpg" alt="Leon" class="author-avatar">
+                                <div class="author-info">
+                                    <strong>By Leon</strong>
+                                    <span>Founder of Volt China, reporting from Guangzhou.</span>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="detail-section">
@@ -1078,7 +1120,8 @@
     <footer>
         <div class="container">
             <ul class="footer-links">
-                <li><a href="#" data-i18n="footerAbout">About Us</a></li>
+                <!-- NEW: Updated link -->
+                <li><a href="about.html" data-i18n="footerAbout">About Us</a></li>
                 <li><a href="#" data-i18n="footerContact">Contact</a></li>
                 <li><a href="#" data-i18n="footerPrivacy">Privacy Policy</a></li>
                 <li><a href="#" data-i18n="footerTerms">Terms of Service</a></li>
@@ -1386,4 +1429,3 @@
     </script>
 </body>
 </html>
---- END OF FILE index.html ---

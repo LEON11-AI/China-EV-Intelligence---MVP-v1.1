@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Volt China</title>
+    <!-- 链接主站的CSS -->
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* 为“关于”页面添加的特定样式 */
+        .about-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.8;
+            color: var(--text-primary); 
+        }
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            float: left;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+        .about-container h1, .about-container h2 {
+            font-weight: 600;
+        }
+        .about-container p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5em;
+        }
+        .about-container a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .about-container a:hover {
+            text-decoration: underline;
+        }
+        .clear-fix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <!-- 让Logo可以点击返回主页 -->
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <span data-i18n="siteTitle">China EV Intelligence</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-links">
+                    <!-- 修改链接为绝对路径，确保在about页面也能正常工作 -->
+                    <li><a href="index.html#home-page" data-i18n="navHome">Home</a></li>
+                    <li><a href="index.html#intelligence-page" data-i18n="navIntelligence">Intelligence</a></li>
+                    <li><a href="index.html#database-page" data-i18n="navDatabase">Focused Database</a></li>
+                    <li><a href="index.html#pricing-page" data-i18n="navPricing">Pricing</a></li>
+                    <!-- 新增About链接 -->
+                    <li><a href="about.html">About</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <!-- 语言切换器和登录按钮 -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="about-container clear-fix">
+            <img src="images/leon.jpg" alt="Leon - Founder of Volt China" class="profile-photo">
+            
+            <h1>Leon</h1>
+            <p><em>Founder & Chief Analyst of Volt China</em></p>
+            <hr style="border-color: var(--card-bg); margin: 20px 0;">
+
+            <h2>My Story</h2>
+            <p>
+                My journey into the world of electric vehicles wasn't just a choice; it was an immersion. Living in Guangzhou, one of the epicenters of China's automotive industry, I've had a front-row seat to the most electrifying transformation in modern transportation. I've witnessed the unprecedented pace of innovation, from the early days of skepticism to the current era where Chinese EVs are setting global benchmarks in technology, design, and ambition.
+            </p>
+            <p>
+                This unique position allowed me to see beyond the headlines. I could feel the pulse of the industry, talk to the people behind the products, and experience these incredible machines on the roads they were designed for. It became my passion to document this revolution, not just as a series of product launches, but as a fundamental shift in technology and culture.
+            </p>
+
+            <h2>Why Volt China?</h2>
+            <p>
+                I founded Volt China to bridge a critical gap. While the world saw fragmented news and complex technical specifications, I saw a need for clarity, context, and deep-seated understanding. The language barrier is only the first hurdle; the real challenge is decoding the strategy, the market dynamics, and the "why" behind every decision. Machine translation can give you words, but it can't give you insight.
+            </p>
+            <p>
+                Volt China is my answer. It's an intelligence platform built to provide precisely that: a clear, authoritative, and on-the-ground perspective. Our mission is to dismantle the wall of complexity and deliver mission-critical intelligence to global enthusiasts, industry professionals, and investors. We don't just report the news; we connect the dots.
+            </p>
+            
+            <h2>Connect With Me</h2>
+            <p>
+                Join the conversation and get the latest insights by following me on <a href="https://www.youtube.com/@VoltChina" target="_blank">YouTube</a> and <a href="https://x.com/xLeonStudio" target="_blank">X (formerly Twitter)</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <!-- 链接到新的about.html -->
+                <li><a href="about.html" data-i18n="footerAbout">About Us</a></li>
+                <li><a href="#" data-i18n="footerContact">Contact</a></li>
+                <li><a href="#" data-i18n="footerPrivacy">Privacy Policy</a></li>
+                <li><a href="#" data-i18n="footerTerms">Terms of Service</a></li>
+            </ul>
+            <p class="copyright" data-i18n="footerCopyright">© 2025 China EV Intelligence. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- 您的网站似乎没有外部的 style.css, 如果有的话请取消下面的注释 -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</body>
+</html>
