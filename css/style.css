@@ -10,457 +10,96 @@
     --btn-radius: 6px;
     --shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* 导航样式 */
-header {
-    background-color: var(--header-blue);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow);
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    align-items: center;
-}
-
-.nav-links li {
-    margin-left: 1.5rem;
-}
-
-.nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: var(--accent-blue);
-}
-
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem; 
-}
-
-.login-btn {
-    background-color: transparent;
-    border: 1px solid var(--accent-blue);
-    color: var(--accent-blue);
-    padding: 0.5rem 1rem;
-    border-radius: var(--btn-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.login-btn:hover {
-    background-color: var(--accent-blue);
-    color: white;
-}
-
-/* Hero区域样式 */
-.hero {
-    padding: 4rem 0;
-    text-align: center;
-    background: linear-gradient(to bottom, var(--header-blue), var(--bg-primary));
-}
-
-.hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    max-width: 700px;
-    margin: 0 auto 2rem;
-}
-
-.cta-button {
-    background-color: var(--accent-orange);
-    color: white;
-    border: none;
-    padding: 0.8rem 2rem;
-    font-size: 1.1rem;
-    border-radius: var(--btn-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow);
-}
-
-.cta-button:hover {
-    background-color: #d67c2d;
-    transform: translateY(-2px);
-}
-
-/* 功能模块样式 */
-.features {
-    padding: 4rem 0;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--text-primary);
-    font-size: 2rem;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.feature-card {
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
-
-.feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--accent-blue);
-}
-
-.feature-card h3 {
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-}
-
-.feature-card p {
-    color: var(--text-secondary);
-}
-
-/* 品牌展示区域 */
-.brands {
-    padding: 3rem 0;
-    background-color: rgba(26, 54, 93, 0.2);
-}
-
-/* 定价区域 */
-.pricing {
-    padding: 4rem 0;
-}
-
-.pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.pricing-card {
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-}
-
-.pricing-card:hover {
-    transform: translateY(-5px);
-}
-
-.pricing-card.pro {
-    border: 2px solid var(--accent-orange);
-}
-
-.pricing-header {
-    margin-bottom: 1.5rem;
-}
-
-.price {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 1rem 0;
-    color: var(--text-primary);
-}
-
-.price span {
-    font-size: 1rem;
-    color: var(--text-secondary);
-}
-
-.pricing-features {
-    list-style: none;
-    margin: 1.5rem 0;
-}
-
-.pricing-features li {
-    margin-bottom: 0.5rem;
-    color: var(--text-secondary);
-}
-
-.pricing-btn {
-    background-color: var(--accent-blue);
-    color: white;
-    border: none;
-    padding: 0.8rem 2rem;
-    width: 100%;
-    border-radius: var(--btn-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.pricing-btn.orange {
-    background-color: var(--accent-orange);
-}
-
-.pricing-btn.orange:hover {
-    background-color: #d67c2d;
-}
-
-.pricing-btn:hover {
-    background-color: #2b6cb0;
-}
-
-/* 页脚样式 */
-footer {
-    background-color: var(--header-blue);
-    padding: 2rem 0;
-    text-align: center;
-    margin-top: 3rem;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    margin-bottom: 1rem;
-}
-
-.footer-links li {
-    margin: 0 1rem;
-}
-
-.footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--accent-blue);
-}
-
-.copyright {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    .hero h1 {
-        font-size: 2rem;
-    }
-    .hero p {
-        font-size: 1rem;
-    }
-    .features-grid, .pricing-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* 页面内容区域 */
-.page-content {
-    /* display: none; */ /* We manage visibility in each page now */
-    padding: 2rem 0;
-}
-
-/* 车型卡片样式 */
-.models-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.model-card {
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-}
-
-.model-card:hover {
-    transform: translateY(-5px);
-}
-
-.model-image {
-    width: 100%;
-    height: 200px;
-    background-color: #4a5568;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-}
-
-.model-content {
-    padding: 1.5rem;
-}
-
-.model-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
-}
-
-.model-brand {
-    color: var(--accent-blue);
-    font-weight: 500;
-    margin-bottom: 1rem;
-}
-
-.model-specs {
-    margin-bottom: 1rem;
-}
-
-.spec-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.spec-label {
-    color: var(--text-secondary);
-}
-
-.spec-value {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.model-status {
-    display: inline-block;
-    padding: 0.3rem 0.8rem;
-    background-color: var(--accent-blue);
-    color: white;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-}
-
-.view-details {
-    display: block;
-    text-align: center;
-    background-color: var(--accent-blue);
-    color: white;
-    padding: 0.6rem;
-    border-radius: var(--btn-radius);
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.view-details:hover {
-    background-color: #2b6cb0;
-}
-
-/* 筛选器样式 */
-.filters {
-    background-color: var(--card-bg);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-}
-
-.filter-title {
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-}
-
-.filter-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.filter-option {
-    background-color: var(--bg-primary);
-    color: var(--text-secondary);
-    border: 1px solid #4a5568;
-    padding: 0.5rem 1rem;
-    border-radius: var(--btn-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.filter-option:hover, .filter-option.active {
-    background-color: var(--accent-blue);
-    color: white;
-    border-color: var(--accent-blue);
-}
-
-/* === 最终视觉优化：品牌Logo (v3 - Surgical Adjustment) === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+header { background-color: var(--header-blue); padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+nav { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; }
+.nav-links { display: flex; list-style: none; align-items: center; }
+.nav-links li { margin-left: 1.5rem; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+.nav-links a:hover { color: var(--accent-blue); }
+.nav-actions { display: flex; align-items: center; gap: 1.5rem; }
+.login-btn { background-color: transparent; border: 1px solid var(--accent-blue); color: var(--accent-blue); padding: 0.5rem 1rem; border-radius: var(--btn-radius); cursor: pointer; transition: all 0.3s ease; }
+.login-btn:hover { background-color: var(--accent-blue); color: white; }
+.hero { padding: 4rem 0; text-align: center; background: linear-gradient(to bottom, var(--header-blue), var(--bg-primary)); }
+.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; }
+.cta-button { background-color: var(--accent-orange); color: white; border: none; padding: 0.8rem 2rem; font-size: 1.1rem; border-radius: var(--btn-radius); cursor: pointer; transition: all 0.3s ease; box-shadow: var(--shadow); }
+.cta-button:hover { background-color: #d67c2d; transform: translateY(-2px); }
+.features { padding: 4rem 0; }
+.section-title { text-align: center; margin-bottom: 3rem; color: var(--text-primary); font-size: 2rem; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.feature-card { background-color: var(--card-bg); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); transition: transform 0.3s ease; }
+.feature-card:hover { transform: translateY(-5px); }
+.feature-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-blue); }
+.feature-card h3 { margin-bottom: 1rem; color: var(--text-primary); }
+.feature-card p { color: var(--text-secondary); }
+.brands { padding: 3rem 0; background-color: rgba(26, 54, 93, 0.2); }
+.pricing { padding: 4rem 0; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+.pricing-card { background-color: var(--card-bg); border-radius: var(--border-radius); padding: 2rem; text-align: center; box-shadow: var(--shadow); transition: transform 0.3s ease; }
+.pricing-card:hover { transform: translateY(-5px); }
+.pricing-card.pro { border: 2px solid var(--accent-orange); }
+.pricing-header { margin-bottom: 1.5rem; }
+.price { font-size: 2.5rem; font-weight: 700; margin: 1rem 0; color: var(--text-primary); }
+.price span { font-size: 1rem; color: var(--text-secondary); }
+.pricing-features { list-style: none; margin: 1.5rem 0; }
+.pricing-features li { margin-bottom: 0.5rem; color: var(--text-secondary); }
+.pricing-btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 2rem; width: 100%; border-radius: var(--btn-radius); cursor: pointer; transition: all 0.3s ease; }
+.pricing-btn.orange { background-color: var(--accent-orange); }
+.pricing-btn.orange:hover { background-color: #d67c2d; }
+.pricing-btn:hover { background-color: #2b6cb0; }
+footer { background-color: var(--header-blue); padding: 2rem 0; text-align: center; margin-top: 3rem; }
+.footer-links { display: flex; justify-content: center; list-style: none; margin-bottom: 1rem; }
+.footer-links li { margin: 0 1rem; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease; }
+.footer-links a:hover { color: var(--accent-blue); }
+.copyright { color: var(--text-secondary); font-size: 0.9rem; }
+@media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .features-grid, .pricing-grid { grid-template-columns: 1fr; } }
+.page-content { padding: 2rem 0; }
+.models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+.model-card { background-color: var(--card-bg); border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s ease; }
+.model-card:hover { transform: translateY(-5px); }
+.model-image { width: 100%; height: 200px; background-color: #4a5568; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); }
+.model-content { padding: 1.5rem; }
+.model-title { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+.model-brand { color: var(--accent-blue); font-weight: 500; margin-bottom: 1rem; }
+.model-specs { margin-bottom: 1rem; }
+.spec-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.spec-label { color: var(--text-secondary); }
+.spec-value { color: var(--text-primary); font-weight: 500; }
+.model-status { display: inline-block; padding: 0.3rem 0.8rem; background-color: var(--accent-blue); color: white; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; }
+.view-details { display: block; text-align: center; background-color: var(--accent-blue); color: white; padding: 0.6rem; border-radius: var(--btn-radius); text-decoration: none; transition: background-color 0.3s ease; }
+.view-details:hover { background-color: #2b6cb0; }
+.filters { background-color: var(--card-bg); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 2rem; box-shadow: var(--shadow); }
+.filter-title { margin-bottom: 1rem; color: var(--text-primary); }
+.filter-options { display: flex; flex-wrap: wrap; gap: 1rem; }
+.filter-option { background-color: var(--bg-primary); color: var(--text-secondary); border: 1px solid #4a5568; padding: 0.5rem 1rem; border-radius: var(--btn-radius); cursor: pointer; transition: all 0.3s ease; }
+.filter-option:hover, .filter-option.active { background-color: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+/* === 最终视觉优化：品牌Logo (Definitive Fix) === */
 .brands-grid {
-    display: flex; /* 改用 Flexbox 来获得更好的对齐控制 */
+    display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* 水平居中所有Logo */
-    align-items: center;   /* 垂直居中所有Logo */
-    gap: 3.5rem; /* 进一步增加Logo之间的间距 */
-    padding: 1rem 0; /* 增加一些垂直内边距 */
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem; /* 调整间距 */
+    padding: 1rem 0;
 }
 
-.brand-logo { 
-    display: none; 
-} /* 隐藏旧的文字logo */
+.brand-item {
+    width: 130px; /* 定义统一的“画框”宽度 */
+    height: 50px; /* 定义统一的“画框”高度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .brand-logo-img {
-    height: 28px;  /* 设定一个统一的基准高度，针对“细长型”Logo */
-    max-width: 130px; /* 限制最大宽度 */
+    max-width: 100%;  /* 图片最大宽度不超过画框 */
+    max-height: 100%; /* 图片最大高度不超过画框 */
     object-fit: contain;
     filter: grayscale(100%) brightness(150%);
     opacity: 0.7;
@@ -471,15 +110,3 @@ footer {
     filter: none;
     opacity: 1;
 }
-
-/* --- “手术刀式”微调开始 --- */
-/* 为理想这种“方块型”Logo，稍微增加高度以匹配视觉重量 */
-.brand-logo-img[alt="Li Auto Logo"] {
-    height: 45px;
-}
-
-/* 为小米这种“徽章型”Logo，显著增加高度 */
-.brand-logo-img[alt="Xiaomi Logo"] {
-    height: 40px;
-}
-/* --- “手术刀式”微调结束 --- */
