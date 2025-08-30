@@ -3,159 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - Content Admin v2</title>
+    <title>Volt China - Content Admin v3</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        body { padding: 2rem; }
-        .admin-container { max-width: 960px; margin: 0 auto; }
-        .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; }
-        h1, h2 { text-align: center; margin-bottom: 2rem; }
-        h2 { margin-top: 0; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; }
-        .form-group input, .form-group textarea { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; }
-        .form-group textarea { min-height: 120px; resize: vertical; }
-        .full-width { grid-column: 1 / -1; }
-        .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; }
-        .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; }
-        .btn-orange { background-color: var(--accent-orange); }
-        .btn:hover { opacity: 0.9; }
-        #json-output { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; }
+        body { padding: 2rem; } .admin-container { max-width: 960px; margin: 0 auto; } .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; } h1, h2 { text-align: center; margin-bottom: 2rem; } h2 { margin-top: 0; } .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; } .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; } .form-group input, .form-group textarea { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; } .form-group textarea { min-height: 120px; resize: vertical; } .full-width { grid-column: 1 / -1; } .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; } .btn-orange { background-color: var(--accent-orange); } .btn:hover { opacity: 0.9; } #json-output { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; } .admin-header { display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
     <div class="admin-container">
-        <h1>Volt China Content Management</h1>
+        <div class="admin-header">
+            <h1 data-i18n="mainTitle">Volt China Content Management</h1>
+            <button class="btn" id="lang-toggle-btn" data-i18n="langToggle">切换到中文</button>
+        </div>
         <div class="form-section">
-            <h2>Manage EV Models</h2>
+            <h2 data-i18n="formTitle">Manage EV Models</h2>
             <form id="models-form">
                 <div class="form-grid">
-                    <div class="form-group"><label for="id">Model ID (e.g., xiaomi_su7_max)</label><input type="text" id="id" required></div>
-                    <div class="form-group"><label for="brand">Brand (e.g., Xiaomi)</label><input type="text" id="brand" required></div>
-                    <div class="form-group"><label for="model_name">Model Name (e.g., SU7 Max)</label><input type="text" id="model_name" required></div>
-                    <div class="form-group"><label for="subtitle">Subtitle</label><input type="text" id="subtitle"></div>
-                    <div class="form-group"><label for="status">Status (e.g., On Sale)</label><input type="text" id="status"></div>
-                    <div class="form-group"><label for="image_card">Card Image Path</label><input type="text" id="image_card"></div>
-                    <div class="form-group"><label for="image_detail">Detail Image Path</label><input type="text" id="image_detail"></div>
-                    <!-- === NEW FIELD === -->
-                    <div class="form-group"><label for="youtube_id">YouTube Video ID</label><input type="text" id="youtube_id"></div>
-                    <div class="form-group full-width"><label for="ceo_note">CEO's Note</label><textarea id="ceo_note"></textarea></div>
-                    <h3>Key Specifications</h3>
-                    <div class="form-group"><label for="range_cltc">Range (CLTC)</label><input type="text" id="range_cltc"></div>
-                    <div class="form-group"><label for="zero_to_100">0-100 km/h</label><input type="text" id="zero_to_100"></div>
-                    <div class="form-group"><label for="power_kw">Power (kW)</label><input type="text" id="power_kw"></div>
-                    <div class="form-group"><label for="battery_kwh">Battery (kWh)</label><input type="text" id="battery_kwh"></div>
-                    <div class="form-group full-width"><label for="price_usd_estimated">Price (USD)</label><input type="text" id="price_usd_estimated"></div>
-                    <h3>Full Specifications</h3>
-                    <div class="form-group"><label for="dimensions">Dimensions</label><input type="text" id="dimensions"></div>
-                    <div class="form-group"><label for="wheelbase">Wheelbase</label><input type="text" id="wheelbase"></div>
-                    <div class="form-group"><label for="powertrain">Powertrain</label><input type="text" id="powertrain"></div>
-                    <div class="form-group"><label for="battery">Battery Details</label><input type="text" id="battery"></div>
-                    <div class="form-group"><label for="charging">Charging</label><input type="text" id="charging"></div>
-                    <div class="form-group"><label for="adas">ADAS</label><input type="text" id="adas"></div>
-                    <h3>Market Plan</h3>
-                    <div class="form-group"><label for="china_launch">China Launch</label><input type="text" id="china_launch"></div>
-                    <div class="form-group"><label for="global_rollout">Global Rollout</label><input type="text" id="global_rollout"></div>
+                    <div class="form-group"><label for="id" data-i18n="id">Model ID</label><input type="text" id="id" required></div>
+                    <div class="form-group"><label for="brand" data-i18n="brand">Brand</label><input type="text" id="brand" required></div>
+                    <div class="form-group"><label for="model_name" data-i18n="model_name">Model Name</label><input type="text" id="model_name" required></div>
+                    <div class="form-group"><label for="subtitle" data-i18n="subtitle">Subtitle</label><input type="text" id="subtitle"></div>
+                    <div class="form-group"><label for="status" data-i18n="status">Status</label><input type="text" id="status"></div>
+                    <div class="form-group"><label for="image_card" data-i18n="image_card">Card Image Path</label><input type="text" id="image_card"></div>
+                    <div class="form-group"><label for="image_detail" data-i18n="image_detail">Detail Image Path</label><input type="text" id="image_detail"></div>
+                    <div class="form-group"><label for="youtube_id" data-i18n="youtube_id">YouTube Video ID</label><input type="text" id="youtube_id"></div>
+                    <div class="form-group full-width"><label for="ceo_note" data-i18n="ceo_note">CEO's Note</label><textarea id="ceo_note"></textarea></div>
+                    <h3 data-i18n="keySpecs" class="full-width">Key Specifications</h3>
+                    <div class="form-group"><label for="range_cltc" data-i18n="range_cltc">Range (CLTC)</label><input type="text" id="range_cltc"></div>
+                    <div class="form-group"><label for="zero_to_100" data-i18n="zero_to_100">0-100 km/h</label><input type="text" id="zero_to_100"></div>
+                    <div class="form-group"><label for="power_kw" data-i18n="power_kw">Power (kW)</label><input type="text" id="power_kw"></div>
+                    <div class="form-group"><label for="battery_kwh" data-i18n="battery_kwh">Battery (kWh)</label><input type="text" id="battery_kwh"></div>
+                    <div class="form-group full-width"><label for="price_usd_estimated" data-i18n="price_usd_estimated">Price (USD)</label><input type="text" id="price_usd_estimated"></div>
+                    <h3 data-i18n="fullSpecs" class="full-width">Full Specifications</h3>
+                    <div class="form-group"><label for="dimensions" data-i18n="dimensions">Dimensions</label><input type="text" id="dimensions"></div>
+                    <div class="form-group"><label for="wheelbase" data-i18n="wheelbase">Wheelbase</label><input type="text" id="wheelbase"></div>
+                    <div class="form-group"><label for="powertrain" data-i18n="powertrain">Powertrain</label><input type="text" id="powertrain"></div>
+                    <div class="form-group"><label for="battery" data-i18n="battery">Battery Details</label><input type="text" id="battery"></div>
+                    <div class="form-group"><label for="charging" data-i18n="charging">Charging</label><input type="text" id="charging"></div>
+                    <div class="form-group"><label for="adas" data-i18n="adas">ADAS</label><input type="text" id="adas"></div>
+                    <h3 data-i18n="marketPlan" class="full-width">Market Plan</h3>
+                    <div class="form-group"><label for="china_launch" data-i18n="china_launch">China Launch</label><input type="text" id="china_launch"></div>
+                    <div class="form-group"><label for="global_rollout" data-i18n="global_rollout">Global Rollout</label><input type="text" id="global_rollout"></div>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn" id="load-model-btn">Load Existing Model</button>
-                    <button type="button" class="btn" id="add-model-btn">Add/Update Model</button>
-                    <button type="reset" class="btn">Clear Form</button>
+                    <button type="button" class="btn" id="load-model-btn" data-i18n="loadModelBtn">Load Existing Model</button>
+                    <button type="button" class="btn" id="add-model-btn" data-i18n="addModelBtn">Add/Update Model</button>
+                    <button type="reset" class="btn" data-i18n="clearFormBtn">Clear Form</button>
                 </div>
             </form>
         </div>
         <div class="form-section">
-            <h2>Generated models.json</h2>
-            <p style="color:var(--text-secondary); margin-bottom: 1rem;">Click 'Generate & Copy' to update the JSON below. Then, paste it into the actual `data/models.json` file and save.</p>
+            <h2 data-i18n="jsonOutputTitle">Generated models.json</h2>
+            <p style="color:var(--text-secondary); margin-bottom: 1rem;" data-i18n="jsonOutputDesc">Click 'Generate & Copy' to update the JSON below. Then, paste it into the actual `data/models.json` file and save.</p>
             <textarea id="json-output" readonly></textarea>
             <div class="btn-group">
-                <button type="button" class="btn btn-orange" id="generate-btn">Generate & Copy JSON</button>
+                <button type="button" class="btn btn-orange" id="generate-btn" data-i18n="generateBtn">Generate & Copy JSON</button>
             </div>
         </div>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('models-form');
-        const addModelBtn = document.getElementById('add-model-btn');
-        const generateBtn = document.getElementById('generate-btn');
-        const jsonOutput = document.getElementById('json-output');
-        const loadModelBtn = document.getElementById('load-model-btn');
-        let modelsData = [];
 
-        fetch('data/models.json').then(res => res.ok ? res.json() : []).then(data => {
-            modelsData = data;
-            updateJsonOutput();
-            alert('Existing models.json loaded.');
-        }).catch(error => {
-            console.warn('Could not load existing models.json. Starting fresh.', error);
-            alert('Could not load existing models.json. Starting with a blank slate.');
-        });
-        
-        loadModelBtn.addEventListener('click', () => {
-            const idToLoad = form.id.value.trim();
-            if (!idToLoad) {
-                alert('Please enter a Model ID to load.');
-                return;
-            }
-            const modelToLoad = modelsData.find(m => m.id === idToLoad);
-            if (modelToLoad) {
-                Object.keys(modelToLoad).forEach(key => {
-                    if (typeof modelToLoad[key] === 'object' && modelToLoad[key] !== null) {
-                        Object.keys(modelToLoad[key]).forEach(subKey => {
-                           if(form[subKey]) form[subKey].value = modelToLoad[key][subKey];
-                        });
-                    } else {
-                        if(form[key]) form[key].value = modelToLoad[key];
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('models-form');
+            const addModelBtn = document.getElementById('add-model-btn');
+            const generateBtn = document.getElementById('generate-btn');
+            const jsonOutput = document.getElementById('json-output');
+            const loadModelBtn = document.getElementById('load-model-btn');
+            const langToggleBtn = document.getElementById('lang-toggle-btn');
+            let modelsData = [];
+            let currentLang = 'en';
+
+            const translations = {
+                en: { mainTitle: "Volt China Content Management", langToggle: "切换到中文", formTitle: "Manage EV Models", id: "Model ID", brand: "Brand", model_name: "Model Name", subtitle: "Subtitle", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load Existing Model", addModelBtn: "Add/Update Model", clearFormBtn: "Clear Form", jsonOutputTitle: "Generated models.json", jsonOutputDesc: "Click 'Generate & Copy' to update the JSON below. Then, paste it into the actual `data/models.json` file and save.", generateBtn: "Generate & Copy JSON" },
+                zh: { mainTitle: "Volt China 内容管理后台", langToggle: "Switch to English", formTitle: "管理电动车型", id: "模型ID (全小写,下划线)", brand: "品牌", model_name: "模型名称", subtitle: "副标题", status: "状态 (如: 在售)", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评", keySpecs: "核心规格", range_cltc: "续航 (CLTC)", zero_to_100: "0-100 km/h", power_kw: "功率 (kW)", battery_kwh: "电池 (kWh)", price_usd_estimated: "价格 (USD)", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市日期", global_rollout: "全球上市计划", loadModelBtn: "加载已有模型", addModelBtn: "添加/更新模型", clearFormBtn: "清空表单", jsonOutputTitle: "生成的 models.json", jsonOutputDesc: "点击“生成并复制”以更新下方JSON。然后，将其粘贴到实际的 `data/models.json` 文件中并保存。", generateBtn: "生成并复制 JSON" }
+            };
+
+            function setLanguage(lang) {
+                currentLang = lang;
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.dataset.i18n;
+                    if (translations[lang][key]) {
+                        if (el.tagName === 'LABEL' || el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'P' || el.tagName === 'BUTTON') {
+                            el.textContent = translations[lang][key];
+                        }
                     }
                 });
-                alert(`Model "${modelToLoad.model_name}" loaded into the form.`);
-            } else {
-                alert(`Model with ID "${idToLoad}" not found.`);
             }
-        });
+            langToggleBtn.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'zh' : 'en'));
 
-        addModelBtn.addEventListener('click', () => {
-            const newModel = {
-                id: form.id.value.trim(), brand: form.brand.value.trim(), model_name: form.model_name.value.trim(),
-                subtitle: form.subtitle.value.trim(), status: form.status.value.trim(), image_card: form.image_card.value.trim(),
-                image_detail: form.image_detail.value.trim(), youtube_id: form.youtube_id.value.trim(), ceo_note: form.ceo_note.value.trim(),
-                key_specs: {
-                    range_cltc: form.range_cltc.value.trim(), zero_to_100: form.zero_to_100.value.trim(),
-                    power_kw: form.power_kw.value.trim(), battery_kwh: form.battery_kwh.value.trim(),
-                    price_usd_estimated: form.price_usd_estimated.value.trim()
-                },
-                full_specs: {
-                    dimensions: form.dimensions.value.trim(), wheelbase: form.wheelbase.value.trim(),
-                    powertrain: form.powertrain.value.trim(), battery: form.battery.value.trim(),
-                    charging: form.charging.value.trim(), adas: form.adas.value.trim()
-                },
-                market_plan: {
-                    china_launch: form.china_launch.value.trim(), global_rollout: form.global_rollout.value.trim()
-                }
-            };
-            if (!newModel.id) { alert('Model ID is required!'); return; }
-            const existingModelIndex = modelsData.findIndex(m => m.id === newModel.id);
-            if (existingModelIndex > -1) {
-                modelsData[existingModelIndex] = newModel;
-                alert(`Model "${newModel.model_name}" has been updated!`);
-            } else {
-                modelsData.push(newModel);
-                alert(`Model "${newModel.model_name}" has been added!`);
-            }
-            form.reset();
-            updateJsonOutput();
-        });
+            fetch('data/models.json').then(res => res.ok ? res.json() : []).then(data => { modelsData = data; updateJsonOutput(); }).catch(console.warn);
 
-        generateBtn.addEventListener('click', () => {
-            updateJsonOutput();
-            navigator.clipboard.writeText(jsonOutput.value).then(() => {
-                 alert('JSON content copied to clipboard! Now paste it into data/models.json');
+            loadModelBtn.addEventListener('click', () => {
+                const idToLoad = form.id.value.trim();
+                if (!idToLoad) return alert('Please enter a Model ID to load.');
+                const modelToLoad = modelsData.find(m => m.id === idToLoad);
+                if (modelToLoad) {
+                    Object.keys(modelToLoad).forEach(key => {
+                        if (typeof modelToLoad[key] === 'object' && modelToLoad[key] !== null) { Object.keys(modelToLoad[key]).forEach(subKey => { if(form[subKey]) form[subKey].value = modelToLoad[key][subKey]; }); } 
+                        else { if(form[key]) form[key].value = modelToLoad[key]; }
+                    });
+                } else { alert(`Model with ID "${idToLoad}" not found.`); }
             });
-        });
 
-        function updateJsonOutput() { jsonOutput.value = JSON.stringify(modelsData, null, 2); }
-    });
+            addModelBtn.addEventListener('click', () => {
+                const newModel = { id: form.id.value.trim(), brand: form.brand.value.trim(), model_name: form.model_name.value.trim(), subtitle: form.subtitle.value.trim(), status: form.status.value.trim(), image_card: form.image_card.value.trim(), image_detail: form.image_detail.value.trim(), youtube_id: form.youtube_id.value.trim(), ceo_note: form.ceo_note.value.trim(), key_specs: { range_cltc: form.range_cltc.value.trim(), zero_to_100: form.zero_to_100.value.trim(), power_kw: form.power_kw.value.trim(), battery_kwh: form.battery_kwh.value.trim(), price_usd_estimated: form.price_usd_estimated.value.trim() }, full_specs: { dimensions: form.dimensions.value.trim(), wheelbase: form.wheelbase.value.trim(), powertrain: form.powertrain.value.trim(), battery: form.battery.value.trim(), charging: form.charging.value.trim(), adas: form.adas.value.trim() }, market_plan: { china_launch: form.china_launch.value.trim(), global_rollout: form.global_rollout.value.trim() } };
+                if (!newModel.id) return alert('Model ID is required!');
+                const existingModelIndex = modelsData.findIndex(m => m.id === newModel.id);
+                if (existingModelIndex > -1) { modelsData[existingModelIndex] = newModel; } 
+                else { modelsData.push(newModel); }
+                form.reset(); updateJsonOutput();
+            });
+
+            generateBtn.addEventListener('click', () => {
+                updateJsonOutput();
+                navigator.clipboard.writeText(jsonOutput.value).then(() => { alert('JSON content copied!'); });
+            });
+
+            function updateJsonOutput() { jsonOutput.value = JSON.stringify(modelsData, null, 2); }
+            
+            setLanguage('en'); // Set default language on load
+        });
     </script>
 </body>
 </html>

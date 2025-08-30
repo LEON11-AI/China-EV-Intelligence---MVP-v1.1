@@ -21,10 +21,7 @@
                     <li><a href="pricing.html">Pricing</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
-                <div class="nav-actions">
-                    <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
-                    <button class="login-btn">Login</button>
-                </div>
+                <div class="nav-actions"><div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div><button class="login-btn">Login</button></div>
             </nav>
         </div>
     </header>
@@ -36,6 +33,17 @@
                 <button class="cta-button">Get Instant Access</button>
             </div>
         </section>
+
+        <!-- === NEW: Latest Intelligence Section === -->
+        <section class="latest-intel">
+            <div class="container">
+                <h2 class="section-title">Latest Intelligence</h2>
+                <div class="intel-list-home" id="latest-intel-container">
+                    <!-- Intelligence items will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
         <section class="features">
             <div class="container">
                 <h2 class="section-title">Why Choose Our Platform</h2>
@@ -47,7 +55,6 @@
             </div>
         </section>
         
-        <!-- === FINAL DEFINITIVE FIX: Using container divs for logos === -->
         <section class="brands">
             <div class="container">
                 <h2 class="section-title">Focused Brands</h2>
@@ -61,7 +68,6 @@
                 </div>
             </div>
         </section>
-        <!-- === END OF FIX === -->
 
         <section class="pricing">
             <div class="container">
@@ -92,5 +98,37 @@
             <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Script to load latest intelligence -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const intelContainer = document.getElementById('latest-intel-container');
+            fetch('data/intelligence.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Get the 3 most recent items
+                    const latestIntel = data.slice(0, 3);
+                    let intelHTML = '';
+                    latestIntel.forEach(item => {
+                        const proBadge = item.is_pro ? '<div class="intel-pro-badge-home">PRO</div>' : '';
+                        intelHTML += `
+                            <a href="#" class="intel-item-home">
+                                <div class="intel-meta">
+                                    <span class="intel-brand-home">${item.brand}</span>
+                                    <span class="intel-date-home">${item.date}</span>
+                                </div>
+                                <h3 class="intel-title-home">${item.title}</h3>
+                                ${proBadge}
+                            </a>
+                        `;
+                    });
+                    intelContainer.innerHTML = intelHTML;
+                })
+                .catch(error => {
+                    console.error('Error loading intelligence data:', error);
+                    intelContainer.innerHTML = '<p style="color: var(--text-secondary);">Could not load intelligence feed.</p>';
+                });
+        });
+    </script>
 </body>
 </html>
