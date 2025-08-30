@@ -1,0 +1,44 @@
+[
+  {
+    "id": "xiaomi_su7_max",
+    "brand": "Xiaomi",
+    "model_name": "SU7 Max",
+    "status": "On Sale (China)",
+    "image": "images/xiaomi_su7_card.jpg",
+    "ceo_note": "This isn't just a car, it's a statement from a tech giant. Pay close attention to its smart cockpit integration and how it challenges Tesla's software dominance. Its real-world battery performance will be the key.",
+    "key_specs": {
+      "range_cltc": "800 km",
+      "zero_to_100": "2.78 s",
+      "power_kw": "495 kW",
+      "battery_kwh": "101 kWh"
+    }
+  },
+  {
+    "id": "nio_et9",
+    "brand": "NIO",
+    "model_name": "ET9",
+    "status": "Upcoming",
+    "image": "images/nio_et9_card.jpg",
+    "ceo_note": "The ET9 is NIO's technological flagship, a 'land jet' aimed at the Maybach and Panamera class. Its 900V architecture and steer-by-wire system are industry-leading technologies to watch.",
+    "key_specs": {
+      "range_cltc": "Est. 850 km",
+      "zero_to_100": "Est. 3.5 s",
+      "power_kw": "520 kW",
+      "battery_kwh": "150 kWh"
+    }
+  },
+  {
+    "id": "byd_seal_perf",
+    "brand": "BYD",
+    "model_name": "Seal Performance",
+    "status": "On Sale (Global)",
+    "image": "images/byd_seal_card.jpg",
+    "ceo_note": "The Seal is BYD's direct answer to the Tesla Model 3, built on their advanced e-Platform 3.0 with Cell-to-Body battery tech. Its driving dynamics and value proposition are its strongest selling points globally.",
+    "key_specs": {
+      "range_cltc": "650 km",
+      "zero_to_100": "3.8 s",
+      "power_kw": "390 kW",
+      "battery_kwh": "82.5 kWh"
+    }
+  }
+]
