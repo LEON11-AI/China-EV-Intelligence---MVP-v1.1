@@ -176,3 +176,50 @@ footer { background-color: var(--header-blue); padding: 2rem 0; text-align: cent
     font-size: 0.7rem;
     align-self: flex-start;
 }
+/* === Intelligence Feed Page Styles === */
+.intel-list-full {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.intel-item {
+    display: block;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+.intel-item:hover {
+    border-color: var(--accent-blue);
+}
+.intel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+.intel-title {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+.pro-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background-color: var(--accent-orange);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+.intel-date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.intel-summary {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}

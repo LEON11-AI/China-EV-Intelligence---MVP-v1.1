@@ -34,7 +34,6 @@
             </div>
         </section>
 
-        <!-- === NEW: Latest Intelligence Section === -->
         <section class="latest-intel">
             <div class="container">
                 <h2 class="section-title">Latest Intelligence</h2>
@@ -99,20 +98,20 @@
         </div>
     </footer>
 
-    <!-- Script to load latest intelligence -->
+    <!-- === UPDATED SCRIPT === -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('latest-intel-container');
             fetch('data/intelligence.json')
                 .then(response => response.json())
                 .then(data => {
-                    // Get the 3 most recent items
                     const latestIntel = data.slice(0, 3);
                     let intelHTML = '';
                     latestIntel.forEach(item => {
                         const proBadge = item.is_pro ? '<div class="intel-pro-badge-home">PRO</div>' : '';
+                        // Corrected the link to point to intelligence.html
                         intelHTML += `
-                            <a href="#" class="intel-item-home">
+                            <a href="intelligence.html" class="intel-item-home">
                                 <div class="intel-meta">
                                     <span class="intel-brand-home">${item.brand}</span>
                                     <span class="intel-date-home">${item.date}</span>
