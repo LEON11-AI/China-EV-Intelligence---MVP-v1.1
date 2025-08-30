@@ -7,6 +7,7 @@
     "status": "On Sale (China)",
     "image_card": "images/xiaomi_su7_card.jpg",
     "image_detail": "images/xiaomi_su7_detail.jpg",
+    "youtube_id": "8nK4o_a-M2g",
     "ceo_note": "This isn't just a car, it's a statement from a tech giant. Pay close attention to its smart cockpit integration and how it challenges Tesla's software dominance. Its real-world battery performance will be the key.",
     "key_specs": {
       "range_cltc": "800 km",
@@ -36,6 +37,7 @@
     "status": "Upcoming",
     "image_card": "images/nio_et9_card.jpg",
     "image_detail": "images/nio_et9_detail.jpg",
+    "youtube_id": "",
     "ceo_note": "The ET9 is NIO's technological flagship, a 'land jet' aimed at the Maybach and Panamera class. Its 900V architecture and steer-by-wire system are industry-leading technologies to watch.",
     "key_specs": {
       "range_cltc": "Est. 850 km",
@@ -65,6 +67,7 @@
     "status": "On Sale (Global)",
     "image_card": "images/byd_seal_card.jpg",
     "image_detail": "images/byd_seal_detail.jpg",
+    "youtube_id": "",
     "ceo_note": "The Seal is BYD's direct answer to the Tesla Model 3, built on their advanced e-Platform 3.0 with Cell-to-Body battery tech. Its driving dynamics and value proposition are its strongest selling points globally.",
     "key_specs": {
       "range_cltc": "650 km",

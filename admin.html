@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volt China - Content Admin v2</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { padding: 2rem; }
+        .admin-container { max-width: 960px; margin: 0 auto; }
+        .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; }
+        h1, h2 { text-align: center; margin-bottom: 2rem; }
+        h2 { margin-top: 0; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input, .form-group textarea { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .full-width { grid-column: 1 / -1; }
+        .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; }
+        .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; }
+        .btn-orange { background-color: var(--accent-orange); }
+        .btn:hover { opacity: 0.9; }
+        #json-output { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Volt China Content Management</h1>
+        <div class="form-section">
+            <h2>Manage EV Models</h2>
+            <form id="models-form">
+                <div class="form-grid">
+                    <div class="form-group"><label for="id">Model ID (e.g., xiaomi_su7_max)</label><input type="text" id="id" required></div>
+                    <div class="form-group"><label for="brand">Brand (e.g., Xiaomi)</label><input type="text" id="brand" required></div>
+                    <div class="form-group"><label for="model_name">Model Name (e.g., SU7 Max)</label><input type="text" id="model_name" required></div>
+                    <div class="form-group"><label for="subtitle">Subtitle</label><input type="text" id="subtitle"></div>
+                    <div class="form-group"><label for="status">Status (e.g., On Sale)</label><input type="text" id="status"></div>
+                    <div class="form-group"><label for="image_card">Card Image Path</label><input type="text" id="image_card"></div>
+                    <div class="form-group"><label for="image_detail">Detail Image Path</label><input type="text" id="image_detail"></div>
+                    <!-- === NEW FIELD === -->
+                    <div class="form-group"><label for="youtube_id">YouTube Video ID</label><input type="text" id="youtube_id"></div>
+                    <div class="form-group full-width"><label for="ceo_note">CEO's Note</label><textarea id="ceo_note"></textarea></div>
+                    <h3>Key Specifications</h3>
+                    <div class="form-group"><label for="range_cltc">Range (CLTC)</label><input type="text" id="range_cltc"></div>
+                    <div class="form-group"><label for="zero_to_100">0-100 km/h</label><input type="text" id="zero_to_100"></div>
+                    <div class="form-group"><label for="power_kw">Power (kW)</label><input type="text" id="power_kw"></div>
+                    <div class="form-group"><label for="battery_kwh">Battery (kWh)</label><input type="text" id="battery_kwh"></div>
+                    <div class="form-group full-width"><label for="price_usd_estimated">Price (USD)</label><input type="text" id="price_usd_estimated"></div>
+                    <h3>Full Specifications</h3>
+                    <div class="form-group"><label for="dimensions">Dimensions</label><input type="text" id="dimensions"></div>
+                    <div class="form-group"><label for="wheelbase">Wheelbase</label><input type="text" id="wheelbase"></div>
+                    <div class="form-group"><label for="powertrain">Powertrain</label><input type="text" id="powertrain"></div>
+                    <div class="form-group"><label for="battery">Battery Details</label><input type="text" id="battery"></div>
+                    <div class="form-group"><label for="charging">Charging</label><input type="text" id="charging"></div>
+                    <div class="form-group"><label for="adas">ADAS</label><input type="text" id="adas"></div>
+                    <h3>Market Plan</h3>
+                    <div class="form-group"><label for="china_launch">China Launch</label><input type="text" id="china_launch"></div>
+                    <div class="form-group"><label for="global_rollout">Global Rollout</label><input type="text" id="global_rollout"></div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn" id="load-model-btn">Load Existing Model</button>
+                    <button type="button" class="btn" id="add-model-btn">Add/Update Model</button>
+                    <button type="reset" class="btn">Clear Form</button>
+                </div>
+            </form>
+        </div>
+        <div class="form-section">
+            <h2>Generated models.json</h2>
+            <p style="color:var(--text-secondary); margin-bottom: 1rem;">Click 'Generate & Copy' to update the JSON below. Then, paste it into the actual `data/models.json` file and save.</p>
+            <textarea id="json-output" readonly></textarea>
+            <div class="btn-group">
+                <button type="button" class="btn btn-orange" id="generate-btn">Generate & Copy JSON</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('models-form');
+        const addModelBtn = document.getElementById('add-model-btn');
+        const generateBtn = document.getElementById('generate-btn');
+        const jsonOutput = document.getElementById('json-output');
+        const loadModelBtn = document.getElementById('load-model-btn');
+        let modelsData = [];
+
+        fetch('data/models.json').then(res => res.ok ? res.json() : []).then(data => {
+            modelsData = data;
+            updateJsonOutput();
+            alert('Existing models.json loaded.');
+        }).catch(error => {
+            console.warn('Could not load existing models.json. Starting fresh.', error);
+            alert('Could not load existing models.json. Starting with a blank slate.');
+        });
+        
+        loadModelBtn.addEventListener('click', () => {
+            const idToLoad = form.id.value.trim();
+            if (!idToLoad) {
+                alert('Please enter a Model ID to load.');
+                return;
+            }
+            const modelToLoad = modelsData.find(m => m.id === idToLoad);
+            if (modelToLoad) {
+                Object.keys(modelToLoad).forEach(key => {
+                    if (typeof modelToLoad[key] === 'object' && modelToLoad[key] !== null) {
+                        Object.keys(modelToLoad[key]).forEach(subKey => {
+                           if(form[subKey]) form[subKey].value = modelToLoad[key][subKey];
+                        });
+                    } else {
+                        if(form[key]) form[key].value = modelToLoad[key];
+                    }
+                });
+                alert(`Model "${modelToLoad.model_name}" loaded into the form.`);
+            } else {
+                alert(`Model with ID "${idToLoad}" not found.`);
+            }
+        });
+
+        addModelBtn.addEventListener('click', () => {
+            const newModel = {
+                id: form.id.value.trim(), brand: form.brand.value.trim(), model_name: form.model_name.value.trim(),
+                subtitle: form.subtitle.value.trim(), status: form.status.value.trim(), image_card: form.image_card.value.trim(),
+                image_detail: form.image_detail.value.trim(), youtube_id: form.youtube_id.value.trim(), ceo_note: form.ceo_note.value.trim(),
+                key_specs: {
+                    range_cltc: form.range_cltc.value.trim(), zero_to_100: form.zero_to_100.value.trim(),
+                    power_kw: form.power_kw.value.trim(), battery_kwh: form.battery_kwh.value.trim(),
+                    price_usd_estimated: form.price_usd_estimated.value.trim()
+                },
+                full_specs: {
+                    dimensions: form.dimensions.value.trim(), wheelbase: form.wheelbase.value.trim(),
+                    powertrain: form.powertrain.value.trim(), battery: form.battery.value.trim(),
+                    charging: form.charging.value.trim(), adas: form.adas.value.trim()
+                },
+                market_plan: {
+                    china_launch: form.china_launch.value.trim(), global_rollout: form.global_rollout.value.trim()
+                }
+            };
+            if (!newModel.id) { alert('Model ID is required!'); return; }
+            const existingModelIndex = modelsData.findIndex(m => m.id === newModel.id);
+            if (existingModelIndex > -1) {
+                modelsData[existingModelIndex] = newModel;
+                alert(`Model "${newModel.model_name}" has been updated!`);
+            } else {
+                modelsData.push(newModel);
+                alert(`Model "${newModel.model_name}" has been added!`);
+            }
+            form.reset();
+            updateJsonOutput();
+        });
+
+        generateBtn.addEventListener('click', () => {
+            updateJsonOutput();
+            navigator.clipboard.writeText(jsonOutput.value).then(() => {
+                 alert('JSON content copied to clipboard! Now paste it into data/models.json');
+            });
+        });
+
+        function updateJsonOutput() { jsonOutput.value = JSON.stringify(modelsData, null, 2); }
+    });
+    </script>
+</body>
+</html>
