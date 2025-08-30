@@ -4,30 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me - Volt China</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        .about-container { max-width: 800px; margin: 60px auto; padding: 40px; background-color: var(--card-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); }
-        .profile-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; float: left; margin-right: 30px; margin-bottom: 10px; border: 3px solid var(--accent-blue); }
-        .about-container h1, .about-container h2 { font-weight: 700; color: var(--text-primary); }
-        .about-container h1 { padding-top: 20px; }
-        .about-container p { color: var(--text-secondary); margin-bottom: 1.5em; line-height: 1.8; }
-        .about-container a { color: var(--accent-blue); text-decoration: none; font-weight: bold; }
-        .about-container a:hover { text-decoration: underline; }
-        .clear-fix::after { content: ""; display: table; clear: both; }
-        hr { border: 0; height: 1px; background-color: #4a5568; margin: 20px 0; }
-    </style>
+    <!-- 内部的 <style> 标签已被移除 -->
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
-                    <span>China EV Intelligence</span>
-                </a>
-                <!-- === UPDATED NAVIGATION === -->
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="intelligence.html">Intelligence</a></li>
@@ -35,19 +22,15 @@
                     <li><a href="pricing.html">Pricing</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
-                <!-- === END OF UPDATE === -->
                 <div class="nav-actions">
-                    <div class="lang-switcher lang-en">
-                        <div class="lang-flag"></div>
-                        <span class="lang-text">English</span>
-                    </div>
+                    <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
                     <button class="login-btn">Login</button>
                 </div>
             </nav>
         </div>
     </header>
     <main>
-        <div class="container">
+        <div class="page-content" style="display:block; padding: 0;">
             <div class="about-container clear-fix">
                 <img src="images/leon.jpg" alt="Leon - Founder of Volt China" class="profile-photo">
                 <h1>Leon</h1>
