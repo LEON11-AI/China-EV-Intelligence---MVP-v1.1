@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>China EV Intelligence - MVP v1.1</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- === Path Fix: Removed leading slash for better compatibility === -->
+    <link rel="stylesheet" href="css/style.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -14,7 +15,6 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
-                <!-- === 最终版导航栏 === -->
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="intelligence.html">Intelligence</a></li>
@@ -47,19 +47,23 @@
                 </div>
             </div>
         </section>
+        
+        <!-- === FINAL FIX: Brand logo paths are now correct relative paths === -->
         <section class="brands">
             <div class="container">
                 <h2 class="section-title">Focused Brands</h2>
                 <div class="brands-grid">
-                    <img src="/images/logo-byd.svg" alt="BYD Logo" class="brand-logo-img">
-                    <img src="/images/logo-nio.svg" alt="NIO Logo" class="brand-logo-img">
-                    <img src="/images/logo-xpeng.svg" alt="XPeng Logo" class="brand-logo-img">
-                    <img src="/images/logo-li-auto.svg" alt="Li Auto Logo" class="brand-logo-img">
-                    <img src="/images/logo-xiaomi.svg" alt="Xiaomi Logo" class="brand-logo-img">
-                    <img src="/images/logo-zeekr.svg" alt="Zeekr Logo" class="brand-logo-img">
+                    <img src="images/logo-byd.svg" alt="BYD Logo" class="brand-logo-img">
+                    <img src="images/logo-nio.svg" alt="NIO Logo" class="brand-logo-img">
+                    <img src="images/logo-xpeng.svg" alt="XPeng Logo" class="brand-logo-img">
+                    <img src="images/logo-li-auto.svg" alt="Li Auto Logo" class="brand-logo-img">
+                    <img src="images/logo-xiaomi.svg" alt="Xiaomi Logo" class="brand-logo-img">
+                    <img src="images/logo-zeekr.svg" alt="Zeekr Logo" class="brand-logo-img">
                 </div>
             </div>
         </section>
+        <!-- === END OF FIX === -->
+
         <section class="pricing">
             <div class="container">
                 <h2 class="section-title">Subscription Plans</h2>
