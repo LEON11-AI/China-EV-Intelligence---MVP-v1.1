@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Intelligence Feed - Volt China</title>
+    <title>Contact Us - Volt China</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .contact-container { max-width: 800px; margin: 4rem auto; text-align: center; }
+        .contact-container p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.8; }
+    </style>
 </head>
 <body>
     <header>
@@ -24,11 +28,11 @@
     </header>
     <main>
         <div class="page-content" style="display: block;">
-            <div class="container">
-                <h1 class="section-title">Intelligence Feed</h1>
-                <div class="intel-list-full" id="full-intel-container">
-                    <!-- Full intelligence list will be injected here -->
-                </div>
+            <div class="container contact-container">
+                <h1 class="section-title">Contact Us</h1>
+                <p>For business inquiries, partnership opportunities, or to provide feedback, please reach out to us via email. We look forward to hearing from you.</p>
+                <!-- === UPDATED EMAIL ADDRESS === -->
+                <a href="mailto:voltchina.01@gmail.com" class="cta-button">Send Us an Email</a>
             </div>
         </div>
     </main>
@@ -44,29 +48,5 @@
             <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const intelContainer = document.getElementById('full-intel-container');
-            fetch('data/intelligence.json')
-                .then(response => response.json())
-                .then(data => {
-                    let intelHTML = '';
-                    data.forEach(item => {
-                        const proBadge = item.is_pro ? '<span class="pro-badge">PRO</span>' : '';
-                        intelHTML += `
-                            <a href="intelligence-detail.html?id=${item.id}" class="intel-item">
-                                <div class="intel-header">
-                                    <h3 class="intel-title">${item.title} ${proBadge}</h3>
-                                    <span class="intel-date">${item.date}</span>
-                                </div>
-                                <p class="intel-summary">${item.summary}</p>
-                            </a>
-                        `;
-                    });
-                    intelContainer.innerHTML = intelHTML;
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
 </body>
 </html>

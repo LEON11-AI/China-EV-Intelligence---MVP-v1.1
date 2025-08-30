@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Focused Database - Volt China</title>
-    <!-- === FINAL PATH FIX: Using relative path === -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,9 +49,10 @@
 
     <footer>
         <div class="container">
+            <!-- === UPDATED FOOTER LINK === -->
             <ul class="footer-links">
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
             </ul>
@@ -66,7 +66,6 @@
         const filterOptions = document.querySelectorAll('.filter-option');
         let allModelsData = [];
 
-        // === FINAL PATH FIX: Using relative path ===
         fetch('data/models.json')
             .then(response => response.json())
             .then(data => {

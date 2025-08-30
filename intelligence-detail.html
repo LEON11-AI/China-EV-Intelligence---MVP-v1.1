@@ -34,7 +34,16 @@
     </main>
 
     <footer>
-        <div class="container"><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul><p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p></div>
+        <div class="container">
+            <!-- === UPDATED FOOTER LINK === -->
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
@@ -44,8 +53,6 @@
         const urlParams = new URLSearchParams(window.location.search);
         const intelId = urlParams.get('id');
 
-        // This is a placeholder for a real user subscription check.
-        // For now, we assume the user is NOT subscribed.
         const isUserSubscribed = false; 
 
         if (!intelId) {
@@ -69,7 +76,6 @@
             document.title = `${item.title} - Volt China`;
             
             let contentHTML = '';
-            // If the content is PRO and the user is NOT subscribed, show the paywall.
             if (item.is_pro && !isUserSubscribed) {
                 contentHTML = `
                     <div class="paywall-content">
@@ -84,7 +90,6 @@
                     </div>
                 `;
             } else {
-                // Otherwise, show the full content.
                 contentHTML = item.full_content;
             }
 
