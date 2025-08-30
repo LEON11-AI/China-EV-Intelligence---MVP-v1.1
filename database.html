@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focused Database - Volt China</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
+                    <span>China EV Intelligence</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Intelligence</a></li>
+                    <li><a href="database.html">Focused Database</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <div class="lang-switcher lang-en">
+                        <div class="lang-flag"></div>
+                        <span class="lang-text">English</span>
+                    </div>
+                    <button class="login-btn">Login</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 数据库页面主内容 -->
+    <main>
+        <section id="database-page" class="page-content" style="display: block;"> <!-- 默认显示 -->
+            <div class="container">
+                <h2 class="section-title">Focused EV Model Database</h2>
+                
+                <div class="filters">
+                    <h3 class="filter-title">Filter by Brand:</h3>
+                    <div class="filter-options">
+                        <button class="filter-option active">All</button>
+                        <button class="filter-option">Xiaomi</button>
+                        <button class="filter-option">NIO</button>
+                        <button class="filter-option">BYD</button>
+                        <button class="filter-option">XPeng</button>
+                        <button class="filter-option">Li Auto</button>
+                    </div>
+                </div>
+                
+                <!-- 车型卡片将由JS动态插入到这里 -->
+                <div class="models-grid" id="models-grid-container">
+                    <!-- Loading state or placeholder could go here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 专用于此页面的JavaScript -->
+    <script>
+        // JS代码将放在这里
+    </script>
+</body>
+</html>
