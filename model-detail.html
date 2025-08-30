@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 标题将由JS动态设置 -->
     <title>Model Details - Volt China</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- === FINAL PATH FIX: Using relative path === -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -30,8 +30,6 @@
     <main>
         <div class="page-content" style="display: block;">
             <div class="container" id="detail-content-container">
-                <!-- 详情内容将由JS动态插入到这里 -->
-                <!-- Loading State -->
                 <p id="loading-message" style="color: var(--text-secondary); text-align: center; padding: 4rem 0;">Loading model data...</p>
             </div>
         </div>
@@ -53,8 +51,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         const contentContainer = document.getElementById('detail-content-container');
         const loadingMessage = document.getElementById('loading-message');
-
-        // 1. 从URL中获取车型ID
         const urlParams = new URLSearchParams(window.location.search);
         const modelId = urlParams.get('id');
 
@@ -63,9 +59,12 @@
             return;
         }
 
-        // 2. 加载所有模型数据并找到匹配的那个
-        fetch('/data/models.json')
-            .then(response => response.json())
+        // === FINAL PATH FIX: Using relative path ===
+        fetch('data/models.json')
+            .then(response => {
+                if (!response.ok) { throw new Error('Network response was not ok'); }
+                return response.json();
+            })
             .then(models => {
                 const model = models.find(m => m.id === modelId);
                 if (model) {
@@ -76,7 +75,7 @@
             })
             .catch(error => {
                 console.error('Error loading model data:', error);
-                displayError('Failed to load model data.');
+                displayError('Failed to load model data. Check file path and JSON format.');
             });
 
         function displayError(message) {
@@ -84,12 +83,8 @@
             loadingMessage.textContent = `Error: ${message}`;
         }
 
-        // 3. 渲染详情页的函数
         function renderModelDetails(model) {
-            // 更新页面标题
             document.title = `${model.brand} ${model.model_name} - Volt China`;
-            
-            // 生成HTML
             const detailHTML = `
                 <a href="database.html" class="back-button">&larr; Back to Database</a>
                 <div class="model-detail">
@@ -98,22 +93,16 @@
                         <p class="detail-subtitle">${model.subtitle}</p>
                         <div class="model-status">${model.status}</div>
                     </div>
-                    <div class="detail-image" style="background-image: url('${model.image_detail}'); background-size: cover; background-position: center;">
-                        <!-- 图片作为背景 -->
-                    </div>
+                    <div class="detail-image" style="background-image: url('${model.image_detail}'); background-size: cover; background-position: center;"></div>
                     <div class="detail-content">
                         <div class="ceo-note">
                             <h3>Chief Experience Officer's Note</h3>
                             <p>${model.ceo_note}</p>
                             <div class="author-byline">
                                 <img src="images/leon.jpg" alt="Leon" class="author-avatar">
-                                <div class="author-info">
-                                    <strong>By Leon</strong>
-                                    <span>Founder of Volt China, reporting from Guangzhou.</span>
-                                </div>
+                                <div class="author-info"><strong>By Leon</strong><span>Founder of Volt China, reporting from Guangzhou.</span></div>
                             </div>
                         </div>
-                        
                         <div class="detail-section">
                             <h3 class="section-heading">Key Specifications</h3>
                             <div class="specs-grid">
@@ -124,7 +113,6 @@
                                 <div class="spec-card"><div class="spec-name">Estimated Price</div><div class="spec-value">${model.key_specs.price_usd_estimated}</div></div>
                             </div>
                         </div>
-                        
                         <div class="detail-section">
                             <h3 class="section-heading">Full Specifications</h3>
                             <div class="specs-grid">
@@ -136,7 +124,6 @@
                                 <div class="spec-card"><div class="spec-name">ADAS</div><div class="spec-value">${model.full_specs.adas}</div></div>
                             </div>
                         </div>
-                        
                         <div class="detail-section">
                             <h3 class="section-heading">Market Plan</h3>
                             <div class="specs-grid">
@@ -147,7 +134,6 @@
                     </div>
                 </div>
             `;
-            // 将生成的HTML插入到页面中
             contentContainer.innerHTML = detailHTML;
         }
     });

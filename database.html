@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Focused Database - Volt China</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- === FINAL PATH FIX: Using relative path === -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -65,7 +66,8 @@
         const filterOptions = document.querySelectorAll('.filter-option');
         let allModelsData = [];
 
-        fetch('/data/models.json')
+        // === FINAL PATH FIX: Using relative path ===
+        fetch('data/models.json')
             .then(response => response.json())
             .then(data => {
                 allModelsData = data;
@@ -73,7 +75,7 @@
             })
             .catch(error => {
                 console.error('Error loading model data:', error);
-                gridContainer.innerHTML = '<p style="color: var(--text-secondary);">Failed to load model data. Please try again later.</p>';
+                gridContainer.innerHTML = '<p style="color: var(--text-secondary);">Failed to load model data.</p>';
             });
 
         function renderModels(models) {
@@ -83,7 +85,6 @@
                 return;
             }
             models.forEach(model => {
-                // === MODIFICATION START: Updated the button link ===
                 const card = `
                     <div class="model-card">
                         <div class="model-image" style="background-image: url('${model.image_card}'); background-size: cover; background-position: center;"></div>
@@ -100,7 +101,6 @@
                         </div>
                     </div>
                 `;
-                // === MODIFICATION END ===
                 gridContainer.innerHTML += card;
             });
         }
