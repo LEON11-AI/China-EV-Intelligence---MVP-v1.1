@@ -49,7 +49,7 @@
         const contentContainer = document.getElementById('intel-detail-container');
         const urlParams = new URLSearchParams(window.location.search);
         const intelId = urlParams.get('id');
-        const isUserSubscribed = false; // Placeholder for real subscription check
+        const isUserSubscribed = false;
 
         if (!intelId) {
             contentContainer.innerHTML = '<p>Error: No intelligence ID provided.</p>';
@@ -87,11 +87,17 @@
             } else {
                 contentHTML = `<p>${item.full_content}</p>`;
             }
+            
+            // === NEW CODE START ===
+            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; Back to Intelligence Feed</a>`;
             const detailHTML = `
+                ${backButtonHTML}
                 <article class="intel-article">
                     <header class="article-header"><h1>${item.title}</h1><div class="article-meta"><span>${item.brand || ''}</span><span>${item.date}</span></div></header>
                     <div class="article-content">${contentHTML}</div>
                 </article>`;
+            // === NEW CODE END ===
+            
             contentContainer.innerHTML = detailHTML;
         }
     });
