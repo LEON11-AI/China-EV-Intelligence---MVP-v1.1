@@ -7,16 +7,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header><!-- Your Header --></header>
+    <!-- === FINAL FIX: Restored the complete Header === -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="intelligence.html">Intelligence</a></li>
+                    <li><a href="database.html">Focused Database</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
+                    <button class="login-btn">Login</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
     <main>
         <div class="page-content" style="display: block;">
             <div class="container">
                 <h1 class="section-title">Intelligence Feed</h1>
-                <div class="intel-list-full" id="full-intel-container"></div>
+                <div class="intel-list-full" id="full-intel-container">
+                    <!-- Full intelligence list will be injected here by JavaScript -->
+                </div>
             </div>
         </div>
     </main>
-    <footer><!-- Your Footer --></footer>
+
+    <!-- === FINAL FIX: Restored the complete Footer === -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('full-intel-container');
