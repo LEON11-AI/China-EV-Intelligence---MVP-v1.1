@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pricing - Volt China</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing & FAQ - Volt China</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .comparison-section { padding: 4rem 0; background-color: var(--bg-primary); }
+        .comparison-table { width: 100%; max-width: 960px; margin: 0 auto; border-collapse: collapse; background-color: var(--card-bg); border-radius: var(--border-radius); overflow: hidden; }
+        .comparison-table th, .comparison-table td { padding: 1rem 1.5rem; text-align: center; border-bottom: 1px solid #4a5568; }
+        .comparison-table th { font-size: 1.2rem; font-weight: 500; background-color: rgba(26, 54, 93, 0.2); }
+        .comparison-table td { color: var(--text-secondary); }
+        .comparison-table thead th:first-child { text-align: left; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table tbody td:first-child { text-align: left; font-weight: 500; color: var(--text-primary); }
+        .checkmark { color: var(--accent-blue); font-weight: bold; font-size: 1.5rem; }
+        .pro-column { color: var(--accent-orange) !important; }
+        .faq-section { max-width: 800px; margin: 4rem auto; text-align: left; }
+        .faq-item { margin-bottom: 2rem; border-bottom: 1px solid #4a5568; padding-bottom: 1.5rem; }
+        .faq-question { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1rem; }
+        .faq-answer { color: var(--text-secondary); line-height: 1.8; }
+    </style>
 </head>
 <body>
     <header>
@@ -24,32 +41,66 @@
     </header>
     <main>
         <div class="page-content" style="display: block;">
-            <!-- Re-using the pricing section from the homepage -->
             <section class="pricing">
                 <div class="container">
-                    <h2 class="section-title">Subscription Plans</h2>
+                    <h1 class="section-title">Find the Plan That's Right for You</h1>
+                    <p style="text-align: center; max-width: 600px; margin: -2rem auto 4rem; color: var(--text-secondary);">
+                        Start for free and unlock powerful insights when you're ready.
+                    </p>
                     <div class="pricing-grid">
                         <div class="pricing-card">
                             <div class="pricing-header"><h3>Free Tier</h3><div class="price">$0 <span>/month</span></div></div>
-                            <ul class="pricing-features">
-                                <li>Basic model specifications</li>
-                                <li>Limited intelligence updates</li>
-                                <li>Delayed data access</li>
-                                <li>Community support</li>
-                            </ul>
+                            <ul class="pricing-features"><li>Basic model specifications</li><li>Limited intelligence updates</li><li>Delayed data access</li><li>Community support</li></ul>
                             <button class="pricing-btn">Sign Up</button>
                         </div>
                         <div class="pricing-card pro">
                             <div class="pricing-header"><h3>Pro Intelligence</h3><div class="price">$49 <span>/month</span></div></div>
-                            <ul class="pricing-features">
-                                <li>Full detailed specifications</li>
-                                <li>Exclusive intelligence reports</li>
-                                <li>Real-time updates</li>
-                                <li>CEO insights and analysis</li>
-                                <li>Priority support</li>
-                            </ul>
+                            <ul class="pricing-features"><li>Full detailed specifications</li><li>Exclusive intelligence reports</li><li>Real-time updates</li><li>CEO insights and analysis</li><li>Priority support</li></ul>
                             <button class="pricing-btn orange">Subscribe Now</button>
                         </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="comparison-section">
+                <div class="container">
+                    <h2 class="section-title">Compare Features</h2>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Features</th>
+                                <th>Free</th>
+                                <th class="pro-column">PRO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Full Access to Model Database</td><td>✓</td><td>✓</td></tr>
+                            <tr><td>Key Specifications</td><td>✓</td><td>✓</td></tr>
+                            <tr><td>Full Specifications & Market Plans</td><td>-</td><td class="checkmark">✓</td></tr>
+                            <tr><td>CEO's Note Analysis</td><td>-</td><td class="checkmark">✓</td></tr>
+                            <tr><td>Public Intelligence Feed</td><td>✓</td><td>✓</td></tr>
+                            <tr><td>Exclusive PRO Intelligence</td><td>-</td><td class="checkmark">✓</td></tr>
+                            <tr><td>Real-time Updates</td><td>-</td><td class="checkmark">✓</td></tr>
+                            <tr><td>Priority Support</td><td>-</td><td class="checkmark">✓</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="faq-section">
+                <div class="container">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Who is the PRO plan for?</h3>
+                        <p class="faq-answer">Our PRO plan is designed for industry professionals, analysts, investors, and serious EV enthusiasts who need timely, in-depth, and contextualized intelligence on the Chinese EV market. If your decisions depend on understanding the competitive landscape, this plan is for you.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What kind of "exclusive intelligence" is included?</h3>
+                        <p class="faq-answer">Exclusive intelligence includes deep dives into supply chain dynamics, analysis of MIIT filings, translations and interpretations of news from Chinese sources that are often missed by Western media, and our Chief Experience Officer's unique, on-the-ground analysis.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I cancel my subscription at any time?</h3>
+                        <p class="faq-answer">Yes, absolutely. You can manage your subscription and cancel at any time. Your access will continue until the end of your current billing period.</p>
                     </div>
                 </div>
             </section>
@@ -57,7 +108,6 @@
     </main>
     <footer>
         <div class="container">
-            <!-- === UPDATED FOOTER LINK === -->
             <ul class="footer-links">
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>

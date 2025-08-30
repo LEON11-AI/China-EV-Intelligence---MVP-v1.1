@@ -27,7 +27,6 @@
     <main>
         <div class="page-content" style="display: block;">
             <div class="container article-container" id="intel-detail-container">
-                <!-- Intelligence Detail will be injected here by JavaScript -->
                 <p id="loading-message" style="text-align: center; padding: 4rem 0;">Loading intelligence...</p>
             </div>
         </div>
@@ -35,7 +34,6 @@
 
     <footer>
         <div class="container">
-            <!-- === UPDATED FOOTER LINK === -->
             <ul class="footer-links">
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -49,11 +47,9 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const contentContainer = document.getElementById('intel-detail-container');
-        const loadingMessage = document.getElementById('loading-message');
         const urlParams = new URLSearchParams(window.location.search);
         const intelId = urlParams.get('id');
-
-        const isUserSubscribed = false; 
+        const isUserSubscribed = false; // Placeholder for real subscription check
 
         if (!intelId) {
             contentContainer.innerHTML = '<p>Error: No intelligence ID provided.</p>';
@@ -74,39 +70,28 @@
 
         function renderIntelDetail(item) {
             document.title = `${item.title} - Volt China`;
-            
             let contentHTML = '';
             if (item.is_pro && !isUserSubscribed) {
                 contentHTML = `
                     <div class="paywall-content">
-                        ${item.summary}
+                        <p>${item.summary}</p>
                         <div class="paywall-block">
+                            <div class="blurred-content"><p>${item.full_content}</p></div>
                             <div class="paywall-prompt">
                                 <h3>Unlock Full Analysis</h3>
-                                <p>You are reading a preview of a PRO article. Subscribe now to unlock the full analysis, plus access to our complete intelligence database and exclusive insights.</p>
+                                <p>You are reading a preview of a PRO article. Subscribe now to unlock the full analysis.</p>
                                 <a href="pricing.html" class="cta-button">Subscribe to PRO</a>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             } else {
-                contentHTML = item.full_content;
+                contentHTML = `<p>${item.full_content}</p>`;
             }
-
             const detailHTML = `
                 <article class="intel-article">
-                    <header class="article-header">
-                        <h1>${item.title}</h1>
-                        <div class="article-meta">
-                            <span>${item.brand || ''}</span>
-                            <span>${item.date}</span>
-                        </div>
-                    </header>
-                    <div class="article-content">
-                        ${contentHTML}
-                    </div>
-                </article>
-            `;
+                    <header class="article-header"><h1>${item.title}</h1><div class="article-meta"><span>${item.brand || ''}</span><span>${item.date}</span></div></header>
+                    <div class="article-content">${contentHTML}</div>
+                </article>`;
             contentContainer.innerHTML = detailHTML;
         }
     });
