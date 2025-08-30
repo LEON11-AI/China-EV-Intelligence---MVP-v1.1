@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>China EV Intelligence - MVP v1.1</title>
-    
-    <!-- 删除了数百行的内联样式 -->
-    
-    <!-- 链接到我们新建的中央样式表 -->
-    <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -19,143 +14,125 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">
-                    <span data-i18n="siteTitle">China EV Intelligence</span>
-                </div>
-                
-                <!-- 主要导航链接 -->
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
+                    <span>China EV Intelligence</span>
+                </a>
                 <ul class="nav-links">
-                    <li><a href="#" class="nav-link" data-page="home" data-i18n="navHome">Home</a></li>
-                    <li><a href="#" class="nav-link" data-page="intelligence" data-i18n="navIntelligence">Intelligence</a></li>
-                    <li><a href="#" class="nav-link" data-page="database" data-i18n="navDatabase">Focused Database</a></li>
-                    <li><a href="#" class="nav-link" data-page="pricing" data-i18n="navPricing">Pricing</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Intelligence</a></li> <!-- 暂时禁用 -->
+                    <li><a href="#">Focused Database</a></li> <!-- 暂时禁用 -->
+                    <li><a href="#">Pricing</a></li> <!-- 暂时禁用 -->
                     <li><a href="about.html">About</a></li>
                 </ul>
-
-                <!-- 右侧操作区 -->
                 <div class="nav-actions">
                     <div class="lang-switcher lang-en">
                         <div class="lang-flag"></div>
-                        <span class="lang-text" data-i18n="language">English</span>
+                        <span class="lang-text">English</span>
                     </div>
-                    <button class="login-btn" data-i18n="login">Login</button>
+                    <button class="login-btn">Login</button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- 主页内容 (其余内容保持不变) -->
+    <!-- 主页内容 -->
     <main>
         <!-- Hero区域 -->
-        <section id="home-page" class="page-content active">
-            <div class="hero">
-                <div class="container">
-                    <h1 data-i18n="heroTitle">China EV Intelligence Platform</h1>
-                    <p data-i18n="heroSubtitle">Your premier source for exclusive insights, data, and analysis on China's electric vehicle market</p>
-                    <button class="cta-button" data-i18n="heroCta">Get Instant Access</button>
-                </div>
+        <section class="hero">
+            <div class="container">
+                <h1>China EV Intelligence Platform</h1>
+                <p>Your premier source for exclusive insights, data, and analysis on China's electric vehicle market</p>
+                <button class="cta-button">Get Instant Access</button>
             </div>
-
-            <!-- ... 您页面其余的HTML内容保持不变 ... -->
-            <!-- ... 我在这里省略了重复的内容，您文件中的这部分是正确的 ... -->
-             <!-- 功能特性 -->
-            <section class="features">
-                <div class="container">
-                    <h2 class="section-title" data-i18n="featuresTitle">Why Choose Our Platform</h2>
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">🔍</div>
-                            <h3 data-i18n="feature1Title">Focused Coverage</h3>
-                            <p data-i18n="feature1Desc">We concentrate on the most important Chinese EV brands and models, ensuring the highest quality intelligence.</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">💡</div>
-                            <h3 data-i18n="feature2Title">Expert Insights</h3>
-                            <p data-i18n="feature2Desc">Our Chief Experience Officer provides exclusive commentary that goes beyond raw data.</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">📈</div>
-                            <h3 data-i18n="feature3Title">Actionable Intelligence</h3>
-                            <p data-i18n="feature3Desc">Get beyond the news with analysis that helps you make informed decisions.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 品牌展示 -->
-            <section class="brands">
-                <div class="container">
-                    <h2 class="section-title" data-i18n="brandsTitle">Focused Brands</h2>
-                    <div class="brands-grid">
-                        <div class="brand-logo">BYD</div>
-                        <div class="brand-logo">NIO</div>
-                        <div class="brand-logo">XPeng</div>
-                        <div class="brand-logo">Li Auto</div>
-                        <div class="brand-logo">Xiaomi</div>
-                        <div class="brand-logo">Zeekr</div>
-                    </div>
-                </div>
-            </section>
-            <!-- ... 直到 ... -->
         </section>
 
-        <!-- 车型详情页 -->
-        <section id="model-detail-page" class="page-content">
-            <!-- ... -->
-             <div class="ceo-note">
-                <h3 data-i18n="ceoNoteTitle">Chief Experience Officer's Note</h3>
-                <p>This isn't just a car, it's a statement from a tech giant. Pay close attention to its smart cockpit integration and how it challenges Tesla's software dominance. Its real-world battery performance will be the key.</p>
-                <!-- NEW: Author Byline -->
-                <div class="author-byline">
-                    <img src="images/leon.jpg" alt="Leon" class="author-avatar">
-                    <div class="author-info">
-                        <strong>By Leon</strong>
-                        <span>Founder of Volt China, reporting from Guangzhou.</span>
+        <!-- 功能特性 -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Our Platform</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Focused Coverage</h3>
+                        <p>We concentrate on the most important Chinese EV brands and models, ensuring the highest quality intelligence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>Expert Insights</h3>
+                        <p>Our Chief Experience Officer provides exclusive commentary that goes beyond raw data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Actionable Intelligence</h3>
+                        <p>Get beyond the news with analysis that helps you make informed decisions.</p>
                     </div>
                 </div>
             </div>
-            <!-- ... -->
         </section>
 
+        <!-- 品牌展示 -->
+        <section class="brands">
+            <div class="container">
+                <h2 class="section-title">Focused Brands</h2>
+                <div class="brands-grid">
+                    <div class="brand-logo">BYD</div>
+                    <div class="brand-logo">NIO</div>
+                    <div class="brand-logo">XPeng</div>
+                    <div class="brand-logo">Li Auto</div>
+                    <div class="brand-logo">Xiaomi</div>
+                    <div class="brand-logo">Zeekr</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 定价 -->
+        <section class="pricing">
+            <div class="container">
+                <h2 class="section-title">Subscription Plans</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Free Tier</h3>
+                            <div class="price">$0 <span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Basic model specifications</li>
+                            <li>Limited intelligence updates</li>
+                            <li>Delayed data access</li>
+                            <li>Community support</li>
+                        </ul>
+                        <button class="pricing-btn">Sign Up</button>
+                    </div>
+                    <div class="pricing-card pro">
+                        <div class="pricing-header">
+                            <h3>Pro Intelligence</h3>
+                            <div class="price">$49 <span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Full detailed specifications</li>
+                            <li>Exclusive intelligence reports</li>
+                            <li>Real-time updates</li>
+                            <li>CEO insights and analysis</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <button class="pricing-btn orange">Subscribe Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- 页脚 -->
     <footer>
         <div class="container">
             <ul class="footer-links">
-                <li><a href="about.html" data-i18n="footerAbout">About Us</a></li>
-                <li><a href="#" data-i18n="footerContact">Contact</a></li>
-                <li><a href="#" data-i18n="footerPrivacy">Privacy Policy</a></li>
-                <li><a href="#" data-i18n="footerTerms">Terms of Service</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
             </ul>
-            <p class="copyright" data-i18n="footerCopyright">© 2025 China EV Intelligence. All rights reserved.</p>
+            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- 您的JavaScript代码保持不变 -->
-    <script>
-        // ... 您所有的JS代码 ...
-    </script>
 </body>
-</html>```
-**请注意:** 为了简洁，我在上面的 `index.html` 代码中省略了大部分重复的HTML内容（用 `...` 表示）。您只需要**打开您现有的 `index.html`，删除 `<style>...</style>` 块，然后在相同位置换上 `<link rel="stylesheet" href="css/style.css">`** 即可。其他所有内容都保持原样。
-
----
-
-### **下一步**
-
-1.  保存这两个文件 (`style.css` 和 `index.html`)。
-2.  然后，请再次执行 `git` 发布流程，将您的修改更新到线上。
-
-    ```bash
-    git add .
-    ```
-    ```bash
-    git commit -m "重构：将CSS样式提取到独立的style.css文件"
-    ```    ```bash
-    git push
-    ```
-
-完成这些步骤后，您的网站结构就和您最初的专业规划完全一致了。`about.html` 和 `index.html` 现在共享同一个样式来源，所有页面的显示都会是正确的。
-
-请您操作，完成后告诉我！
+</html>
