@@ -9,23 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            margin-bottom: 2rem;
-            border-radius: var(--border-radius);
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-bottom: 2rem; border-radius: var(--border-radius); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     </style>
 </head>
 <body>
@@ -53,9 +38,10 @@
     </main>
     <footer>
         <div class="container">
+            <!-- === UPDATED FOOTER LINK === -->
             <ul class="footer-links">
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
             </ul>
@@ -65,30 +51,19 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const contentContainer = document.getElementById('detail-content-container');
-        const loadingMessage = document.getElementById('loading-message');
         const urlParams = new URLSearchParams(window.location.search);
         const modelId = urlParams.get('id');
 
-        if (!modelId) { displayError('No model ID provided.'); return; }
+        if (!modelId) { contentContainer.innerHTML = '<p>Error: No model ID provided.</p>'; return; }
 
         fetch('data/models.json').then(res => res.ok ? res.json() : Promise.reject('Network response was not ok')).then(models => {
             const model = models.find(m => m.id === modelId);
             if (model) { renderModelDetails(model); } 
-            else { displayError(`Model with ID "${modelId}" not found.`); }
-        }).catch(error => {
-            console.error('Error loading model data:', error);
-            displayError('Failed to load model data. Check file path and JSON format.');
-        });
-
-        function displayError(message) {
-            loadingMessage.style.color = 'var(--accent-orange)';
-            loadingMessage.textContent = `Error: ${message}`;
-        }
+            else { contentContainer.innerHTML = `<p>Error: Model with ID "${modelId}" not found.</p>`; }
+        }).catch(error => console.error('Error:', error));
 
         function renderModelDetails(model) {
             document.title = `${model.brand} ${model.model_name} - Volt China`;
-
-            // === NEW: YouTube Video Section Logic ===
             let videoSection = '';
             if (model.youtube_id && model.youtube_id.trim() !== '') {
                 videoSection = `
@@ -97,12 +72,13 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/${model.youtube_id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
 
+            // === FINAL FIX: Added Back Button ===
+            const backButtonHTML = `<a href="database.html" class="back-button">&larr; Back to Database</a>`;
             const detailHTML = `
-                <a href="database.html" class="back-button">&larr; Back to Database</a>
+                ${backButtonHTML}
                 <div class="model-detail">
                     <div class="detail-header">
                         <h2 class="detail-title">${model.brand} ${model.model_name}</h2>
