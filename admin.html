@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - Content Admin v3</title>
+    <title>Volt China - Content Admin v5 (Final)</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        body { padding: 2rem; } .admin-container { max-width: 960px; margin: 0 auto; } .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; } h1, h2 { text-align: center; margin-bottom: 2rem; } h2 { margin-top: 0; } .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; } .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; } .form-group input, .form-group textarea { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; } .form-group textarea { min-height: 120px; resize: vertical; } .full-width { grid-column: 1 / -1; } .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; } .btn-orange { background-color: var(--accent-orange); } .btn:hover { opacity: 0.9; } #json-output { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; } .admin-header { display: flex; justify-content: space-between; align-items: center; }
+        body { padding: 2rem; } .admin-container { max-width: 960px; margin: 0 auto; } .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; } h1, h2, h3 { text-align: center; margin-bottom: 1.5rem; } h2 { margin-top: 0; } h3 { margin-top: 2rem; grid-column: 1 / -1; border-top: 1px solid #4a5568; padding-top: 1.5rem; } .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; } .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; text-align: left; } .form-group input, .form-group textarea, .form-group select { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; } .form-group textarea { min-height: 120px; resize: vertical; } .full-width { grid-column: 1 / -1; } .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; } .btn-orange { background-color: var(--accent-orange); } .btn:hover { opacity: 0.9; } .output-area { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; } .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
     </style>
 </head>
 <body>
@@ -16,11 +16,38 @@
             <button class="btn" id="lang-toggle-btn" data-i18n="langToggle">切换到中文</button>
         </div>
         <div class="form-section">
+            <h2 data-i18n="intelFormTitle">Manage Intelligence Feed</h2>
+            <form id="intel-form">
+                <div class="form-grid">
+                    <div class="form-group"><label for="intel_id" data-i18n="intel_id">Intel ID</label><input type="text" id="intel_id" required placeholder="e.g., intel_004"></div>
+                    <div class="form-group"><label for="intel_date" data-i18n="intel_date">Date</label><input type="text" id="intel_date" required placeholder="YYYY-MM-DD"></div>
+                    <div class="form-group"><label for="intel_brand" data-i18n="intel_brand">Brand</label><input type="text" id="intel_brand"></div>
+                    <div class="form-group"><label for="intel_model" data-i18n="intel_model">Model</label><input type="text" id="intel_model"></div>
+                    <div class="form-group full-width"><label for="intel_title" data-i18n="intel_title">Title</label><input type="text" id="intel_title" required></div>
+                    <div class="form-group full-width"><label for="intel_summary" data-i18n="intel_summary">Summary</label><textarea id="intel_summary" required></textarea></div>
+                    <div class="form-group full-width"><label for="intel_full_content" data-i18n="intel_full_content">Full Content</label><textarea id="intel_full_content" rows="10" required></textarea></div>
+                    <div class="form-group"><label for="intel_is_pro" data-i18n="intel_is_pro">PRO Content?</label><select id="intel_is_pro"><option value="false">No (Free)</option><option value="true">Yes (PRO)</option></select></div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn" id="load-intel-btn" data-i18n="loadIntelBtn">Load</button>
+                    <button type="button" class="btn" id="add-intel-btn" data-i18n="addIntelBtn">Add/Update</button>
+                    <button type="reset" class="btn" data-i18n="clearIntelFormBtn">Clear</button>
+                </div>
+            </form>
+        </div>
+        <div class="form-section">
+            <h2 data-i18n="intelJsonOutputTitle">Generated intelligence.json</h2>
+            <p style="color:var(--text-secondary); margin-bottom: 1rem;" data-i18n="intelJsonOutputDesc">Copy this and paste into `data/intelligence.json`.</p>
+            <textarea id="intel-json-output" class="output-area" readonly></textarea>
+            <div class="btn-group"><button type="button" class="btn btn-orange" id="intel-generate-btn" data-i18n="intelGenerateBtn">Generate & Copy</button></div>
+        </div>
+        
+        <div class="form-section">
             <h2 data-i18n="formTitle">Manage EV Models</h2>
             <form id="models-form">
                 <div class="form-grid">
-                    <div class="form-group"><label for="id" data-i18n="id">Model ID</label><input type="text" id="id" required></div>
-                    <div class="form-group"><label for="brand" data-i18n="brand">Brand</label><input type="text" id="brand" required></div>
+                    <div class="form-group"><label for="id" data-i18n="id">Model ID</label><input type="text" id="id" required placeholder="e.g., xiaomi_su7_max"></div>
+                    <div class="form-group"><label for="brand" data-i18n="brand">Brand</label><input type="text" id="brand" required placeholder="e.g., Xiaomi"></div>
                     <div class="form-group"><label for="model_name" data-i18n="model_name">Model Name</label><input type="text" id="model_name" required></div>
                     <div class="form-group"><label for="subtitle" data-i18n="subtitle">Subtitle</label><input type="text" id="subtitle"></div>
                     <div class="form-group"><label for="status" data-i18n="status">Status</label><input type="text" id="status"></div>
@@ -28,101 +55,97 @@
                     <div class="form-group"><label for="image_detail" data-i18n="image_detail">Detail Image Path</label><input type="text" id="image_detail"></div>
                     <div class="form-group"><label for="youtube_id" data-i18n="youtube_id">YouTube Video ID</label><input type="text" id="youtube_id"></div>
                     <div class="form-group full-width"><label for="ceo_note" data-i18n="ceo_note">CEO's Note</label><textarea id="ceo_note"></textarea></div>
-                    <h3 data-i18n="keySpecs" class="full-width">Key Specifications</h3>
+                    <h3 data-i18n="keySpecs">Key Specifications</h3>
                     <div class="form-group"><label for="range_cltc" data-i18n="range_cltc">Range (CLTC)</label><input type="text" id="range_cltc"></div>
                     <div class="form-group"><label for="zero_to_100" data-i18n="zero_to_100">0-100 km/h</label><input type="text" id="zero_to_100"></div>
                     <div class="form-group"><label for="power_kw" data-i18n="power_kw">Power (kW)</label><input type="text" id="power_kw"></div>
                     <div class="form-group"><label for="battery_kwh" data-i18n="battery_kwh">Battery (kWh)</label><input type="text" id="battery_kwh"></div>
                     <div class="form-group full-width"><label for="price_usd_estimated" data-i18n="price_usd_estimated">Price (USD)</label><input type="text" id="price_usd_estimated"></div>
-                    <h3 data-i18n="fullSpecs" class="full-width">Full Specifications</h3>
+                    <h3 data-i18n="fullSpecs">Full Specifications</h3>
                     <div class="form-group"><label for="dimensions" data-i18n="dimensions">Dimensions</label><input type="text" id="dimensions"></div>
                     <div class="form-group"><label for="wheelbase" data-i18n="wheelbase">Wheelbase</label><input type="text" id="wheelbase"></div>
                     <div class="form-group"><label for="powertrain" data-i18n="powertrain">Powertrain</label><input type="text" id="powertrain"></div>
                     <div class="form-group"><label for="battery" data-i18n="battery">Battery Details</label><input type="text" id="battery"></div>
                     <div class="form-group"><label for="charging" data-i18n="charging">Charging</label><input type="text" id="charging"></div>
                     <div class="form-group"><label for="adas" data-i18n="adas">ADAS</label><input type="text" id="adas"></div>
-                    <h3 data-i18n="marketPlan" class="full-width">Market Plan</h3>
+                    <h3 data-i18n="marketPlan">Market Plan</h3>
                     <div class="form-group"><label for="china_launch" data-i18n="china_launch">China Launch</label><input type="text" id="china_launch"></div>
                     <div class="form-group"><label for="global_rollout" data-i18n="global_rollout">Global Rollout</label><input type="text" id="global_rollout"></div>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn" id="load-model-btn" data-i18n="loadModelBtn">Load Existing Model</button>
-                    <button type="button" class="btn" id="add-model-btn" data-i18n="addModelBtn">Add/Update Model</button>
-                    <button type="reset" class="btn" data-i18n="clearFormBtn">Clear Form</button>
+                    <button type="button" class="btn" id="load-model-btn" data-i18n="loadModelBtn">Load</button>
+                    <button type="button" class="btn" id="add-model-btn" data-i18n="addModelBtn">Add/Update</button>
+                    <button type="reset" class="btn" data-i18n="clearFormBtn">Clear</button>
                 </div>
             </form>
         </div>
         <div class="form-section">
             <h2 data-i18n="jsonOutputTitle">Generated models.json</h2>
-            <p style="color:var(--text-secondary); margin-bottom: 1rem;" data-i18n="jsonOutputDesc">Click 'Generate & Copy' to update the JSON below. Then, paste it into the actual `data/models.json` file and save.</p>
-            <textarea id="json-output" readonly></textarea>
-            <div class="btn-group">
-                <button type="button" class="btn btn-orange" id="generate-btn" data-i18n="generateBtn">Generate & Copy JSON</button>
-            </div>
+            <p style="color:var(--text-secondary); margin-bottom: 1rem;" data-i18n="jsonOutputDesc">Copy this and paste into `data/models.json`.</p>
+            <textarea id="json-output" class="output-area" readonly></textarea>
+            <div class="btn-group"><button type="button" class="btn btn-orange" id="generate-btn" data-i18n="generateBtn">Generate & Copy</button></div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('models-form');
-            const addModelBtn = document.getElementById('add-model-btn');
-            const generateBtn = document.getElementById('generate-btn');
-            const jsonOutput = document.getElementById('json-output');
-            const loadModelBtn = document.getElementById('load-model-btn');
-            const langToggleBtn = document.getElementById('lang-toggle-btn');
-            let modelsData = [];
-            let currentLang = 'en';
+    document.addEventListener('DOMContentLoaded', () => {
+        let currentLang = 'en';
+        const translations = {
+            en: { mainTitle: "Volt China Content Management", langToggle: "切换到中文", intelFormTitle: "Manage Intelligence Feed", intel_id: "Intel ID (e.g., intel_004)", intel_date: "Date (YYYY-MM-DD)", intel_brand: "Brand", intel_model: "Model", intel_title: "Title", intel_summary: "Summary (For list view)", intel_full_content: "Full Content (Supports HTML)", intel_is_pro: "Is PRO Content?", loadIntelBtn: "Load", addIntelBtn: "Add/Update", clearIntelFormBtn: "Clear", intelJsonOutputTitle: "Generated intelligence.json", intelJsonOutputDesc: "Copy this and paste into `data/intelligence.json`.", intelGenerateBtn: "Generate & Copy", formTitle: "Manage EV Models", id: "Model ID", brand: "Brand", model_name: "Model Name", subtitle: "Subtitle", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load", addModelBtn: "Add/Update", clearFormBtn: "Clear", jsonOutputTitle: "Generated models.json", jsonOutputDesc: "Copy this and paste into `data/models.json`.", generateBtn: "Generate & Copy" },
+            zh: { mainTitle: "Volt China 内容管理后台", langToggle: "Switch to English", intelFormTitle: "管理情报文章", intel_id: "情报ID (如: intel_004)", intel_date: "日期 (YYYY-MM-DD)", intel_brand: "品牌", intel_model: "车型", intel_title: "标题", intel_summary: "摘要 (用于列表页)", intel_full_content: "完整内容 (支持HTML标签)", intel_is_pro: "是否为PRO内容?", loadIntelBtn: "加载", addIntelBtn: "添加/更新", clearIntelFormBtn: "清空", intelJsonOutputTitle: "生成的 intelligence.json", intelJsonOutputDesc: "复制并粘贴到 `data/intelligence.json` 文件。", intelGenerateBtn: "生成并复制", formTitle: "管理电动车型", id: "模型ID", brand: "品牌", model_name: "模型名称", subtitle: "副标题", status: "状态", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评", keySpecs: "核心规格", range_cltc: "续航", zero_to_100: "0-100 km/h", power_kw: "功率", battery_kwh: "电池", price_usd_estimated: "价格", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市", global_rollout: "全球上市", loadModelBtn: "加载", addModelBtn: "添加/更新", clearFormBtn: "清空", jsonOutputTitle: "生成的 models.json", jsonOutputDesc: "复制并粘贴到 `data/models.json` 文件。", generateBtn: "生成并复制" }
+        };
 
-            const translations = {
-                en: { mainTitle: "Volt China Content Management", langToggle: "切换到中文", formTitle: "Manage EV Models", id: "Model ID", brand: "Brand", model_name: "Model Name", subtitle: "Subtitle", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load Existing Model", addModelBtn: "Add/Update Model", clearFormBtn: "Clear Form", jsonOutputTitle: "Generated models.json", jsonOutputDesc: "Click 'Generate & Copy' to update the JSON below. Then, paste it into the actual `data/models.json` file and save.", generateBtn: "Generate & Copy JSON" },
-                zh: { mainTitle: "Volt China 内容管理后台", langToggle: "Switch to English", formTitle: "管理电动车型", id: "模型ID (全小写,下划线)", brand: "品牌", model_name: "模型名称", subtitle: "副标题", status: "状态 (如: 在售)", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评", keySpecs: "核心规格", range_cltc: "续航 (CLTC)", zero_to_100: "0-100 km/h", power_kw: "功率 (kW)", battery_kwh: "电池 (kWh)", price_usd_estimated: "价格 (USD)", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市日期", global_rollout: "全球上市计划", loadModelBtn: "加载已有模型", addModelBtn: "添加/更新模型", clearFormBtn: "清空表单", jsonOutputTitle: "生成的 models.json", jsonOutputDesc: "点击“生成并复制”以更新下方JSON。然后，将其粘贴到实际的 `data/models.json` 文件中并保存。", generateBtn: "生成并复制 JSON" }
-            };
-
-            function setLanguage(lang) {
-                currentLang = lang;
-                document.querySelectorAll('[data-i18n]').forEach(el => {
-                    const key = el.dataset.i18n;
-                    if (translations[lang][key]) {
-                        if (el.tagName === 'LABEL' || el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'P' || el.tagName === 'BUTTON') {
-                            el.textContent = translations[lang][key];
-                        }
-                    }
-                });
-            }
-            langToggleBtn.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'zh' : 'en'));
-
-            fetch('data/models.json').then(res => res.ok ? res.json() : []).then(data => { modelsData = data; updateJsonOutput(); }).catch(console.warn);
-
-            loadModelBtn.addEventListener('click', () => {
-                const idToLoad = form.id.value.trim();
-                if (!idToLoad) return alert('Please enter a Model ID to load.');
-                const modelToLoad = modelsData.find(m => m.id === idToLoad);
-                if (modelToLoad) {
-                    Object.keys(modelToLoad).forEach(key => {
-                        if (typeof modelToLoad[key] === 'object' && modelToLoad[key] !== null) { Object.keys(modelToLoad[key]).forEach(subKey => { if(form[subKey]) form[subKey].value = modelToLoad[key][subKey]; }); } 
-                        else { if(form[key]) form[key].value = modelToLoad[key]; }
-                    });
-                } else { alert(`Model with ID "${idToLoad}" not found.`); }
+        const setLanguage = (lang) => {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang]?.[key]) {
+                    el.textContent = translations[lang][key];
+                }
             });
+        };
+        document.getElementById('lang-toggle-btn').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'zh' : 'en'));
 
-            addModelBtn.addEventListener('click', () => {
-                const newModel = { id: form.id.value.trim(), brand: form.brand.value.trim(), model_name: form.model_name.value.trim(), subtitle: form.subtitle.value.trim(), status: form.status.value.trim(), image_card: form.image_card.value.trim(), image_detail: form.image_detail.value.trim(), youtube_id: form.youtube_id.value.trim(), ceo_note: form.ceo_note.value.trim(), key_specs: { range_cltc: form.range_cltc.value.trim(), zero_to_100: form.zero_to_100.value.trim(), power_kw: form.power_kw.value.trim(), battery_kwh: form.battery_kwh.value.trim(), price_usd_estimated: form.price_usd_estimated.value.trim() }, full_specs: { dimensions: form.dimensions.value.trim(), wheelbase: form.wheelbase.value.trim(), powertrain: form.powertrain.value.trim(), battery: form.battery.value.trim(), charging: form.charging.value.trim(), adas: form.adas.value.trim() }, market_plan: { china_launch: form.china_launch.value.trim(), global_rollout: form.global_rollout.value.trim() } };
-                if (!newModel.id) return alert('Model ID is required!');
-                const existingModelIndex = modelsData.findIndex(m => m.id === newModel.id);
-                if (existingModelIndex > -1) { modelsData[existingModelIndex] = newModel; } 
-                else { modelsData.push(newModel); }
-                form.reset(); updateJsonOutput();
-            });
-
-            generateBtn.addEventListener('click', () => {
-                updateJsonOutput();
-                navigator.clipboard.writeText(jsonOutput.value).then(() => { alert('JSON content copied!'); });
-            });
-
-            function updateJsonOutput() { jsonOutput.value = JSON.stringify(modelsData, null, 2); }
-            
-            setLanguage('en'); // Set default language on load
+        // Models Logic
+        const modelsForm = document.getElementById('models-form');
+        const modelsJsonOutput = document.getElementById('json-output');
+        let modelsData = [];
+        fetch('data/models.json').then(res => res.ok ? res.json() : []).then(data => { modelsData = data; updateModelsJsonOutput(); }).catch(console.warn);
+        document.getElementById('load-model-btn').addEventListener('click', () => {
+            const idToLoad = modelsForm.id.value.trim(); if (!idToLoad) return;
+            const modelToLoad = modelsData.find(m => m.id === idToLoad);
+            if (modelToLoad) { Object.keys(modelToLoad).forEach(key => { if (typeof modelToLoad[key] === 'object') { Object.keys(modelToLoad[key]).forEach(subKey => { if(modelsForm[subKey]) modelsForm[subKey].value = modelToLoad[key][subKey]; }); } else { if(modelsForm[key]) modelsForm[key].value = modelToLoad[key]; } }); }
         });
+        document.getElementById('add-model-btn').addEventListener('click', () => {
+            const model = { id: modelsForm.id.value.trim(), brand: modelsForm.brand.value.trim(), model_name: modelsForm.model_name.value.trim(), subtitle: modelsForm.subtitle.value.trim(), status: modelsForm.status.value.trim(), image_card: modelsForm.image_card.value.trim(), image_detail: modelsForm.image_detail.value.trim(), youtube_id: modelsForm.youtube_id.value.trim(), ceo_note: modelsForm.ceo_note.value.trim(), key_specs: { range_cltc: modelsForm.range_cltc.value.trim(), zero_to_100: modelsForm.zero_to_100.value.trim(), power_kw: modelsForm.power_kw.value.trim(), battery_kwh: modelsForm.battery_kwh.value.trim(), price_usd_estimated: modelsForm.price_usd_estimated.value.trim() }, full_specs: { dimensions: modelsForm.dimensions.value.trim(), wheelbase: modelsForm.wheelbase.value.trim(), powertrain: modelsForm.powertrain.value.trim(), battery: modelsForm.battery.value.trim(), charging: modelsForm.charging.value.trim(), adas: modelsForm.adas.value.trim() }, market_plan: { china_launch: modelsForm.china_launch.value.trim(), global_rollout: modelsForm.global_rollout.value.trim() } };
+            if (!model.id) return; const index = modelsData.findIndex(m => m.id === model.id);
+            if (index > -1) modelsData[index] = model; else modelsData.push(model);
+            modelsForm.reset(); updateModelsJsonOutput();
+        });
+        document.getElementById('generate-btn').addEventListener('click', () => { navigator.clipboard.writeText(modelsJsonOutput.value); });
+        function updateModelsJsonOutput() { modelsJsonOutput.value = JSON.stringify(modelsData, null, 2); }
+
+        // Intelligence Logic
+        const intelForm = document.getElementById('intel-form');
+        const intelJsonOutput = document.getElementById('intel-json-output');
+        let intelData = [];
+        fetch('data/intelligence.json').then(res => res.ok ? res.json() : []).then(data => { intelData = data; updateIntelJsonOutput(); }).catch(console.warn);
+        document.getElementById('load-intel-btn').addEventListener('click', () => {
+            const idToLoad = intelForm.intel_id.value.trim(); if (!idToLoad) return;
+            const itemToLoad = intelData.find(i => i.id === idToLoad);
+            if (itemToLoad) Object.keys(itemToLoad).forEach(key => { if(intelForm[`intel_${key}`]) intelForm[`intel_${key}`].value = itemToLoad[key]; });
+        });
+        document.getElementById('add-intel-btn').addEventListener('click', () => {
+            const item = { id: intelForm.intel_id.value.trim(), date: intelForm.intel_date.value.trim(), brand: intelForm.intel_brand.value.trim(), model: intelForm.intel_model.value.trim(), title: intelForm.intel_title.value.trim(), is_pro: intelForm.intel_is_pro.value === 'true', summary: intelForm.intel_summary.value.trim(), full_content: intelForm.intel_full_content.value.trim() };
+            if (!item.id) return; const index = intelData.findIndex(i => i.id === item.id);
+            if (index > -1) intelData[index] = item; else intelData.unshift(item);
+            intelForm.reset(); updateIntelJsonOutput();
+        });
+        document.getElementById('intel-generate-btn').addEventListener('click', () => { navigator.clipboard.writeText(intelJsonOutput.value); });
+        function updateIntelJsonOutput() { intelJsonOutput.value = JSON.stringify(intelData, null, 2); }
+        
+        setLanguage('en');
+    });
     </script>
 </body>
 </html>

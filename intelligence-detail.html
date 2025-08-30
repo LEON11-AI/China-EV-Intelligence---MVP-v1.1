@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligence - Volt China</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="intelligence.html">Intelligence</a></li>
+                    <li><a href="database.html">Focused Database</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <div class="nav-actions"><div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div><button class="login-btn">Login</button></div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content" style="display: block;">
+            <div class="container article-container" id="intel-detail-container">
+                <!-- Intelligence Detail will be injected here by JavaScript -->
+                <p id="loading-message" style="text-align: center; padding: 4rem 0;">Loading intelligence...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container"><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul><p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p></div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contentContainer = document.getElementById('intel-detail-container');
+        const loadingMessage = document.getElementById('loading-message');
+        const urlParams = new URLSearchParams(window.location.search);
+        const intelId = urlParams.get('id');
+
+        // This is a placeholder for a real user subscription check.
+        // For now, we assume the user is NOT subscribed.
+        const isUserSubscribed = false; 
+
+        if (!intelId) {
+            contentContainer.innerHTML = '<p>Error: No intelligence ID provided.</p>';
+            return;
+        }
+
+        fetch('data/intelligence.json')
+            .then(response => response.json())
+            .then(intelData => {
+                const item = intelData.find(i => i.id === intelId);
+                if (item) {
+                    renderIntelDetail(item);
+                } else {
+                    contentContainer.innerHTML = `<p>Error: Intelligence with ID "${intelId}" not found.</p>`;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
+        function renderIntelDetail(item) {
+            document.title = `${item.title} - Volt China`;
+            
+            let contentHTML = '';
+            // If the content is PRO and the user is NOT subscribed, show the paywall.
+            if (item.is_pro && !isUserSubscribed) {
+                contentHTML = `
+                    <div class="paywall-content">
+                        ${item.summary}
+                        <div class="paywall-block">
+                            <div class="paywall-prompt">
+                                <h3>Unlock Full Analysis</h3>
+                                <p>You are reading a preview of a PRO article. Subscribe now to unlock the full analysis, plus access to our complete intelligence database and exclusive insights.</p>
+                                <a href="pricing.html" class="cta-button">Subscribe to PRO</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Otherwise, show the full content.
+                contentHTML = item.full_content;
+            }
+
+            const detailHTML = `
+                <article class="intel-article">
+                    <header class="article-header">
+                        <h1>${item.title}</h1>
+                        <div class="article-meta">
+                            <span>${item.brand || ''}</span>
+                            <span>${item.date}</span>
+                        </div>
+                    </header>
+                    <div class="article-content">
+                        ${contentHTML}
+                    </div>
+                </article>
+            `;
+            contentContainer.innerHTML = detailHTML;
+        }
+    });
+    </script>
+</body>
+</html>

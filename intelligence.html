@@ -44,8 +44,9 @@
                     let intelHTML = '';
                     data.forEach(item => {
                         const proBadge = item.is_pro ? '<span class="pro-badge">PRO</span>' : '';
+                        // === MODIFICATION START: Link is now active ===
                         intelHTML += `
-                            <a href="#" class="intel-item">
+                            <a href="intelligence-detail.html?id=${item.id}" class="intel-item">
                                 <div class="intel-header">
                                     <h3 class="intel-title">${item.title} ${proBadge}</h3>
                                     <span class="intel-date">${item.date}</span>
@@ -53,6 +54,7 @@
                                 <p class="intel-summary">${item.summary}</p>
                             </a>
                         `;
+                        // === MODIFICATION END ===
                     });
                     intelContainer.innerHTML = intelHTML;
                 })
