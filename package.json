@@ -1,0 +1,7 @@
+{
+  "name": "volt-china-project",
+  "version": "1.1.0",
+  "scripts": {
+    "publish": "git add . && git commit -m \"chore: Update content via admin tool\" && git push"
+  }
+}

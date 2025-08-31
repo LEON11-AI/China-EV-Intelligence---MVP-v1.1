@@ -1,32 +1,32 @@
 [
   {
-    "id": "小鹏_p7_Ultra",
-    "brand": "小鹏",
-    "model_name": "2025款_小鹏P7_Ultra",
-    "subtitle": "750 四驱鹏翼 Ultra",
-    "status": "已上市",
-    "image_card": "D:\\China-EV-Intelligence---MVP-v1.1\\images\\xpeng_p7\\FM",
-    "image_detail": "D:\\China-EV-Intelligence---MVP-v1.1\\images\\xpeng_p7",
+    "id": "xpeng_p7_ultra",
+    "brand": "XPeng",
+    "model_name": "2025 P7 Ultra",
+    "subtitle": "750 4WD Pengyi Ultra",
+    "status": "Launched",
+    "image_card": "images/xpeng_p7/P7-02.jpg",
+    "image_detail": "images/xpeng_p7/P7-03.jpg",
     "youtube_id": "",
-    "ceo_note": "等待测评",
+    "ceo_note": "Waiting for the review/test evaluation",
     "key_specs": {
       "range_cltc": "750 km",
       "zero_to_100": "3.7s",
       "power_kw": "437kw",
       "battery_kwh": "92.2kwh",
-      "price_usd_estimated": "21.98-30.18万 rmb"
+      "price_usd_estimated": "219,800 - 301,800 RMB"
     },
     "full_specs": {
-      "dimensions": "5017*1970*1427",
-      "wheelbase": "3008",
-      "powertrain": "双电机",
-      "battery": "三元锂电池",
-      "charging": "800v",
+      "dimensions": "5017*1970*1427mm",
+      "wheelbase": "3008mm",
+      "powertrain": "Dual Motors",
+      "battery": "Ternary Lithium Battery",
+      "charging": "800V",
       "adas": "L2"
     },
     "market_plan": {
-      "china_launch": "已上市",
-      "global_rollout": ""
+      "china_launch": "Launched",
+      "global_rollout": "To be confirmed"
     }
   }
 ]
