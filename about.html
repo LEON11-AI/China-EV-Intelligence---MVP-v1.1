@@ -1,69 +1,184 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Default language -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Volt China</title>
+    <title>Volt China - Content Admin v9 (Corrected)</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { padding: 2rem; } .admin-container { max-width: 960px; margin: 0 auto; } .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; } h1, h2, h3 { text-align: center; margin-bottom: 1.5rem; } h2 { margin-top: 0; } h3 { margin-top: 2rem; grid-column: 1 / -1; border-top: 1px solid #4a5568; padding-top: 1.5rem; } .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; } .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; text-align: left; } .form-group input, .form-group textarea, .form-group select { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; } .form-group textarea { min-height: 120px; resize: vertical; } .full-width { grid-column: 1 / -1; } .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; } .btn-orange { background-color: var(--accent-orange); } .btn:hover { opacity: 0.9; } .btn:disabled { background-color: #4a5568; cursor: not-allowed; } .output-area { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<!-- === LANGUAGE GENE INJECTION 1/3: Added page key === -->
-<body data-page-key="pageTitleAbout">
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span data-i18n="siteTitle">China EV Intelligence</span></a>
-                <!-- === LANGUAGE GENE INJECTION 2/3: Added i18n tags === -->
-                <ul class="nav-links">
-                    <li><a href="index.html" data-i18n="navHome">Home</a></li>
-                    <li><a href="intelligence.html" data-i18n="navIntelligence">Intelligence</a></li>
-                    <li><a href="database.html" data-i18n="navDatabase">Focused Database</a></li>
-                    <li><a href="pricing.html" data-i18n="navPricing">Pricing</a></li>
-                    <li><a href="about.html" data-i18n="navAbout">About</a></li>
-                </ul>
-                <div class="nav-actions">
-                    <div class="lang-switcher lang-en lang-toggle">
-                        <span class="lang-text" data-i18n="navLanguage">English</span>
-                    </div>
-                    <button class="login-btn" data-i18n="navLogin">Login</button>
-                </div>
-            </nav>
+<body>
+    <!-- HTML is unchanged -->
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1 data-i18n="mainTitle">Volt China Content Management</h1>
+            <button class="btn" id="lang-toggle-btn" data-i18n="langToggle">切换到中文</button>
         </div>
-    </header>
-    <main>
-        <div class="page-content" style="display:block; padding: 0;">
-            <div class="about-container clear-fix">
-                <img src="images/leon.jpg" alt="Leon - Founder of Volt China" class="profile-photo">
-                <h1 data-i18n="aboutName">Leon</h1>
-                <p><em data-i18n="aboutTitle">Founder & Chief Analyst of Volt China</em></p>
-                <hr>
-                <h2 data-i18n="aboutStoryTitle">My Story</h2>
-                <p data-i18n="aboutStoryP1">My journey into the world of electric vehicles wasn't just a choice; it was an immersion. Living in Guangzhou, one of the epicenters of China's automotive industry, I've had a front-row seat to the most electrifying transformation in modern transportation. I've witnessed the unprecedented pace of innovation, from the early days of skepticism to the current era where Chinese EVs are setting global benchmarks in technology, design, and ambition.</p>
-                <p data-i18n="aboutStoryP2">This unique position allowed me to see beyond the headlines. I could feel the pulse of the industry, talk to the people behind the products, and experience these incredible machines on the roads they were designed for. It became my passion to document this revolution, not just as a series of product launches, but as a fundamental shift in technology and culture.</p>
-                <h2 data-i18n="aboutWhyTitle">Why Volt China?</h2>
-                <p data-i18n="aboutWhyP1">I founded Volt China to bridge a critical gap. While the world saw fragmented news and complex technical specifications, I saw a need for clarity, context, and deep-seated understanding. The language barrier is only the first hurdle; the real challenge is decoding the strategy, the market dynamics, and the "why" behind every decision. Machine translation can give you words, but it can't give you insight.</p>
-                <p data-i18n="aboutWhyP2">Volt China is my answer. It's an intelligence platform built to provide precisely that: a clear, authoritative, and on-the-ground perspective. Our mission is to dismantle the wall of complexity and deliver mission-critical intelligence to global enthusiasts, industry professionals, and investors. We don't just report the news; we connect the dots.</p>
-                <h2 data-i18n="aboutConnectTitle">Connect With Me</h2>
-                <p data-i18n="aboutConnectP1">Join the conversation and get the latest insights by following me on <a href="https://www.youtube.com/@VoltChina" target="_blank">YouTube</a> and <a href="https://x.com/xLeonStudio" target="_blank">X (formerly Twitter)</a>.</p>
+        <div class="form-section">
+            <h2 data-i18n="apiKeyTitle">AI Translation Setup (Baidu)</h2>
+            <div class="form-grid">
+                 <div class="form-group"><label for="baidu_app_id" data-i18n="apiKeyLabelAppId">Baidu APP ID</label><input type="text" id="baidu_app_id" placeholder="Enter your Baidu APP ID"></div>
+                <div class="form-group"><label for="baidu_secret_key" data-i18n="apiKeyLabelKey">Baidu Secret Key</label><input type="password" id="baidu_secret_key" placeholder="Enter your Baidu Secret Key"></div>
             </div>
+             <p style="color:var(--text-secondary); font-size: 0.8rem; margin-top: 0.5rem;" data-i18n="apiKeyDesc">
+                Required for auto-translation. Your keys are stored securely in your browser's local storage.
+            </p>
         </div>
-    </main>
-    <footer>
-        <div class="container">
-            <ul class="footer-links">
-                <li><a href="about.html" data-i18n="footerAbout">About Us</a></li>
-                <li><a href="contact.html" data-i18n="footerContact">Contact</a></li>
-                <li><a href="#" data-i18n="footerPrivacy">Privacy Policy</a></li>
-                <li><a href="#" data-i18n="footerTerms">Terms of Service</a></li>
-            </ul>
-            <p class="copyright" data-i18n="footerCopyright">© 2025 China EV Intelligence. All rights reserved.</p>
+        
+        <!-- **BUG FIX**: Added unique ID to this section -->
+        <div class="form-section" id="intel-section">
+            <h2 data-i18n="intelFormTitle">Manage Intelligence Feed</h2>
+            <form id="intel-form">
+                <div class="form-grid"><div class="form-group"><label for="intel_id" data-i18n="intel_id">Intel ID</label><input type="text" id="intel_id" required></div><div class="form-group"><label for="intel_date" data-i18n="intel_date">Date</label><input type="text" id="intel_date" required placeholder="YYYY-MM-DD"></div><div class="form-group"><label for="intel_brand" data-i18n="intel_brand">Brand</label><input type="text" id="intel_brand"></div><div class="form-group"><label for="intel_model" data-i18n="intel_model">Model</label><input type="text" id="intel_model"></div><div class="form-group full-width"><label for="intel_title" data-i18n="intel_title">Title (in English)</label><input type="text" id="intel_title" required></div><div class="form-group full-width"><label for="intel_summary" data-i18n="intel_summary">Summary (in English)</label><textarea id="intel_summary" required></textarea></div><div class="form-group full-width"><label for="intel_full_content" data-i18n="intel_full_content">Full Content (in English)</label><textarea id="intel_full_content" rows="10" required></textarea></div><div class="form-group"><label for="intel_is_pro" data-i18n="intel_is_pro">PRO Content?</label><select id="intel_is_pro"><option value="false">No (Free)</option><option value="true">Yes (PRO)</option></select></div></div><div class="btn-group"><button type="button" class="btn" id="load-intel-btn" data-i18n="loadIntelBtn">Load</button><button type="button" class="btn" id="add-intel-btn" data-i18n="addIntelBtn">Translate & Add/Update</button><button type="reset" class="btn" data-i18n="clearIntelFormBtn">Clear</button></div>
+            </form>
         </div>
-    </footer>
-    
-    <!-- === LANGUAGE GENE INJECTION 3/3: Added script files === -->
-    <script src="js/translations.js"></script>
-    <script src="js/main.js"></script>
+        <div class="form-section"><h2 data-i18n="intelJsonOutputTitle">Generated intelligence.json</h2><textarea id="intel-json-output" class="output-area" readonly></textarea><div class="btn-group"><button type="button" class="btn btn-orange" id="intel-generate-btn" data-i18n="intelGenerateBtn">Generate & Copy</button></div></div>
+        
+        <!-- **BUG FIX**: Added unique ID to this section -->
+        <div class="form-section" id="models-section">
+            <h2 data-i18n="formTitle">Manage EV Models</h2>
+            <form id="models-form">
+                 <div class="form-grid"><div class="form-group"><label for="id" data-i18n="id">Model ID</label><input type="text" id="id" required></div><div class="form-group"><label for="brand" data-i18n="brand">Brand</label><input type="text" id="brand" required></div><div class="form-group"><label for="model_name" data-i18n="model_name">Model Name (in English)</label><input type="text" id="model_name" required></div><div class="form-group"><label for="subtitle" data-i18n="subtitle">Subtitle (in English)</label><input type="text" id="subtitle"></div><div class="form-group"><label for="status" data-i18n="status">Status</label><input type="text" id="status"></div><div class="form-group"><label for="image_card" data-i18n="image_card">Card Image Path</label><input type="text" id="image_card"></div><div class="form-group"><label for="image_detail" data-i18n="image_detail">Detail Image Path</label><input type="text" id="image_detail"></div><div class="form-group"><label for="youtube_id" data-i18n="youtube_id">YouTube Video ID</label><input type="text" id="youtube_id"></div><div class="form-group full-width"><label for="ceo_note" data-i18n="ceo_note">CEO's Note (in English)</label><textarea id="ceo_note"></textarea></div><h3 data-i18n="keySpecs">Key Specifications</h3><div class="form-group"><label for="range_cltc" data-i18n="range_cltc">Range (CLTC)</label><input type="text" id="range_cltc"></div><div class="form-group"><label for="zero_to_100" data-i18n="zero_to_100">0-100 km/h</label><input type="text" id="zero_to_100"></div><div class="form-group"><label for="power_kw" data-i18n="power_kw">Power (kW)</label><input type="text" id="power_kw"></div><div class="form-group"><label for="battery_kwh" data-i18n="battery_kwh">Battery (kWh)</label><input type="text" id="battery_kwh"></div><div class="form-group full-width"><label for="price_usd_estimated" data-i18n="price_usd_estimated">Price (USD)</label><input type="text" id="price_usd_estimated"></div><h3 data-i18n="fullSpecs">Full Specifications</h3><div class="form-group"><label for="dimensions" data-i18n="dimensions">Dimensions</label><input type="text" id="dimensions"></div><div class="form-group"><label for="wheelbase" data-i18n="wheelbase">Wheelbase</label><input type="text" id="wheelbase"></div><div class="form-group"><label for="powertrain" data-i18n="powertrain">Powertrain</label><input type="text" id="powertrain"></div><div class="form-group"><label for="battery" data-i18n="battery">Battery Details</label><input type="text" id="battery"></div><div class="form-group"><label for="charging" data-i18n="charging">Charging</label><input type="text" id="charging"></div><div class="form-group"><label for="adas" data-i18n="adas">ADAS</label><input type="text" id="adas"></div><h3 data-i18n="marketPlan">Market Plan</h3><div class="form-group"><label for="china_launch" data-i18n="china_launch">China Launch</label><input type="text" id="china_launch"></div><div class="form-group"><label for="global_rollout" data-i18n="global_rollout">Global Rollout</label><input type="text" id="global_rollout"></div></div><div class="btn-group"><button type="button" class="btn" id="load-model-btn" data-i18n="loadModelBtn">Load</button><button type="button" class="btn" id="add-model-btn" data-i18n="addModelBtn">Translate & Add/Update</button><button type="reset" class="btn" data-i18n="clearFormBtn">Clear</button></div>
+            </form>
+        </div>
+        <div class="form-section"><h2 data-i18n="jsonOutputTitle">Generated models.json</h2><textarea id="json-output" class="output-area" readonly></textarea><div class="btn-group"><button type="button" class="btn btn-orange" id="generate-btn" data-i18n="generateBtn">Generate & Copy</button></div></div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- START: CORE SETUP AND **ROBUST** BAIDU TRANSLATION ENGINE ---
+        const appIdInput = document.getElementById('baidu_app_id');
+        const secretKeyInput = document.getElementById('baidu_secret_key');
+        appIdInput.value = localStorage.getItem('volt-china-baidu-app-id') || '';
+        secretKeyInput.value = localStorage.getItem('volt-china-baidu-secret-key') || '';
+        appIdInput.addEventListener('change', () => localStorage.setItem('volt-china-baidu-app-id', appIdInput.value.trim()));
+        secretKeyInput.addEventListener('change', () => localStorage.setItem('volt-china-baidu-secret-key', secretKeyInput.value.trim()));
+
+        async function translateWithBaidu(texts, appId, secretKey) {
+            if (!appId || !secretKey) { alert('Error: Baidu APP ID or Secret Key is missing.'); throw new Error("API credentials missing"); }
+            if (texts.every(t => !t)) return texts.map(() => "");
+            
+            const query = texts.join('\n');
+            const salt = Date.now();
+            const sign = md5(appId + query + salt + secretKey);
+            const apiUrl = `https://fanyi-api.baidu.com/api/trans/vip/translate`;
+            const params = new URLSearchParams({ q: query, from: 'en', to: 'cht', appid: appId, salt: salt, sign: sign });
+
+            try {
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                const response = await axios.post(proxyUrl + apiUrl, params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' } });
+                const data = response.data;
+                if (data.error_code) { throw new Error(`Baidu API Error ${data.error_code}: ${data.error_msg}`); }
+                return data.trans_result.map(item => item.dst);
+            } catch (error) {
+                console.error("Translation failed:", error);
+                alert(`Translation failed. Error: ${error.message}. Check the console (F12) for more details.`);
+                throw error;
+            }
+        }
+        
+        const uiTranslations = { en: { mainTitle: "Volt China Content Management", apiKeyTitle: "AI Translation Setup (Baidu)", apiKeyLabelAppId: "Baidu APP ID", apiKeyLabelKey: "Baidu Secret Key", apiKeyDesc: "Required for auto-translation. Your keys are stored securely in your browser's local storage.", langToggle: "切换到中文", intelFormTitle: "Manage Intelligence Feed", intel_id: "Intel ID", intel_date: "Date", intel_brand: "Brand", intel_model: "Model", intel_title: "Title (in English)", intel_summary: "Summary (in English)", intel_full_content: "Full Content (in English)", intel_is_pro: "Is PRO Content?", loadIntelBtn: "Load", addIntelBtn: "Translate & Add/Update", clearIntelFormBtn: "Clear", intelJsonOutputTitle: "Generated intelligence.json", intelGenerateBtn: "Generate & Copy", formTitle: "Manage EV Models", id: "Model ID", brand: "Brand", model_name: "Model Name (in English)", subtitle: "Subtitle (in English)", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note (in English)", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load", addIntelBtn: "Translate & Add/Update", clearFormBtn: "Clear", jsonOutputTitle: "Generated models.json", generateBtn: "Generate & Copy" }, zh: { mainTitle: "Volt China 内容管理后台", apiKeyTitle: "AI翻译设置 (百度)", apiKeyLabelAppId: "百度翻译 APP ID", apiKeyLabelKey: "百度翻译 密钥", apiKeyDesc: "自动翻译功能需要此密钥。密钥将安全地保存在您的浏览器本地存储中。", langToggle: "Switch to English", intelFormTitle: "管理情报文章", intel_id: "情报ID", intel_date: "日期", intel_brand: "品牌", intel_model: "车型", intel_title: "标题 (英文)", intel_summary: "摘要 (英文)", intel_full_content: "完整内容 (英文)", intel_is_pro: "是否为PRO内容?", loadIntelBtn: "加载", addIntelBtn: "翻译并添加/更新", clearIntelFormBtn: "清空", intelJsonOutputTitle: "生成的 intelligence.json", intelGenerateBtn: "生成并复制", formTitle: "管理电动车型", id: "模型ID", brand: "品牌", model_name: "模型名称 (英文)", subtitle: "副标题 (英文)", status: "状态", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评 (英文)", keySpecs: "核心规格", range_cltc: "续航", zero_to_100: "0-100 km/h", power_kw: "功率", battery_kwh: "电池", price_usd_estimated: "价格", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市", global_rollout: "全球上市", loadModelBtn: "加载", addModelBtn: "添加/更新", clearFormBtn: "清空", jsonOutputTitle: "生成的 models.json", generateBtn: "生成并复制" }};
+        let currentLang = 'en'; const setLanguage = (lang) => { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (uiTranslations[lang]?.[key]) el.textContent = uiTranslations[lang][key]; }); }; document.getElementById('lang-toggle-btn').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'zh' : 'en')); setLanguage('en');
+        
+        // --- **LOGIC CORRECTION AREA** ---
+
+        // --- MODELS LOGIC ---
+        const modelsSection = document.getElementById('models-section');
+        const modelsForm = document.getElementById('models-form');
+        const modelsJsonOutput = document.getElementById('json-output');
+        let modelsData = [];
+        const translatableModelFields = ['model_name', 'subtitle', 'ceo_note'];
+
+        fetch('data/models.json').then(res => res.ok ? res.json() : []).then(data => { modelsData = data; updateModelsJsonOutput(); }).catch(console.warn);
+        
+        modelsSection.querySelector('#load-model-btn').addEventListener('click', () => {
+            const idToLoad = modelsForm.id.value.trim(); if (!idToLoad) return;
+            const modelToLoad = modelsData.find(m => m.id === idToLoad);
+            if (modelToLoad) { Object.keys(modelsForm.elements).forEach(key => { const el = modelsForm.elements[key]; if (el.id) { const modelValue = getModelValue(modelToLoad, el.id); if (modelValue !== undefined) el.value = modelValue; } }); }
+        });
+        
+        modelsSection.querySelector('#add-model-btn').addEventListener('click', async () => {
+            const appId = appIdInput.value.trim(); const secretKey = secretKeyInput.value.trim();
+            const thisBtn = modelsSection.querySelector('#add-model-btn');
+            const originalBtnText = thisBtn.textContent;
+            thisBtn.textContent = "Translating..."; thisBtn.disabled = true;
+
+            try {
+                const textsToTranslate = translatableModelFields.map(id => modelsForm[id].value.trim());
+                const translatedTexts = await translateWithBaidu(textsToTranslate, appId, secretKey);
+                const model = { id: modelsForm.id.value.trim(), brand: modelsForm.brand.value.trim(), status: modelsForm.status.value.trim(), image_card: modelsForm.image_card.value.trim(), image_detail: modelsForm.image_detail.value.trim(), youtube_id: modelsForm.youtube_id.value.trim(), key_specs: { range_cltc: modelsForm.range_cltc.value.trim(), zero_to_100: modelsForm.zero_to_100.value.trim(), power_kw: modelsForm.power_kw.value.trim(), battery_kwh: modelsForm.battery_kwh.value.trim(), price_usd_estimated: modelsForm.price_usd_estimated.value.trim() }, full_specs: { dimensions: modelsForm.dimensions.value.trim(), wheelbase: modelsForm.wheelbase.value.trim(), powertrain: modelsForm.powertrain.value.trim(), battery: modelsForm.battery.value.trim(), charging: modelsForm.charging.value.trim(), adas: modelsForm.adas.value.trim() }, market_plan: { china_launch: modelsForm.china_launch.value.trim(), global_rollout: modelsForm.global_rollout.value.trim() } };
+                translatableModelFields.forEach((id, i) => { model[id] = { en: textsToTranslate[i], "zh-Hant": translatedTexts[i] }; });
+
+                if (!model.id) throw new Error("Model ID cannot be empty.");
+                const index = modelsData.findIndex(m => m.id === model.id);
+                if (index > -1) modelsData[index] = model; else modelsData.push(model);
+                
+                updateModelsJsonOutput();
+                modelsForm.reset();
+            } catch (error) {
+                console.error("Operation failed:", error);
+                modelsJsonOutput.value = `ERROR: ${error.message}\n\nPlease check your API keys and the console for details.`;
+            } finally {
+                thisBtn.textContent = originalBtnText;
+                thisBtn.disabled = false;
+            }
+        });
+
+        modelsSection.querySelector('#generate-btn').addEventListener('click', () => navigator.clipboard.writeText(modelsJsonOutput.value));
+        function updateModelsJsonOutput() { modelsJsonOutput.value = JSON.stringify(modelsData, null, 2); }
+        function getModelValue(model, key) { if (translatableModelFields.includes(key)) return model[key]?.en; if (model.key_specs?.[key] !== undefined) return model.key_specs[key]; if (model.full_specs?.[key] !== undefined) return model.full_specs[key]; if (model.market_plan?.[key] !== undefined) return model.market_plan[key]; return model[key]; }
+        
+        // --- INTELLIGENCE LOGIC ---
+        const intelSection = document.getElementById('intel-section');
+        const intelForm = document.getElementById('intel-form');
+        const intelJsonOutput = document.getElementById('intel-json-output');
+        let intelData = [];
+        const translatableIntelFields = ['title', 'summary', 'full_content'];
+
+        fetch('data/intelligence.json').then(res => res.ok ? res.json() : []).then(data => { intelData = data; updateIntelJsonOutput(); }).catch(console.warn);
+        
+        intelSection.querySelector('#load-intel-btn').addEventListener('click', () => {
+            const idToLoad = intelForm.intel_id.value.trim(); if (!idToLoad) return;
+            const itemToLoad = intelData.find(i => i.id === idToLoad);
+            if (itemToLoad) { Object.keys(itemToLoad).forEach(key => { const el = intelForm[`intel_${key}`]; if (el) { const value = itemToLoad[key]; if (typeof value === 'object' && value?.en !== undefined) { el.value = value.en; } else { el.value = value; } } }); }
+        });
+        
+        intelSection.querySelector('#add-intel-btn').addEventListener('click', async () => {
+            const appId = appIdInput.value.trim(); const secretKey = secretKeyInput.value.trim();
+            const thisBtn = intelSection.querySelector('#add-intel-btn');
+            const originalBtnText = thisBtn.textContent;
+            thisBtn.textContent = "Translating..."; thisBtn.disabled = true;
+
+            try {
+                const textsToTranslate = translatableIntelFields.map(id => intelForm[`intel_${id}`].value.trim());
+                const translatedTexts = await translateWithBaidu(textsToTranslate, appId, secretKey);
+                
+                const item = { id: intelForm.intel_id.value.trim(), date: intelForm.intel_date.value.trim(), brand: intelForm.intel_brand.value.trim(), model: intelForm.intel_model.value.trim(), is_pro: intelForm.intel_is_pro.value === 'true' };
+                translatableIntelFields.forEach((id, i) => { item[id] = { en: textsToTranslate[i], "zh-Hant": translatedTexts[i] }; });
+                
+                if (!item.id) throw new Error("Intel ID cannot be empty.");
+                const index = intelData.findIndex(i => i.id === item.id);
+                if (index > -1) intelData[index] = item; else intelData.unshift(item);
+
+                updateIntelJsonOutput();
+                intelForm.reset();
+            } catch (error) {
+                console.error("Operation failed:", error);
+                intelJsonOutput.value = `ERROR: ${error.message}\n\nPlease check your API keys and the console for details.`;
+            } finally {
+                thisBtn.textContent = originalBtnText;
+                thisBtn.disabled = false;
+            }
+        });
+
+        intelSection.querySelector('#intel-generate-btn').addEventListener('click', () => navigator.clipboard.writeText(intelJsonOutput.value));
+        function updateIntelJsonOutput() { intelJsonOutput.value = JSON.stringify(intelData, null, 2); }
+    });
+    </script>
 </body>
 </html>

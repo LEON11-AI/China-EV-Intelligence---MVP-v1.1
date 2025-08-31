@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - Content Admin v5 (Final)</title>
+    <title>Volt China - Content Admin (Final & Corrected)</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        body { padding: 2rem; } .admin-container { max-width: 960px; margin: 0 auto; } .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; } h1, h2, h3 { text-align: center; margin-bottom: 1.5rem; } h2 { margin-top: 0; } h3 { margin-top: 2rem; grid-column: 1 / -1; border-top: 1px solid #4a5568; padding-top: 1.5rem; } .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; } .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; text-align: left; } .form-group input, .form-group textarea, .form-group select { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; } .form-group textarea { min-height: 120px; resize: vertical; } .full-width { grid-column: 1 / -1; } .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; } .btn-orange { background-color: var(--accent-orange); } .btn:hover { opacity: 0.9; } .output-area { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; } .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        body { padding: 2rem; } .admin-container { max-width: 960px; margin: 0 auto; } .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; } h1, h2, h3 { text-align: center; margin-bottom: 1.5rem; } h2 { margin-top: 0; } h3 { margin-top: 2rem; grid-column: 1 / -1; border-top: 1px solid #4a5568; padding-top: 1.5rem; } .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; } .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; text-align: left; } .form-group input, .form-group textarea, .form-group select { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; } .form-group textarea { min-height: 120px; resize: vertical; } .full-width { grid-column: 1 / -1; } .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; } .btn-orange { background-color: var(--accent-orange); } .btn:hover { opacity: 0.9; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        
+        /* --- THIS IS THE RESTORED STYLE THAT WAS MISSING --- */
+        .output-area {
+            width: 100%;
+            min-height: 400px;
+            background-color: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -15,6 +28,7 @@
             <h1 data-i18n="mainTitle">Volt China Content Management</h1>
             <button class="btn" id="lang-toggle-btn" data-i18n="langToggle">切换到中文</button>
         </div>
+        
         <div class="form-section">
             <h2 data-i18n="intelFormTitle">Manage Intelligence Feed</h2>
             <form id="intel-form">
@@ -37,7 +51,6 @@
         </div>
         <div class="form-section">
             <h2 data-i18n="intelJsonOutputTitle">Generated intelligence.json</h2>
-            <p style="color:var(--text-secondary); margin-bottom: 1rem;" data-i18n="intelJsonOutputDesc">Copy this and paste into `data/intelligence.json`.</p>
             <textarea id="intel-json-output" class="output-area" readonly></textarea>
             <div class="btn-group"><button type="button" class="btn btn-orange" id="intel-generate-btn" data-i18n="intelGenerateBtn">Generate & Copy</button></div>
         </div>
@@ -81,13 +94,13 @@
         </div>
         <div class="form-section">
             <h2 data-i18n="jsonOutputTitle">Generated models.json</h2>
-            <p style="color:var(--text-secondary); margin-bottom: 1rem;" data-i18n="jsonOutputDesc">Copy this and paste into `data/models.json`.</p>
             <textarea id="json-output" class="output-area" readonly></textarea>
             <div class="btn-group"><button type="button" class="btn btn-orange" id="generate-btn" data-i18n="generateBtn">Generate & Copy</button></div>
         </div>
     </div>
 
     <script>
+    // This is the original, stable, non-translating script.
     document.addEventListener('DOMContentLoaded', () => {
         let currentLang = 'en';
         const translations = {
