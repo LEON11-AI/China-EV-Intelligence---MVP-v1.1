@@ -164,3 +164,36 @@ footer { background-color: var(--header-blue); padding: 2rem 0; text-align: cent
 .paywall-prompt h3 { font-size: 1.5rem; color: var(--text-primary); text-align: center; margin-bottom: 1rem; }
 .paywall-prompt p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem; }
 .paywall-prompt .cta-button { min-width: 200px; white-space: nowrap; }
+/* --- Language Switcher & Button Style Fixes --- */
+
+/* 
+  将语言切换按钮变为“文本链接”样式，完美融入导航栏
+*/
+.lang-toggle {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-family: inherit; /* 确保字体一致 */
+    font-size: 1rem;      /* 确保字号一致 */
+    cursor: pointer;
+    padding: 0;
+    margin-right: 1.5rem; /* 与登录按钮保持间距 */
+    transition: color 0.3s ease;
+}
+
+.lang-toggle:hover {
+    color: var(--text-primary); /* 鼠标悬浮时变亮，提供反馈 */
+}
+
+/* 
+  优化登录按钮，去除原生边框，使其与整体设计更协调 
+*/
+.login-btn {
+    border: 1px solid var(--accent-blue);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: var(--accent-blue);
+    color: #fff;
+}

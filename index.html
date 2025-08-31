@@ -118,46 +118,19 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('latest-intel-container');
-            
-            // This function handles rendering the error message using translations
-            function renderError(trans) {
-                intelContainer.innerHTML = `<p style="color: var(--text-secondary);">${trans.error_load_intel}</p>`;
-            }
-
+            function renderError(trans) { intelContainer.innerHTML = `<p style="color: var(--text-secondary);">${trans.error_load_intel}</p>`; }
             fetch('data/intelligence.json')
                 .then(response => response.json())
                 .then(data => {
-                    const latestIntel = data.slice(0, 3);
-                    let intelHTML = '';
+                    const latestIntel = data.slice(0, 3); let intelHTML = '';
                     latestIntel.forEach(item => {
-                        // Note: The content from the JSON file itself (item.brand, item.title) is not translated by this system.
                         const proBadge = item.is_pro ? '<div class="intel-pro-badge-home">PRO</div>' : '';
-                        intelHTML += `
-                            <a href="intelligence-detail.html?id=${item.id}" class="intel-item-home">
-                                <div class="intel-meta">
-                                    <span class="intel-brand-home">${item.brand}</span>
-                                    <span class="intel-date-home">${item.date}</span>
-                                </div>
-                                <h3 class="intel-title-home">${item.title}</h3>
-                                ${proBadge}
-                            </a>
-                        `;
+                        intelHTML += `<a href="intelligence-detail.html?id=${item.id}" class="intel-item-home"><div class="intel-meta"><span class="intel-brand-home">${item.brand}</span><span class="intel-date-home">${item.date}</span></div><h3 class="intel-title-home">${item.title}</h3>${proBadge}</a>`;
                     });
                     intelContainer.innerHTML = intelHTML;
                 })
-                .catch(error => {
-                    console.error('Error loading intelligence data:', error);
-                    // Get the current language's translations to show the error.
-                    const currentTranslations = translations[window.currentLang] || translations['en'];
-                    renderError(currentTranslations);
-                });
-
-            // Listen for language changes to update the error message if it was displayed.
-            document.addEventListener('languageUpdated', event => {
-                if (intelContainer.querySelector('p')) { // If the error message is showing
-                    renderError(event.detail.translations);
-                }
-            });
+                .catch(error => { console.error('Error loading intelligence data:', error); renderError(translations[window.currentLang] || translations['en']); });
+            document.addEventListener('languageUpdated', event => { if (intelContainer.querySelector('p')) { renderError(event.detail.translations); } });
         });
     </script>
 </body>
