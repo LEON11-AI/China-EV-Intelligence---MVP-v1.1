@@ -1,92 +1,32 @@
 [
   {
-    "id": "xiaomi_su7_max",
-    "brand": "Xiaomi",
-    "model_name": "SU7 Max",
-    "subtitle": "The tech giant's ambitious entry into the EV market",
-    "status": "On Sale (China)",
-    "image_card": "images/xiaomi_su7_card.jpg",
-    "image_detail": "images/xiaomi_su7_detail.jpg",
-    "youtube_id": "8nK4o_a-M2g",
-    "ceo_note": "This isn't just a car, it's a statement from a tech giant. Pay close attention to its smart cockpit integration and how it challenges Tesla's software dominance. Its real-world battery performance will be the key.",
-    "key_specs": {
-      "range_cltc": "800 km",
-      "zero_to_100": "2.78 s",
-      "power_kw": "495 kW",
-      "battery_kwh": "101 kWh",
-      "price_usd_estimated": "$42,000 - $69,000"
-    },
-    "full_specs": {
-      "dimensions": "4997x1963x1440 mm",
-      "wheelbase": "3000 mm",
-      "powertrain": "AWD, 495 kW, 673 hp",
-      "battery": "101 kWh, NMC, CATL, 800V",
-      "charging": "DC 10-80% in 19 mins",
-      "adas": "L2+, Nvidia Orin-X (2x), 1x Lidar"
-    },
-    "market_plan": {
-      "china_launch": "2024-03-28",
-      "global_rollout": "Planned, details unconfirmed."
-    }
-  },
-  {
-    "id": "nio_et9",
-    "brand": "NIO",
-    "model_name": "ET9",
-    "subtitle": "NIO's technological flagship, a 'land jet' for the new era",
-    "status": "Upcoming",
-    "image_card": "images/nio_et9_card.jpg",
-    "image_detail": "images/nio_et9_detail.jpg",
+    "id": "小鹏_p7_Ultra",
+    "brand": "小鹏",
+    "model_name": "2025款_小鹏P7_Ultra",
+    "subtitle": "750 四驱鹏翼 Ultra",
+    "status": "已上市",
+    "image_card": "D:\\China-EV-Intelligence---MVP-v1.1\\images\\xpeng_p7\\FM",
+    "image_detail": "D:\\China-EV-Intelligence---MVP-v1.1\\images\\xpeng_p7",
     "youtube_id": "",
-    "ceo_note": "The ET9 is NIO's technological flagship, a 'land jet' aimed at the Maybach and Panamera class. Its 900V architecture and steer-by-wire system are industry-leading technologies to watch.",
+    "ceo_note": "等待测评",
     "key_specs": {
-      "range_cltc": "Est. 850 km",
-      "zero_to_100": "Est. 3.5 s",
-      "power_kw": "520 kW",
-      "battery_kwh": "150 kWh",
-      "price_usd_estimated": "$110,000+"
+      "range_cltc": "750 km",
+      "zero_to_100": "3.7s",
+      "power_kw": "437kw",
+      "battery_kwh": "92.2kwh",
+      "price_usd_estimated": "21.98-30.18万 rmb"
     },
     "full_specs": {
-      "dimensions": "5324x2016x1620 mm",
-      "wheelbase": "3250 mm",
-      "powertrain": "AWD, 520 kW, 707 hp",
-      "battery": "150 kWh, Semi-Solid State, 900V",
-      "charging": "DC 600kW peak, Battery Swap",
-      "adas": "L2++, 3x Lidar, 4x Nvidia Orin-X"
+      "dimensions": "5017*1970*1427",
+      "wheelbase": "3008",
+      "powertrain": "双电机",
+      "battery": "三元锂电池",
+      "charging": "800v",
+      "adas": "L2"
     },
     "market_plan": {
-      "china_launch": "Est. Q1 2025",
-      "global_rollout": "Confirmed for Europe and other markets."
-    }
-  },
-  {
-    "id": "byd_seal_perf",
-    "brand": "BYD",
-    "model_name": "Seal Performance",
-    "subtitle": "BYD's direct answer to the Tesla Model 3 with Blade Battery tech",
-    "status": "On Sale (Global)",
-    "image_card": "images/byd_seal_card.jpg",
-    "image_detail": "images/byd_seal_detail.jpg",
-    "youtube_id": "",
-    "ceo_note": "The Seal is BYD's direct answer to the Tesla Model 3, built on their advanced e-Platform 3.0 with Cell-to-Body battery tech. Its driving dynamics and value proposition are its strongest selling points globally.",
-    "key_specs": {
-      "range_cltc": "650 km",
-      "zero_to_100": "3.8 s",
-      "power_kw": "390 kW",
-      "battery_kwh": "82.5 kWh",
-      "price_usd_estimated": "$50,000 - $65,000"
-    },
-    "full_specs": {
-      "dimensions": "4800x1875x1460 mm",
-      "wheelbase": "2920 mm",
-      "powertrain": "AWD, 390 kW, 530 hp",
-      "battery": "82.5 kWh, LFP Blade, Cell-to-Body",
-      "charging": "DC 150kW, 30-80% in 30 mins",
-      "adas": "L2, DiPilot"
-    },
-    "market_plan": {
-      "china_launch": "2022-07-29",
-      "global_rollout": "Available in Europe, Australia, etc."
+      "china_launch": "已上市",
+      "global_rollout": ""
     }
   }
 ]
