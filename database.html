@@ -9,33 +9,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-<body data-page-key="page_title_database">
+<body>
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span data-i18n="site_logo">China EV Intelligence</span></a>
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
                 <ul class="nav-links">
-                    <li><a href="index.html" data-i18n="nav_home">Home</a></li>
-                    <li><a href="intelligence.html" data-i18n="nav_intelligence">Intelligence</a></li>
-                    <li><a href="database.html" data-i18n="nav_database">Focused Database</a></li>
-                    <li><a href="pricing.html" data-i18n="nav_pricing">Pricing</a></li>
-                    <li><a href="about.html" data-i18n="nav_about">About</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="intelligence.html">Intelligence</a></li>
+                    <li><a href="database.html">Focused Database</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <button class="lang-toggle" data-i18n="nav_language">English</button>
-                    <button class="login-btn" data-i18n="login_btn">Login</button>
+                    <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
+                    <button class="login-btn">Login</button>
                 </div>
             </nav>
         </div>
     </header>
+
     <main>
         <section class="page-content" style="display: block;">
             <div class="container">
-                <h2 class="section-title" data-i18n="db_section_title">Focused EV Model Database</h2>
+                <h2 class="section-title">Focused EV Model Database</h2>
                 <div class="filters">
-                    <h3 class="filter-title" data-i18n="db_filter_title">Filter by Brand:</h3>
+                    <h3 class="filter-title">Filter by Brand:</h3>
                     <div class="filter-options">
-                        <button class="filter-option active" data-brand="All" data-i18n="db_filter_all">All</button>
+                        <button class="filter-option active" data-brand="All">All</button>
                         <button class="filter-option" data-brand="Xiaomi">Xiaomi</button>
                         <button class="filter-option" data-brand="NIO">NIO</button>
                         <button class="filter-option" data-brand="BYD">BYD</button>
@@ -45,37 +46,44 @@
             </div>
         </section>
     </main>
+
     <footer>
         <div class="container">
             <ul class="footer-links">
-                <li><a href="about.html" data-i18n="footer_about">About Us</a></li>
-                <li><a href="contact.html" data-i18n="footer_contact">Contact</a></li>
-                <li><a href="#" data-i18n="footer_privacy">Privacy Policy</a></li>
-                <li><a href="#" data-i18n="footer_terms">Terms of Service</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
             </ul>
-            <p class="copyright" data-i18n="footer_copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="js/translations.js"></script>
-    <script src="js/main.js"></script>
-    
     <script>
-    // **RESTORED TO ORIGINAL LOGIC**
+    // **RESTORED TO ORIGINAL SCRIPT**
     document.addEventListener('DOMContentLoaded', () => {
         const gridContainer = document.getElementById('models-grid-container');
         const filterOptions = document.querySelectorAll('.filter-option');
         let allModelsData = [];
-        let currentTranslations = {}; // This will hold our labels
 
-        function renderModels(models, trans) {
+        fetch('data/models.json')
+            .then(response => response.json())
+            .then(data => {
+                allModelsData = data;
+                renderModels(allModelsData);
+            })
+            .catch(error => {
+                console.error('Error loading model data:', error);
+                gridContainer.innerHTML = '<p style="color: var(--text-secondary);">Failed to load model data.</p>';
+            });
+
+        function renderModels(models) {
             gridContainer.innerHTML = '';
             if (models.length === 0) {
-                gridContainer.innerHTML = `<p style="color: var(--text-secondary);">${trans.error_no_models}</p>`;
+                gridContainer.innerHTML = '<p style="color: var(--text-secondary);">No models found for this brand.</p>';
                 return;
             }
             models.forEach(model => {
-                // RESTORED: Directly access original English properties from JSON
                 const card = `
                     <div class="model-card">
                         <div class="model-image" style="background-image: url('${model.image_card}');"></div>
@@ -84,12 +92,11 @@
                             <div class="model-brand">${model.brand}</div>
                             <div class="model-status">${model.status}</div>
                             <div class="model-specs">
-                                <!-- CORRECTED: Use translated labels from the 'trans' object -->
-                                <div class="spec-item"><span class="spec-label">${trans.card_range || 'Range (CLTC):'}</span><span class="spec-value">${model.key_specs.range_cltc}</span></div>
-                                <div class="spec-item"><span class="spec-label">${trans.card_acceleration || '0-100 km/h:'}</span><span class="spec-value">${model.key_specs.zero_to_100}</span></div>
-                                <div class="spec-item"><span class="spec-label">${trans.card_power || 'Power:'}</span><span class="spec-value">${model.key_specs.power_kw}</span></div>
+                                <div class="spec-item"><span class="spec-label">Range (CLTC):</span><span class="spec-value">${model.key_specs.range_cltc}</span></div>
+                                <div class="spec-item"><span class="spec-label">0-100 km/h:</span><span class="spec-value">${model.key_specs.zero_to_100}</span></div>
+                                <div class="spec-item"><span class="spec-label">Power:</span><span class="spec-value">${model.key_specs.power_kw}</span></div>
                             </div>
-                            <a href="model-detail.html?id=${model.id}" class="view-details">${trans.card_details_btn || 'View Details'}</a>
+                            <a href="model-detail.html?id=${model.id}" class="view-details">View Details</a>
                         </div>
                     </div>
                 `;
@@ -97,23 +104,17 @@
             });
         }
 
-        fetch('data/models.json').then(res => res.json()).then(data => { allModelsData = data; });
-
-        // Listen for the broadcast from main.js to get the correct LABELS
-        document.addEventListener('languageUpdated', event => {
-            currentTranslations = event.detail.translations;
-            const activeFilter = document.querySelector('.filter-option.active').getAttribute('data-brand');
-            const modelsToRender = activeFilter === 'All' ? allModelsData : allModelsData.filter(m => m.brand === activeFilter);
-            renderModels(modelsToRender, currentTranslations);
-        });
-
         filterOptions.forEach(button => {
             button.addEventListener('click', () => {
                 filterOptions.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const selectedBrand = button.getAttribute('data-brand');
-                const filteredModels = (selectedBrand === 'All') ? allModelsData : allModelsData.filter(m => m.brand === selectedBrand);
-                renderModels(filteredModels, currentTranslations);
+                if (selectedBrand === 'All') {
+                    renderModels(allModelsData);
+                } else {
+                    const filteredModels = allModelsData.filter(model => model.brand === selectedBrand);
+                    renderModels(filteredModels);
+                }
             });
         });
     });
