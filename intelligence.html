@@ -6,22 +6,21 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- === FINAL FIX: Restored the complete Header === -->
+<body data-page-key="page_title_intelligence">
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span data-i18n="site_logo">China EV Intelligence</span></a>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="intelligence.html">Intelligence</a></li>
-                    <li><a href="database.html">Focused Database</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+                    <li><a href="intelligence.html" data-i18n="nav_intelligence">Intelligence</a></li>
+                    <li><a href="database.html" data-i18n="nav_database">Focused Database</a></li>
+                    <li><a href="pricing.html" data-i18n="nav_pricing">Pricing</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">About</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
-                    <button class="login-btn">Login</button>
+                    <button class="lang-toggle" data-i18n="nav_language">English</button>
+                    <button class="login-btn" data-i18n="login_btn">Login</button>
                 </div>
             </nav>
         </div>
@@ -30,7 +29,7 @@
     <main>
         <div class="page-content" style="display: block;">
             <div class="container">
-                <h1 class="section-title">Intelligence Feed</h1>
+                <h1 class="section-title" data-i18n="intel_page_title">Intelligence Feed</h1>
                 <div class="intel-list-full" id="full-intel-container">
                     <!-- Full intelligence list will be injected here by JavaScript -->
                 </div>
@@ -38,41 +37,75 @@
         </div>
     </main>
 
-    <!-- === FINAL FIX: Restored the complete Footer === -->
     <footer>
         <div class="container">
             <ul class="footer-links">
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
+                <li><a href="about.html" data-i18n="footer_about">About Us</a></li>
+                <li><a href="contact.html" data-i18n="footer_contact">Contact</a></li>
+                <li><a href="#" data-i18n="footer_privacy">Privacy Policy</a></li>
+                <li><a href="#" data-i18n="footer_terms">Terms of Service</a></li>
             </ul>
-            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+            <p class="copyright" data-i18n="footer_copyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('full-intel-container');
+            let allIntelData = []; // Store data globally on this page
+
+            // Function to render the intelligence list
+            function renderIntelList(trans) {
+                if (!allIntelData.length) return; // Don't render if data isn't loaded
+                
+                let intelHTML = '';
+                allIntelData.forEach(item => {
+                    const proBadge = item.is_pro ? `<span class="pro-badge">${trans.intel_pro_badge}</span>` : '';
+                    intelHTML += `
+                        <a href="intelligence-detail.html?id=${item.id}" class="intel-item">
+                            <div class="intel-header">
+                                <h3 class="intel-title">${item.title} ${proBadge}</h3>
+                                <span class="intel-date">${item.date}</span>
+                            </div>
+                            <p class="intel-summary">${item.summary}</p>
+                        </a>
+                    `;
+                });
+                intelContainer.innerHTML = intelHTML;
+            }
+            
+            // Function to render an error message
+            function renderError(trans) {
+                 intelContainer.innerHTML = `<p style="color: var(--text-secondary);">${trans.error_load_intel_full}</p>`;
+            }
+
+            // Fetch data once on page load
             fetch('data/intelligence.json')
                 .then(response => response.json())
                 .then(data => {
-                    let intelHTML = '';
-                    data.forEach(item => {
-                        const proBadge = item.is_pro ? '<span class="pro-badge">PRO</span>' : '';
-                        intelHTML += `
-                            <a href="intelligence-detail.html?id=${item.id}" class="intel-item">
-                                <div class="intel-header">
-                                    <h3 class="intel-title">${item.title} ${proBadge}</h3>
-                                    <span class="intel-date">${item.date}</span>
-                                </div>
-                                <p class="intel-summary">${item.summary}</p>
-                            </a>
-                        `;
-                    });
-                    intelContainer.innerHTML = intelHTML;
+                    allIntelData = data;
+                    // Initial render. We get the translations directly from the global object.
+                    const currentTranslations = translations[window.currentLang] || translations['en'];
+                    renderIntelList(currentTranslations);
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    const currentTranslations = translations[window.currentLang] || translations['en'];
+                    renderError(currentTranslations);
+                });
+
+            // Listen for language changes to re-render the list
+            document.addEventListener('languageUpdated', event => {
+                if (allIntelData.length > 0) {
+                    renderIntelList(event.detail.translations);
+                } else {
+                    // If data loading failed, we might need to update the error message text
+                    renderError(event.detail.translations);
+                }
+            });
         });
     </script>
 </body>

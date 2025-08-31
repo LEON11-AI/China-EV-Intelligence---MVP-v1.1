@@ -9,34 +9,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-page-key="page_title_home">
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span data-i18n="site_logo">China EV Intelligence</span></a>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="intelligence.html">Intelligence</a></li>
-                    <li><a href="database.html">Focused Database</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+                    <li><a href="intelligence.html" data-i18n="nav_intelligence">Intelligence</a></li>
+                    <li><a href="database.html" data-i18n="nav_database">Focused Database</a></li>
+                    <li><a href="pricing.html" data-i18n="nav_pricing">Pricing</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">About</a></li>
                 </ul>
-                <div class="nav-actions"><div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div><button class="login-btn">Login</button></div>
+                <div class="nav-actions">
+                    <button class="lang-toggle" data-i18n="nav_language">English</button>
+                    <button class="login-btn" data-i18n="login_btn">Login</button>
+                </div>
             </nav>
         </div>
     </header>
     <main>
         <section class="hero">
             <div class="container">
-                <h1>China EV Intelligence Platform</h1>
-                <p>Your premier source for exclusive insights, data, and analysis on China's electric vehicle market</p>
-                <a href="pricing.html" class="cta-button" style="text-decoration: none;">Get Instant Access</a>
+                <h1 data-i18n="home_hero_title">China EV Intelligence Platform</h1>
+                <p data-i18n="home_hero_subtitle">Your premier source for exclusive insights, data, and analysis on China's electric vehicle market</p>
+                <a href="pricing.html" class="cta-button" style="text-decoration: none;" data-i18n="home_hero_button">Get Instant Access</a>
             </div>
         </section>
 
         <section class="latest-intel">
             <div class="container">
-                <h2 class="section-title">Latest Intelligence</h2>
+                <h2 class="section-title" data-i18n="home_latest_intel_title">Latest Intelligence</h2>
                 <div class="intel-list-home" id="latest-intel-container">
                     <!-- Intelligence items will be injected here by JavaScript -->
                 </div>
@@ -45,18 +48,18 @@
 
         <section class="features">
             <div class="container">
-                <h2 class="section-title">Why Choose Our Platform</h2>
+                <h2 class="section-title" data-i18n="home_features_title">Why Choose Our Platform</h2>
                 <div class="features-grid">
-                    <div class="feature-card"><div class="feature-icon">🔍</div><h3>Focused Coverage</h3><p>We concentrate on the most important Chinese EV brands and models, ensuring the highest quality intelligence.</p></div>
-                    <div class="feature-card"><div class="feature-icon">💡</div><h3>Expert Insights</h3><p>Our Chief Experience Officer provides exclusive commentary that goes beyond raw data.</p></div>
-                    <div class="feature-card"><div class="feature-icon">📈</div><h3>Actionable Intelligence</h3><p>Get beyond the news with analysis that helps you make informed decisions.</p></div>
+                    <div class="feature-card"><div class="feature-icon">🔍</div><h3 data-i18n="home_feature1_title">Focused Coverage</h3><p data-i18n="home_feature1_desc">We concentrate on the most important Chinese EV brands and models, ensuring the highest quality intelligence.</p></div>
+                    <div class="feature-card"><div class="feature-icon">💡</div><h3 data-i18n="home_feature2_title">Expert Insights</h3><p data-i18n="home_feature2_desc">Our Chief Experience Officer provides exclusive commentary that goes beyond raw data.</p></div>
+                    <div class="feature-card"><div class="feature-icon">📈</div><h3 data-i18n="home_feature3_title">Actionable Intelligence</h3><p data-i18n="home_feature3_desc">Get beyond the news with analysis that helps you make informed decisions.</p></div>
                 </div>
             </div>
         </section>
         
         <section class="brands">
             <div class="container">
-                <h2 class="section-title">Focused Brands</h2>
+                <h2 class="section-title" data-i18n="home_brands_title">Focused Brands</h2>
                 <div class="brands-grid">
                     <div class="brand-item"><img src="images/logo-byd.png" alt="BYD Logo" class="brand-logo-img"></div>
                     <div class="brand-item"><img src="images/logo-nio.png" alt="NIO Logo" class="brand-logo-img"></div>
@@ -70,17 +73,28 @@
 
         <section class="pricing">
             <div class="container">
-                <h2 class="section-title">Subscription Plans</h2>
+                <h2 class="section-title" data-i18n="home_pricing_title">Subscription Plans</h2>
                 <div class="pricing-grid">
                     <div class="pricing-card">
-                        <div class="pricing-header"><h3>Free Tier</h3><div class="price">$0 <span>/month</span></div></div>
-                        <ul class="pricing-features"><li>Basic model specifications</li><li>Limited intelligence updates</li><li>Delayed data access</li><li>Community support</li></ul>
-                        <button class="pricing-btn">Sign Up</button>
+                        <div class="pricing-header"><h3 data-i18n="home_pricing_free_tier">Free Tier</h3><div class="price">$0 <span data-i18n="home_pricing_month">/month</span></div></div>
+                        <ul class="pricing-features">
+                            <li data-i18n="home_pricing_free_feat1">Basic model specifications</li>
+                            <li data-i18n="home_pricing_free_feat2">Limited intelligence updates</li>
+                            <li data-i18n="home_pricing_free_feat3">Delayed data access</li>
+                            <li data-i18n="home_pricing_free_feat4">Community support</li>
+                        </ul>
+                        <button class="pricing-btn" data-i18n="home_pricing_free_btn">Sign Up</button>
                     </div>
                     <div class="pricing-card pro">
-                        <div class="pricing-header"><h3>Pro Intelligence</h3><div class="price">$49 <span>/month</span></div></div>
-                        <ul class="pricing-features"><li>Full detailed specifications</li><li>Exclusive intelligence reports</li><li>Real-time updates</li><li>CEO insights and analysis</li><li>Priority support</li></ul>
-                        <button class="pricing-btn orange">Subscribe Now</button>
+                        <div class="pricing-header"><h3 data-i18n="home_pricing_pro_tier">Pro Intelligence</h3><div class="price">$49 <span data-i18n="home_pricing_month">/month</span></div></div>
+                        <ul class="pricing-features">
+                            <li data-i18n="home_pricing_pro_feat1">Full detailed specifications</li>
+                            <li data-i18n="home_pricing_pro_feat2">Exclusive intelligence reports</li>
+                            <li data-i18n="home_pricing_pro_feat3">Real-time updates</li>
+                            <li data-i18n="home_pricing_pro_feat4">CEO insights and analysis</li>
+                            <li data-i18n="home_pricing_pro_feat5">Priority support</li>
+                        </ul>
+                        <button class="pricing-btn orange" data-i18n="home_pricing_pro_btn">Subscribe Now</button>
                     </div>
                 </div>
             </div>
@@ -89,25 +103,34 @@
     <footer>
         <div class="container">
             <ul class="footer-links">
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
+                <li><a href="about.html" data-i18n="footer_about">About Us</a></li>
+                <li><a href="contact.html" data-i18n="footer_contact">Contact</a></li>
+                <li><a href="#" data-i18n="footer_privacy">Privacy Policy</a></li>
+                <li><a href="#" data-i18n="footer_terms">Terms of Service</a></li>
             </ul>
-            <!-- === FINAL FIX: Trivial change to force rebuild === -->
-            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+            <p class="copyright" data-i18n="footer_copyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('latest-intel-container');
+            
+            // This function handles rendering the error message using translations
+            function renderError(trans) {
+                intelContainer.innerHTML = `<p style="color: var(--text-secondary);">${trans.error_load_intel}</p>`;
+            }
+
             fetch('data/intelligence.json')
                 .then(response => response.json())
                 .then(data => {
                     const latestIntel = data.slice(0, 3);
                     let intelHTML = '';
                     latestIntel.forEach(item => {
+                        // Note: The content from the JSON file itself (item.brand, item.title) is not translated by this system.
                         const proBadge = item.is_pro ? '<div class="intel-pro-badge-home">PRO</div>' : '';
                         intelHTML += `
                             <a href="intelligence-detail.html?id=${item.id}" class="intel-item-home">
@@ -124,8 +147,17 @@
                 })
                 .catch(error => {
                     console.error('Error loading intelligence data:', error);
-                    intelContainer.innerHTML = '<p style="color: var(--text-secondary);">Could not load intelligence feed.</p>';
+                    // Get the current language's translations to show the error.
+                    const currentTranslations = translations[window.currentLang] || translations['en'];
+                    renderError(currentTranslations);
                 });
+
+            // Listen for language changes to update the error message if it was displayed.
+            document.addEventListener('languageUpdated', event => {
+                if (intelContainer.querySelector('p')) { // If the error message is showing
+                    renderError(event.detail.translations);
+                }
+            });
         });
     </script>
 </body>
