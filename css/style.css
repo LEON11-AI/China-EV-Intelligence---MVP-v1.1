@@ -47,26 +47,26 @@ nav {
     text-decoration: none;
     flex-shrink: 0; 
     margin-right: 2rem;
+    display: flex;
+    align-items: center;
 }
-
-/* 
-  【新增并修复】: 
-  我们在这里增加了针对 Logo 图片的样式。
-  这会把您 Logo 的高度固定在 45px，宽度则会自动缩放以保持比例。
-  这能立刻解决 Logo 过大和导航排版错乱的问题。
-*/
 .nav-logo-img {
-    height: 45px; /* 设定一个固定的高度 */
-    width: auto;  /* 宽度自动调整以保持比例 */
+    height: 45px;
+    width: auto;
 }
-
 .nav-links {
     display: flex;
     list-style: none;
     align-items: center;
     gap: 1.5rem;
     flex-grow: 1;
-    justify-content: flex-start;
+    /* 
+      【修复】: 
+      这行代码就是本次修复的关键！
+      我们将 flex-start (靠左) 改为了 center (居中)。
+      这会让中间的导航链接在它们可用的空间内完美居中，解决布局不平衡的问题。
+    */
+    justify-content: center;
 }
 .nav-links a {
     color: var(--text-secondary);
