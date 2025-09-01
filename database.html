@@ -41,7 +41,9 @@
                         <!-- Filter buttons will be injected here -->
                     </div>
                 </div>
-                <div class="models-grid" id="models-grid-container"></div>
+                <div class="models-grid" id="models-grid-container">
+                    <!-- Model cards will be dynamically injected here -->
+                </div>
             </div>
         </section>
     </main>
@@ -60,6 +62,7 @@
     
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
+    <!-- 【修复开始】: 下面的脚本已为您更新 -->
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const gridContainer = document.getElementById('models-grid-container');
@@ -74,14 +77,28 @@
                     renderFilters(lang);
                     renderModels(allModelsData, lang);
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Error fetching models data:', error));
         };
 
         const renderModels = (models, lang) => {
             gridContainer.innerHTML = '';
             models.forEach(model => {
-                const modelName = model.model_name[lang] || model.model_name['en'];
-                const status = model.status[lang] || model.status['en'];
+                
+                // 这是我们修改的核心逻辑
+                let modelName = '';
+                if (typeof model.model_name === 'object' && model.model_name !== null) {
+                    modelName = model.model_name[lang] || model.model_name['en'];
+                } else {
+                    modelName = model.model_name;
+                }
+
+                let status = '';
+                if (typeof model.status === 'object' && model.status !== null) {
+                    status = model.status[lang] || model.status['en'];
+                } else {
+                    status = model.status;
+                }
+
                 const card = `
                     <div class="model-card">
                         <div class="model-image" style="background-image: url('${model.image_card}');"></div>
@@ -100,12 +117,7 @@
                 gridContainer.innerHTML += card;
             });
             // Re-apply translations for static text inside dynamic content
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
+            updateStaticTranslations(lang);
         };
 
         const renderFilters = (lang) => {
@@ -133,10 +145,21 @@
                 });
             });
         };
+        
+        // Helper function to update translations for static text elements
+        const updateStaticTranslations = (lang) => {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        };
 
         renderPage(window.currentLang || 'en');
         document.addEventListener('languageUpdated', event => renderPage(event.detail.lang));
     });
     </script>
+    <!-- 【修复结束】 -->
 </body>
 </html>
