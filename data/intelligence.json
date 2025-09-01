@@ -1,32 +1,12 @@
 [
   {
-    "id": "intel_003",
-    "date": "2025-07-20",
-    "brand": "NIO",
-    "model": "ET9",
-    "title": "NIO ET9 final production specs revealed in MIIT filing.",
-    "is_pro": true,
-    "summary": "Full specifications for NIO's upcoming flagship, the ET9, have been published by China's MIIT, revealing key details about its powertrain, dimensions, and battery technology ahead of its official launch...",
-    "full_content": "The full filing from the Ministry of Industry and Information Technology (MIIT) confirms that the NIO ET9 will feature a dual-motor setup with a combined power output of 520 kW. The vehicle measures 5324mm in length, with a wheelbase of 3250mm. The filing also lists a 150 kWh semi-solid-state battery pack as an option, expected to deliver over 850km of CLTC range."
-  },
-  {
-    "id": "intel_002",
-    "date": "2025-07-18",
-    "brand": "Xiaomi",
-    "model": "SU7",
-    "title": "Xiaomi SU7 production ramps up to meet overwhelming demand.",
+    "id": "测试_001",
+    "date": "2025-09-01",
+    "brand": "测试_001",
+    "model": "",
+    "title": "比亚迪 DM-i",
     "is_pro": false,
-    "summary": "Sources close to Xiaomi's supply chain indicate that the company is aggressively ramping up production of its popular SU7 sedan, aiming to shorten delivery times which have stretched to several months for new orders...",
-    "full_content": "Key assembler BAIC is reportedly adding a second shift at its Beijing plant, which could potentially double the monthly output from around 10,000 units to nearly 20,000 units by the end of the third quarter. This move is a direct response to the unexpectedly high volume of pre-orders."
-  },
-  {
-    "id": "intel_001",
-    "date": "2025-07-15",
-    "brand": "BYD",
-    "model": null,
-    "title": "BYD's next-generation Blade Battery technology enters production.",
-    "is_pro": true,
-    "summary": "BYD has officially commenced production of its second-generation Blade Battery, featuring significant improvements in energy density and charging speeds. The new LFP cells reportedly achieve an energy density of over 190 Wh/kg...",
-    "full_content": "The new battery architecture supports charging rates of up to 6C, theoretically allowing for a 10-80% charge in under 10 minutes on compatible ultra-fast chargers. The first vehicle expected to feature this new battery is the upcoming Sea Lion 07 SUV."
+    "summary": "比亚迪 DM-i 技术全称为 “Dual Mode Intelligent”，是一种以电为主的超级混动技术。以下是关于该技术的详细介绍：\n核心原理：比亚迪 DM-i 技术利用高安全性能的刀片电池和高性能的功率电动机，通过智能控制系统实现电力驱动与燃油支持的结合。该技术由发动机、发电机 MG1 和驱动电机 MG2 三个动力源构成，发动机与 MG1 齿轮常啮合，与 MG2 齿轮通过离合器开闭连接，确保车辆在各种行驶模式下的高效运行。",
+    "full_content": "核心原理：比亚迪 DM-i 技术利用高安全性能的刀片电池和高性能的功率电动机，通过智能控制系统实现电力驱动与燃油支持的结合。该技术由发动机、发电机 MG1 和驱动电机 MG2 三个动力源构成，发动机与 MG1 齿轮常啮合，与 MG2 齿轮通过离合器开闭连接，确保车辆在各种行驶模式下的高效运行。\n工作模式\n纯电模式：当电池电量充足且驱动电机输出功率满足车辆行驶功率等条件时，发动机不运转，驱动电机单独驱动车辆，此时车辆就像一台纯电动车，可应对起步、倒车、怠速、急加速和平稳行驶等各种状况。\n串联模式：在城市工况亏电状态下，发动机高速高效运转，驱动发电机发电，离合器分离，只有驱动电机驱动车辆，多余电量给电池充电，此模式即增程模式。\n发动机直驱模式：在高速巡航工况下，离合器结合，发动机直接驱动车辆，充分利用发动机的高效运行，多余的动力还可带动发电机为电池补充电能。\n再生制动模式：车辆长下坡或制动时，电机将动能转化为电能存储于电池中，实现能量回收再利用。\n核心组件\n骁云插混专用发动机：提供 1.5L 和 1.5Ti 两款插混专用型号，其中 1.5L 发动机通过多项技术优化实现了 43.04% 的热效率，1.5Ti 增压发动机热效率做到了 40.12%，达到全球领先水平。\nEHS 双电机：采用串并联双电机结构，体积和重量得到有效减小，根据驱动电机的功率分为 EHS132、EHS145 和 EHS160 三款，具有 EV 纯电、HEV 串联、发动机直驱、HEV 并联四种工作模式。\nDM-i 超级混动专用刀片电池：单节电池采用串联卷绕电芯设计，安全等级大幅提升，结构简化，空间利用率高。电池包容量根据车型不同在 8.3 度到 21.5 度之间，实现纯电里程 50 到 120 公里。\n先进控制系统：包括整车控制系统、发动机控制系统、电机控制系统、电池管理系统等，可智能优化能量使用，确保车辆在各种行驶条件下的高效运行。\n技术优势\n高效省油：以电为主的架构，多用电、少用油、高效用油，NEDC 百公里亏电油耗低至 2.9L，满油满电综合续航可达 2100 公里。\n动力强劲：0-50km 加速时间可达 3.3 秒，动力性能出色。\n驾乘舒适：EHS 电混系统无需换挡，零顿挫，混动系统噪音小，能带来安静、平顺的驾乘体验。\n绿色环保：短途用电零排放，长途混动低排放，启动电池无铅化，符合环保要求。"
   }
 ]
