@@ -10,13 +10,13 @@
         .contact-container p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.8; }
     </style>
 </head>
-<!-- === LANGUAGE GENE INJECTION 1/3: Added page key === -->
 <body data-page-key="pageTitleContact">
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span data-i18n="siteTitle">China EV Intelligence</span></a>
-                <!-- === LANGUAGE GENE INJECTION 2/3: Added i18n tags === -->
+                <a href="index.html" class="logo" style="text-decoration: none;">
+                    <img src="images/logo.png" alt="Volt China Logo" class="nav-logo-img">
+                </a>
                 <ul class="nav-links">
                     <li><a href="index.html" data-i18n="navHome">Home</a></li>
                     <li><a href="intelligence.html" data-i18n="navIntelligence">Intelligence</a></li>
@@ -25,9 +25,7 @@
                     <li><a href="about.html" data-i18n="navAbout">About</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <div class="lang-switcher lang-en lang-toggle">
-                        <span class="lang-text" data-i18n="navLanguage">English</span>
-                    </div>
+                    <button class="lang-toggle" data-i18n="navLanguage">English</button>
                     <button class="login-btn" data-i18n="navLogin">Login</button>
                 </div>
             </nav>
@@ -58,7 +56,6 @@
         </div>
     </footer>
 
-    <!-- === LANGUAGE GENE INJECTION 3/3: Added script files === -->
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
 </body>

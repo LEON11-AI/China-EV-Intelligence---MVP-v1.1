@@ -7,21 +7,23 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-page-key="pageTitleIntelligenceDetail"> <!-- Placeholder, title set dynamically -->
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;"><span>China EV Intelligence</span></a>
+                <a href="index.html" class="logo" style="text-decoration: none;">
+                    <img src="images/logo.png" alt="Volt China Logo" class="nav-logo-img">
+                </a>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="intelligence.html">Intelligence</a></li>
-                    <li><a href="database.html">Focused Database</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html" data-i18n="navHome">Home</a></li>
+                    <li><a href="intelligence.html" data-i18n="navIntelligence">Intelligence</a></li>
+                    <li><a href="database.html" data-i18n="navDatabase">Focused Database</a></li>
+                    <li><a href="pricing.html" data-i18n="navPricing">Pricing</a></li>
+                    <li><a href="about.html" data-i18n="navAbout">About</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <div class="lang-switcher lang-en"><div class="lang-flag"></div><span class="lang-text">English</span></div>
-                    <button class="login-btn">Login</button>
+                    <button class="lang-toggle" data-i18n="navLanguage">English</button>
+                    <button class="login-btn" data-i18n="navLogin">Login</button>
                 </div>
             </nav>
         </div>
@@ -30,7 +32,7 @@
     <main>
         <div class="page-content" style="display: block;">
             <div class="container article-container" id="intel-detail-container">
-                <p id="loading-message" style="text-align: center; padding: 4rem 0;">Loading intelligence...</p>
+                <p id="loading-message" style="text-align: center; padding: 4rem 0;" data-i18n="loadingIntel">Loading intelligence...</p>
             </div>
         </div>
     </main>
@@ -38,70 +40,91 @@
     <footer>
         <div class="container">
             <ul class="footer-links">
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
+                <li><a href="about.html" data-i18n="footerAbout">About Us</a></li>
+                <li><a href="contact.html" data-i18n="footerContact">Contact</a></li>
+                <li><a href="#" data-i18n="footerPrivacy">Privacy Policy</a></li>
+                <li><a href="#" data-i18n="footerTerms">Terms of Service</a></li>
             </ul>
-            <p class="copyright">© 2025 China EV Intelligence. All rights reserved.</p>
+            <p class="copyright" data-i18n="footerCopyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
 
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
     <script>
-    // **RESTORED TO ORIGINAL SCRIPT**
     document.addEventListener('DOMContentLoaded', () => {
         const contentContainer = document.getElementById('intel-detail-container');
         const urlParams = new URLSearchParams(window.location.search);
         const intelId = urlParams.get('id');
+        let allIntelData = [];
+        
+        // This is a placeholder for a real user subscription check.
         const isUserSubscribed = false; 
 
-        if (!intelId) {
-            contentContainer.innerHTML = '<p>Error: No intelligence ID provided.</p>';
-            return;
-        }
+        const renderPage = (lang) => {
+            const trans = translations[lang] || translations['en'];
+            if (!intelId) {
+                contentContainer.innerHTML = `<p>${trans.error_no_id}</p>`;
+                return;
+            }
+            if (!allIntelData.length) return; // Wait for data
 
-        fetch('data/intelligence.json')
-            .then(response => response.json())
-            .then(intelData => {
-                const item = intelData.find(i => i.id === intelId);
-                if (item) {
-                    renderIntelDetail(item);
-                } else {
-                    contentContainer.innerHTML = `<p>Error: Intelligence with ID "${intelId}" not found.</p>`;
-                }
-            })
-            .catch(error => console.error('Error:', error));
+            const item = allIntelData.find(i => i.id === intelId);
+            if (item) {
+                renderIntelDetail(item, trans);
+            } else {
+                contentContainer.innerHTML = `<p>${trans.error_not_found.replace('{intelId}', intelId)}</p>`;
+            }
+        };
 
-        function renderIntelDetail(item) {
-            document.title = `${item.title} - Volt China`;
+        const renderIntelDetail = (item, trans) => {
+            const title = item.title[lang] || item.title['en'];
+            document.title = `${title} - Volt China`;
+            
             let contentHTML = '';
             if (item.is_pro && !isUserSubscribed) {
+                const summary = item.summary[lang] || item.summary['en'];
                 contentHTML = `
                     <div class="paywall-content">
-                        <p>${item.summary}</p>
+                        <p>${summary}</p>
                         <div class="paywall-block">
-                            <div class="blurred-content"><p>${item.full_content}</p></div>
+                            <div class="blurred-content"><p>${item.full_content[lang] || item.full_content['en']}</p></div>
                             <div class="paywall-prompt">
-                                <h3>Unlock Full Analysis</h3>
-                                <p>You are reading a preview of a PRO article. Subscribe now to unlock the full analysis.</p>
-                                <a href="pricing.html" class="cta-button">Subscribe to PRO</a>
+                                <h3 data-i18n="paywallTitle">Unlock Full Analysis</h3>
+                                <p data-i18n="paywallDesc">You are reading a preview of a PRO article. Subscribe now to unlock the full analysis.</p>
+                                <a href="pricing.html" class="cta-button" data-i18n="paywallBtn">Subscribe to PRO</a>
                             </div>
                         </div>
                     </div>`;
             } else {
-                contentHTML = `<p>${item.full_content}</p>`;
+                contentHTML = `<p>${item.full_content[lang] || item.full_content['en']}</p>`;
             }
             
-            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; Back to Intelligence Feed</a>`;
+            const backButtonHTML = `<a href="intelligence.html" class="back-button" data-i18n="backToIntel">&larr; Back to Intelligence Feed</a>`;
             const detailHTML = `
                 ${backButtonHTML}
                 <article class="intel-article">
-                    <header class="article-header"><h1>${item.title}</h1><div class="article-meta"><span>${item.brand || ''}</span><span>${item.date}</span></div></header>
+                    <header class="article-header"><h1>${title}</h1><div class="article-meta"><span>${item.brand || ''}</span><span>${item.date}</span></div></header>
                     <div class="article-content">${contentHTML}</div>
                 </article>`;
             
             contentContainer.innerHTML = detailHTML;
-        }
+            // Re-apply translations for static text inside dynamic content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (trans[key]) el.textContent = trans[key];
+            });
+        };
+
+        fetch('data/intelligence.json')
+            .then(response => response.json())
+            .then(data => {
+                allIntelData = data;
+                renderPage(window.currentLang || 'en');
+            })
+            .catch(error => console.error('Error:', error));
+
+        document.addEventListener('languageUpdated', event => renderPage(event.detail.lang));
     });
     </script>
 </body>

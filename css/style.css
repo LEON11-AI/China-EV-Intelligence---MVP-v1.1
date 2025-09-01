@@ -193,3 +193,9 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .paywall-prompt h3 { font-size: 1.5rem; color: var(--text-primary); text-align: center; margin-bottom: 1rem; }
 .paywall-prompt p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem; }
 .paywall-prompt .cta-button { min-width: 200px; white-space: nowrap; }
+/* === FINAL BRANDING: Navigation Logo === */
+.nav-logo-img {
+    height: 40px; /* 您可以根据需要微调这个高度 */
+    width: auto;  /* 自动保持图片的宽高比 */
+    display: block; /* 确保图片正确显示 */
+}
