@@ -1,0 +1,12 @@
+# Netlify Configuration File
+
+# This is the most important part for fixing the CORS issue.
+# It tells Netlify to add a special "header" to every response.
+# This header is like a permission slip that says:
+# "It's okay for ANYONE from ANYWHERE (*) to access this data."
+# This will allow your local admin.html file to fetch the online data.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
