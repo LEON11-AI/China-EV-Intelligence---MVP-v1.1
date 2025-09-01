@@ -51,6 +51,7 @@
 
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
+    <!-- 【修复开始】: 下面的脚本已为您更新 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('full-intel-container');
@@ -63,8 +64,23 @@
                 let intelHTML = '';
                 allIntelData.forEach(item => {
                     const proBadge = item.is_pro ? `<span class="pro-badge">${trans.proBadge || 'PRO'}</span>` : '';
-                    const title = item.title[lang] || item.title['en'];
-                    const summary = item.summary[lang] || item.summary['en'];
+                    
+                    // 这是我们修改的核心逻辑，同时处理 title 和 summary
+                    let title = '';
+                    if (typeof item.title === 'object' && item.title !== null) {
+                        title = item.title[lang] || item.title['en'];
+                    } else {
+                        title = item.title;
+                    }
+
+                    let summary = '';
+                    if (typeof item.summary === 'object' && item.summary !== null) {
+                        summary = item.summary[lang] || item.summary['en'];
+                    } else {
+                        // 如果 summary 字段不存在或不是对象，提供一个默认值
+                        summary = item.summary || 'Click to read more...'; 
+                    }
+
                     intelHTML += `
                         <a href="intelligence-detail.html?id=${item.id}" class="intel-item">
                             <div class="intel-header">
@@ -84,12 +100,13 @@
                     allIntelData = data;
                     renderIntelList(window.currentLang || 'en');
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Error fetching intelligence data:', error));
 
             document.addEventListener('languageUpdated', event => {
                 renderIntelList(event.detail.lang);
             });
         });
     </script>
+    <!-- 【修复结束】 -->
 </body>
-</html>
+</html>```
