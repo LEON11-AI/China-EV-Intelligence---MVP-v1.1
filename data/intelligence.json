@@ -4,56 +4,29 @@
     "date": "2025-07-20",
     "brand": "NIO",
     "model": "ET9",
+    "title": "NIO ET9 final production specs revealed in MIIT filing.",
     "is_pro": true,
-    "title": {
-      "en": "NIO ET9 final production specs revealed in MIIT filing.",
-      "zh_Hant": "蔚來ET9最終量產規格在工信部文件中披露。"
-    },
-    "summary": {
-      "en": "Full specifications for NIO's upcoming flagship, the ET9, have been published by China's MIIT, revealing key details about its powertrain, dimensions, and battery technology ahead of its official launch...",
-      "zh_Hant": "蔚來即將推出的旗艦車型ET9的完整規格已由中國工信部公佈，揭示了其在正式發布前的動力系統、尺寸和電池技術的關鍵細節..."
-    },
-    "full_content": {
-      "en": "The full filing from the Ministry of Industry and Information Technology (MIIT) confirms that the NIO ET9 will feature a dual-motor setup with a combined power output of 520 kW. The vehicle measures 5324mm in length, with a wheelbase of 3250mm. The filing also lists a 150 kWh semi-solid-state battery pack as an option, expected to deliver over 850km of CLTC range.",
-      "zh_Hant": "來自工業和信息化部（MIIT）的完整文件證實，蔚來ET9將配備雙電機設置，總功率輸出為520千瓦。車輛長度為5324毫米，軸距為3250毫米。文件還列出了一個150千瓦時的半固態電池包作為選裝，預計將提供超過850公里的CLTC續航里程。"
-    }
+    "summary": "Full specifications for NIO's upcoming flagship, the ET9, have been published by China's MIIT, revealing key details about its powertrain, dimensions, and battery technology ahead of its official launch...",
+    "full_content": "The full filing from the Ministry of Industry and Information Technology (MIIT) confirms that the NIO ET9 will feature a dual-motor setup with a combined power output of 520 kW. The vehicle measures 5324mm in length, with a wheelbase of 3250mm. The filing also lists a 150 kWh semi-solid-state battery pack as an option, expected to deliver over 850km of CLTC range."
   },
   {
     "id": "intel_002",
     "date": "2025-07-18",
     "brand": "Xiaomi",
     "model": "SU7",
+    "title": "Xiaomi SU7 production ramps up to meet overwhelming demand.",
     "is_pro": false,
-    "title": {
-      "en": "Xiaomi SU7 production ramps up to meet overwhelming demand.",
-      "zh_Hant": "小米SU7增產以應對巨大需求。"
-    },
-    "summary": {
-      "en": "Sources close to Xiaomi's supply chain indicate that the company is aggressively ramping up production of its popular SU7 sedan, aiming to shorten delivery times which have stretched to several months for new orders...",
-      "zh_Hant": "接近小米供應鏈的消息人士透露，該公司正在積極提高其熱門轎車SU7的產量，旨在縮短已延長至數月的新訂單交車時間..."
-    },
-    "full_content": {
-      "en": "Key assembler BAIC is reportedly adding a second shift at its Beijing plant, which could potentially double the monthly output from around 10,000 units to nearly 20,000 units by the end of the third quarter. This move is a direct response to the unexpectedly high volume of pre-orders.",
-      "zh_Hant": "據報導，主要組裝商北汽集團正在其北京工廠增加第二個班次，這可能在第三季度末將月產量從約1萬輛翻倍至近2萬輛。此舉是為了應對出乎意料的龐大預訂量。"
-    }
+    "summary": "Sources close to Xiaomi's supply chain indicate that the company is aggressively ramping up production of its popular SU7 sedan, aiming to shorten delivery times which have stretched to several months for new orders...",
+    "full_content": "Key assembler BAIC is reportedly adding a second shift at its Beijing plant, which could potentially double the monthly output from around 10,000 units to nearly 20,000 units by the end of the third quarter. This move is a direct response to the unexpectedly high volume of pre-orders."
   },
   {
     "id": "intel_001",
     "date": "2025-07-15",
     "brand": "BYD",
     "model": null,
+    "title": "BYD's next-generation Blade Battery technology enters production.",
     "is_pro": true,
-    "title": {
-      "en": "BYD's next-generation Blade Battery technology enters production.",
-      "zh_Hant": "比亞迪下一代刀片電池技術投入生產。"
-    },
-    "summary": {
-      "en": "BYD has officially commenced production of its second-generation Blade Battery, featuring significant improvements in energy density and charging speeds. The new LFP cells reportedly achieve an energy density of over 190 Wh/kg...",
-      "zh_Hant": "比亞迪已正式在其位於重慶的工廠開始生產第二代刀片電池，該電池在能量密度和充電速度方面有顯著提升。據報導，新款磷酸鐵鋰電池單體的能量密度超過190 Wh/kg..."
-    },
-    "full_content": {
-      "en": "The new battery architecture supports charging rates of up to 6C, theoretically allowing for a 10-80% charge in under 10 minutes on compatible ultra-fast chargers. The first vehicle expected to feature this new battery is the upcoming Sea Lion 07 SUV.",
-      "zh_Hant": "新的電池架構支持高達6C的充電速率，理論上在兼容的超快速充電樁上，10分鐘內即可完成10-80%的充電。預計首款搭載此款新電池的車型將是即將推出的海獅07 SUV。"
-    }
+    "summary": "BYD has officially commenced production of its second-generation Blade Battery, featuring significant improvements in energy density and charging speeds. The new LFP cells reportedly achieve an energy density of over 190 Wh/kg...",
+    "full_content": "The new battery architecture supports charging rates of up to 6C, theoretically allowing for a 10-80% charge in under 10 minutes on compatible ultra-fast chargers. The first vehicle expected to feature this new battery is the upcoming Sea Lion 07 SUV."
   }
 ]
