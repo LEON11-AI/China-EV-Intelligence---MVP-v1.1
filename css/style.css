@@ -12,19 +12,88 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { height: 100%; }
-body { font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; display: flex; flex-direction: column; min-height: 100%; }
-main { flex-grow: 1; }
+body {
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+main {
+    flex-grow: 1;
+}
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-header { background-color: var(--header-blue); padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
-nav { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; }
-.nav-links { display: flex; list-style: none; align-items: center; }
-.nav-links li { margin-left: 1.5rem; }
-.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
-.nav-links a:hover { color: var(--accent-blue); }
-.nav-actions { display: flex; align-items: center; gap: 1.5rem; }
-.login-btn { background-color: transparent; border: 1px solid var(--accent-blue); color: var(--accent-blue); padding: 0.5rem 1rem; border-radius: var(--btn-radius); cursor: pointer; transition: all 0.3s ease; }
-.login-btn:hover { background-color: var(--accent-blue); color: white; }
+
+/* === FINAL HEADER STYLES (Classic Layout) === */
+header {
+    background-color: var(--header-blue);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 1.5rem;
+}
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.nav-links a:hover {
+    color: var(--accent-blue);
+}
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.login-btn, .lang-toggle {
+    background-color: transparent;
+    border: 1px solid #4a5568;
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.login-btn:hover, .lang-toggle:hover {
+    background-color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: white;
+}
+.login-btn {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.login-btn:hover {
+    background-color: transparent;
+    color: var(--accent-blue);
+}
+
+/* General Content Styles */
 .hero { padding: 4rem 0; text-align: center; background: linear-gradient(to bottom, var(--header-blue), var(--bg-primary)); }
 .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
 .hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; }
