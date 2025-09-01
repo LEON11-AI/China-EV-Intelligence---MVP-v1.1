@@ -116,6 +116,7 @@
 
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
+    <!-- 【修复开始】: 下面的脚本已为您更新 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('latest-intel-container');
@@ -126,16 +127,28 @@
                     const latestIntel = data.slice(0, 3); let intelHTML = '';
                     latestIntel.forEach(item => {
                         const proBadge = item.is_pro ? '<div class="intel-pro-badge-home">PRO</div>' : '';
-                        const title = item.title[lang] || item.title['en'];
+                        
+                        // 这是我们修改的核心逻辑
+                        let title = '';
+                        // 检查 item.title 是不是一个包含语言翻译的对象
+                        if (typeof item.title === 'object' && item.title !== null) {
+                            // 如果是，就按语言获取标题
+                            title = item.title[lang] || item.title['en'];
+                        } else {
+                            // 如果不是，说明它就是一个简单的标题字符串，直接使用
+                            title = item.title;
+                        }
+
                         intelHTML += `<a href="intelligence-detail.html?id=${item.id}" class="intel-item-home"><div class="intel-meta"><span class="intel-brand-home">${item.brand}</span><span class="intel-date-home">${item.date}</span></div><h3 class="intel-title-home">${title}</h3>${proBadge}</a>`;
                     });
                     intelContainer.innerHTML = intelHTML;
                 })
-                .catch(error => { console.error('Error:', error); });
+                .catch(error => { console.error('Error fetching intelligence data:', error); });
             };
             renderIntel(window.currentLang || 'en');
             document.addEventListener('languageUpdated', event => renderIntel(event.detail.lang));
         });
     </script>
+    <!-- 【修复结束】 -->
 </body>
 </html>
