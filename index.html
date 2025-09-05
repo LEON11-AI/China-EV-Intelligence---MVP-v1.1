@@ -102,6 +102,8 @@
             </div>
         </section>
     </main>
+
+    <!-- 【修复开始】: 下面的 footer 部分已为您更新 -->
     <footer>
         <div class="container">
             <ul class="footer-links">
@@ -110,13 +112,17 @@
                 <li><a href="#" data-i18n="footerPrivacy">Privacy Policy</a></li>
                 <li><a href="#" data-i18n="footerTerms">Terms of Service</a></li>
             </ul>
+            <!-- 【新增】: 在这里为您增加了邮箱地址 -->
+            <div class="footer-contact" style="margin: 1rem 0;">
+                <a href="mailto:business@voltchina.net" style="color: var(--text-secondary); text-decoration: none;">business@voltchina.net</a>
+            </div>
             <p class="copyright" data-i18n="footerCopyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
+    <!-- 【修复结束】 -->
 
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
-    <!-- 【修复开始】: 下面的脚本已为您更新 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const intelContainer = document.getElementById('latest-intel-container');
@@ -128,14 +134,10 @@
                     latestIntel.forEach(item => {
                         const proBadge = item.is_pro ? '<div class="intel-pro-badge-home">PRO</div>' : '';
                         
-                        // 这是我们修改的核心逻辑
                         let title = '';
-                        // 检查 item.title 是不是一个包含语言翻译的对象
                         if (typeof item.title === 'object' && item.title !== null) {
-                            // 如果是，就按语言获取标题
                             title = item.title[lang] || item.title['en'];
                         } else {
-                            // 如果不是，说明它就是一个简单的标题字符串，直接使用
                             title = item.title;
                         }
 
@@ -149,6 +151,5 @@
             document.addEventListener('languageUpdated', event => renderIntel(event.detail.lang));
         });
     </script>
-    <!-- 【修复结束】 -->
 </body>
 </html>

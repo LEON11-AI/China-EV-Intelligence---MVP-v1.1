@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - 内容管理后台 (v13 - Live Data Final Fix)</title>
+    <title>Volt China - 内容管理后台 (v15 - Final Working Version)</title>
+    
+    <link rel="stylesheet" href="css/quill.snow.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
         body { padding: 2rem; } .admin-container { max-width: 960px; margin: 0 auto; } .form-section { background-color: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem; } h1, h2, h3 { text-align: center; margin-bottom: 1.5rem; } h2 { margin-top: 0; } h3 { margin-top: 2rem; grid-column: 1 / -1; border-top: 1px solid #4a5568; padding-top: 1.5rem; } .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; } .form-group label { color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; text-align: left; } .form-group input, .form-group textarea, .form-group select { background-color: var(--bg-primary); border: 1px solid #4a5568; border-radius: var(--btn-radius); padding: 0.75rem; color: var(--text-primary); font-size: 1rem; } .form-group textarea { min-height: 120px; resize: vertical; } .full-width { grid-column: 1 / -1; } .btn-group { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; } .btn { background-color: var(--accent-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: var(--btn-radius); cursor: pointer; font-size: 1rem; font-weight: 500; } .btn-orange { background-color: var(--accent-orange); } .btn-red { background-color: #e53e3e; } .btn-red:hover { background-color: #c53030; } .btn:hover { opacity: 0.9; } .output-area { width: 100%; min-height: 400px; background-color: #000; color: #0f0; font-family: monospace; padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; }
@@ -12,6 +14,14 @@
         .admin-title p { font-size: 1rem; color: var(--text-secondary); margin: 0; text-align: left; }
         .load-section { display: flex; align-items: flex-end; gap: 1rem; margin-bottom: 1rem; }
         .load-section .form-group { flex-grow: 1; margin-bottom: 0; }
+        /* Quill 暗黑主题样式 */
+        .ql-editor { min-height: 250px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; border-bottom-left-radius: var(--btn-radius); border-bottom-right-radius: var(--btn-radius); }
+        .ql-toolbar { background-color: #3e4a5d; border-top-left-radius: var(--btn-radius); border-top-right-radius: var(--btn-radius); border-bottom: none !important; }
+        .ql-container.ql-snow { border: 1px solid #4a5568; border-radius: var(--btn-radius); }
+        .ql-snow .ql-stroke { stroke: var(--text-secondary); }
+        .ql-snow .ql-picker-label { color: var(--text-secondary); }
+        .ql-snow .ql-picker.ql-expanded .ql-picker-label { border-color: transparent !important; }
+        .ql-snow .ql-picker-options { background-color: var(--card-bg); border-radius: var(--btn-radius); }
     </style>
 </head>
 <body>
@@ -42,7 +52,10 @@
                     <div class="form-group"><label for="intel_is_pro" data-i18n="intel_is_pro"></label><select id="intel_is_pro"><option value="false">否 (免费)</option><option value="true">是 (PRO)</option></select></div>
                     <div class="form-group full-width"><label for="intel_title" data-i18n="intel_title"></label><input type="text" id="intel_title" required></div>
                     <div class="form-group full-width"><label for="intel_summary" data-i18n="intel_summary"></label><textarea id="intel_summary" required></textarea></div>
-                    <div class="form-group full-width"><label for="intel_full_content" data-i18n="intel_full_content"></label><textarea id="intel_full_content" rows="10" required></textarea></div>
+                    <div class="form-group full-width">
+                        <label for="intel_full_content_editor" data-i18n="intel_full_content"></label>
+                        <div id="intel_full_content_editor"></div>
+                    </div>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-red" id="delete-intel-btn-unique" data-i18n="deleteIntelBtn"></button>
@@ -51,6 +64,7 @@
                 </div>
             </form>
         </div>
+        
         <div class="form-section">
             <h2 data-i18n="formTitle"></h2>
             <form id="models-form">
@@ -109,13 +123,15 @@
             <div class="btn-group"><button type="button" class="btn btn-orange" id="generate-btn" data-i18n="generateBtn"></button></div>
         </div>
     </div>
-
+    
+    <script src="js/quill.min.js"></script>
+    
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     let currentLang = 'zh';
     const translations = {
-        en: { mainTitle: "Volt China", mainSubtitle: "Content Management", langToggle: "切换到中文", intelFormTitle: "Manage Intelligence Feed", intelSelectorLabel: "Select Intel to Load/Edit", loadIntelBtn: "Load", intel_id: "Intel ID (for new entries)", intel_date: "Date (YYYY-MM-DD)", intel_brand: "Brand", intel_model: "Model", intel_title: "Title", intel_summary: "Summary (For list view)", intel_full_content: "Full Content (Supports HTML)", intel_is_pro: "Is PRO Content?", deleteIntelBtn: "Delete", addIntelBtn: "Add/Update", clearIntelFormBtn: "Clear Form", intelJsonOutputTitle: "Generated intelligence.json", intelJsonOutputDesc: "Copy this and paste into `data/intelligence.json`.", intelGenerateBtn: "Generate & Copy", formTitle: "Manage EV Models", modelSelectorLabel: "Select Model to Load/Edit", id: "Model ID (e.g., xiaomi_su7)", brand: "Brand", model_name: "Model Name", subtitle: "Subtitle", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load", deleteModelBtn: "Delete", addModelBtn: "Add/Update", clearFormBtn: "Clear Form", jsonOutputTitle: "Generated models.json", jsonOutputDesc: "Copy this and paste into `data/models.json`.", generateBtn: "Generate & Copy" },
-        zh: { mainTitle: "Volt China", mainSubtitle: "内容管理后台", langToggle: "Switch to English", intelFormTitle: "管理情报文章", intelSelectorLabel: "选择已有情报进行加载/编辑", loadIntelBtn: "加载", intel_id: "情报ID (用于新条目)", intel_date: "日期 (YYYY-MM-DD)", intel_brand: "品牌", intel_model: "车型", intel_title: "标题", intel_summary: "摘要 (用于列表页)", intel_full_content: "完整内容 (支持HTML标签)", intel_is_pro: "是否为PRO内容?", deleteIntelBtn: "删除", addIntelBtn: "添加/更新", clearIntelFormBtn: "清空表单", intelJsonOutputTitle: "生成的 intelligence.json", intelJsonOutputDesc: "复制并粘贴到 `data/intelligence.json` 文件。", intelGenerateBtn: "生成并复制", formTitle: "管理电动车型", modelSelectorLabel: "选择已有车型进行加载/编辑", id: "车型ID (用于新条目)", brand: "品牌", model_name: "车型名称", subtitle: "副标题", status: "状态", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评", keySpecs: "核心规格", range_cltc: "续航 (CLTC)", zero_to_100: "0-100 km/h", power_kw: "功率 (kW)", battery_kwh: "电池 (kWh)", price_usd_estimated: "价格", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市", global_rollout: "全球上市", loadModelBtn: "加载", deleteModelBtn: "删除", addModelBtn: "添加/更新", clearFormBtn: "清空表单", jsonOutputTitle: "生成的 models.json", jsonOutputDesc: "复制并粘贴到 `data/models.json` 文件。", generateBtn: "生成并复制" }
+        en: { mainTitle: "Volt China", mainSubtitle: "Content Management", langToggle: "切换到中文", intelFormTitle: "Manage Intelligence Feed", intelSelectorLabel: "Select Intel to Load/Edit", loadIntelBtn: "Load", intel_id: "Intel ID (for new entries)", intel_date: "Date (YYYY-MM-DD)", intel_brand: "Brand", intel_model: "Model", intel_title: "Title", intel_summary: "Summary (For list view)", intel_full_content: "Full Content (Rich Text Editor)", intel_is_pro: "Is PRO Content?", deleteIntelBtn: "Delete", addIntelBtn: "Add/Update", clearIntelFormBtn: "Clear Form", intelJsonOutputTitle: "Generated intelligence.json", intelJsonOutputDesc: "Copy this and paste into `data/intelligence.json`.", intelGenerateBtn: "Generate & Copy", formTitle: "Manage EV Models", modelSelectorLabel: "Select Model to Load/Edit", id: "Model ID (e.g., xiaomi_su7)", brand: "Brand", model_name: "Model Name", subtitle: "Subtitle", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load", deleteModelBtn: "Delete", addModelBtn: "Add/Update", clearFormBtn: "Clear Form", jsonOutputTitle: "Generated models.json", jsonOutputDesc: "Copy this and paste into `data/models.json`.", generateBtn: "Generate & Copy" },
+        zh: { mainTitle: "Volt China", mainSubtitle: "内容管理后台", langToggle: "Switch to English", intelFormTitle: "管理情报文章", intelSelectorLabel: "选择已有情报进行加载/编辑", loadIntelBtn: "加载", intel_id: "情报ID (用于新条目)", intel_date: "日期 (YYYY-MM-DD)", intel_brand: "品牌", intel_model: "车型", intel_title: "标题", intel_summary: "摘要 (用于列表页)", intel_full_content: "完整内容 (富文本编辑器)", intel_is_pro: "是否为PRO内容?", deleteIntelBtn: "删除", addIntelBtn: "添加/更新", clearIntelFormBtn: "清空表单", intelJsonOutputTitle: "生成的 intelligence.json", intelJsonOutputDesc: "复制并粘贴到 `data/intelligence.json` 文件。", intelGenerateBtn: "生成并复制", formTitle: "管理电动车型", modelSelectorLabel: "选择已有车型进行加载/编辑", id: "车型ID (用于新条目)", brand: "品牌", model_name: "车型名称", subtitle: "副标题", status: "状态", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评", keySpecs: "核心规格", range_cltc: "续航 (CLTC)", zero_to_100: "0-100 km/h", power_kw: "功率 (kW)", battery_kwh: "电池 (kWh)", price_usd_estimated: "价格", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市", global_rollout: "全球上市", loadModelBtn: "加载", deleteModelBtn: "删除", addModelBtn: "添加/更新", clearFormBtn: "清空表单", jsonOutputTitle: "生成的 models.json", jsonOutputDesc: "复制并粘贴到 `data/models.json` 文件。", generateBtn: "生成并复制" }
     };
 
     const setLanguage = (lang) => {
@@ -130,6 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('lang-toggle-btn').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'zh' : 'en'));
     
     const sanitizePath = (path) => { if (!path) return ''; let correctedPath = path.replace(/\\/g, '/'); const prefixMatch = correctedPath.match(/^(.*?)images\//i); if (prefixMatch && prefixMatch.length > 1) { correctedPath = correctedPath.substring(prefixMatch[1].length); } return correctedPath; };
+    
+    const quill = new Quill('#intel_full_content_editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link'],
+                ['clean']
+            ]
+        }
+    });
 
     // ======================= Models Logic =======================
     const modelsForm = document.getElementById('models-form');
@@ -150,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (keepSelection) modelSelector.value = selectedValue;
     }
 
-    // 【修复】: 从线上网址加载数据，并增加 ?_v=... 来防止浏览器缓存
     fetch(`https://voltchina.net/data/models.json?_v=${new Date().getTime()}`).then(res => res.ok ? res.json() : []).then(data => { modelsData = data; updateModelsJsonOutput(); populateModelSelector(); }).catch(console.warn);
     
     document.getElementById('load-model-btn-unique').addEventListener('click', () => {
@@ -176,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('clear-model-btn-unique').addEventListener('click', () => modelsForm.reset());
-    document.getElementById('generate-btn').addEventListener('click', () => { navigator.clipboard.writeText(modelsJsonOutput.value).then(() => alert('Copied!')); });
+    document.getElementById('generate-btn').addEventListener('click', () => { navigator.clipboard.writeText(modelsJsonOutput.value).then(() => alert('Models JSON copied!')); });
     function updateModelsJsonOutput() { modelsJsonOutput.value = JSON.stringify(modelsData, null, 2); }
 
     // ======================= Intelligence Logic =======================
@@ -198,18 +226,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (keepSelection) intelSelector.value = selectedValue;
     }
 
-    // 【修复】: 从线上网址加载数据，并增加 ?_v=... 来防止浏览器缓存
     fetch(`https://voltchina.net/data/intelligence.json?_v=${new Date().getTime()}`).then(res => res.ok ? res.json() : []).then(data => { intelData = data; updateIntelJsonOutput(); populateIntelSelector(); }).catch(console.warn);
 
     document.getElementById('load-intel-btn-unique').addEventListener('click', () => {
         const idToLoad = intelSelector.value;
         if (!idToLoad) return alert(translations[currentLang].intelSelectorLabel);
         const itemToLoad = intelData.find(i => i.id === idToLoad);
-        if (itemToLoad) { intelForm.reset(); Object.keys(itemToLoad).forEach(key => { if(intelForm[`intel_${key}`]) intelForm[`intel_${key}`].value = itemToLoad[key]; }); }
+        if (itemToLoad) { 
+            intelForm.reset();
+            quill.setText('');
+            Object.keys(itemToLoad).forEach(key => { 
+                if (key === 'full_content') {
+                    quill.root.innerHTML = itemToLoad[key];
+                } else if(intelForm[`intel_${key}`]) {
+                    intelForm[`intel_${key}`].value = itemToLoad[key];
+                }
+            });
+        }
     });
 
     document.getElementById('add-intel-btn-unique').addEventListener('click', () => {
-        const item = { id: intelForm.intel_id.value.trim(), date: intelForm.intel_date.value.trim(), brand: intelForm.intel_brand.value.trim(), model: intelForm.intel_model.value.trim(), title: intelForm.intel_title.value.trim(), is_pro: intelForm.intel_is_pro.value === 'true', summary: intelForm.intel_summary.value.trim(), full_content: intelForm.intel_full_content.value.trim() };
+        const fullContentFromEditor = quill.root.innerHTML;
+        const item = { id: intelForm.intel_id.value.trim(), date: intelForm.intel_date.value.trim(), brand: intelForm.intel_brand.value.trim(), model: intelForm.intel_model.value.trim(), title: intelForm.intel_title.value.trim(), is_pro: intelForm.intel_is_pro.value === 'true', summary: intelForm.intel_summary.value.trim(), full_content: fullContentFromEditor };
+        
         if (!item.id) return alert('Intel ID is required!');
         const index = intelData.findIndex(i => i.id === item.id);
         if (index > -1) { intelData[index] = item; alert(`Intel "${item.title}" updated.`); } 
@@ -220,10 +259,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('delete-intel-btn-unique').addEventListener('click', () => {
         const idToDelete = intelForm.intel_id.value.trim(); if (!idToDelete) return alert(translations[currentLang].intelSelectorLabel);
         const index = intelData.findIndex(i => i.id === idToDelete);
-        if (index > -1) { if (confirm(`Delete intel "${intelData[index].title}"?`)) { intelData.splice(index, 1); intelForm.reset(); updateIntelJsonOutput(); populateIntelSelector(); } }
+        if (index > -1) { if (confirm(`Delete intel "${intelData[index].title}"?`)) { intelData.splice(index, 1); intelForm.reset(); quill.setText(''); updateIntelJsonOutput(); populateIntelSelector(); } }
     });
     
-    document.getElementById('clear-intel-btn-unique').addEventListener('click', () => intelForm.reset());
+    document.getElementById('clear-intel-btn-unique').addEventListener('click', () => {
+        intelForm.reset();
+        quill.setText('');
+    });
+    
     document.getElementById('intel-generate-btn').addEventListener('click', () => { navigator.clipboard.writeText(intelJsonOutput.value).then(() => alert('Copied!')); });
     function updateIntelJsonOutput() { intelJsonOutput.value = JSON.stringify(intelData, null, 2); }
     
@@ -231,4 +274,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html>```
+</html>
