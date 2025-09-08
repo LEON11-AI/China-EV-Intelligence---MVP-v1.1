@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - 内容管理后台 (v17.2 - Final Layout Fix)</title>
+    <title>Volt China - 内容管理后台 (v18 - Final Image Fix)</title>
     
     <link rel="stylesheet" href="css/quill.snow.css">
     <link rel="stylesheet" href="css/style.css">
@@ -12,17 +12,9 @@
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
         .admin-title h1 { font-size: 1.8rem; margin: 0; text-align: left; }
         .admin-title p { font-size: 1rem; color: var(--text-secondary); margin: 0; text-align: left; }
-        .load-section { 
-            display: flex; 
-            flex-wrap: wrap; 
-            align-items: flex-end; 
-            gap: 1rem; 
-            margin-bottom: 1rem;
-        }
-        /* 【修复】: 移除了 flex-grow: 1; 并为下拉菜单本身设置了宽度 */
-        .load-section .form-group { margin-bottom: 0; flex-grow: 1; }
+        .load-section { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .load-section .form-group { flex-grow: 1; margin-bottom: 0; }
         .load-section .form-group select { width: 100%; }
-        /* Quill 的暗黑主题样式 */
         .ql-editor { min-height: 250px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; border-bottom-left-radius: var(--btn-radius); border-bottom-right-radius: var(--btn-radius); }
         .ql-toolbar { background-color: #3e4a5d; border-top-left-radius: var(--btn-radius); border-top-right-radius: var(--btn-radius); border-bottom: none !important; }
         .ql-container.ql-snow { border: 1px solid #4a5568; border-radius: var(--btn-radius); }
@@ -34,8 +26,6 @@
 </head>
 <body>
     <div class="admin-container">
-        <!-- The entire body content, including the full JavaScript, remains unchanged. -->
-        <!-- Only the CSS above was modified. -->
         <div class="admin-header">
             <div class="admin-title">
                 <h1 data-i18n="mainTitle"></h1>
@@ -153,6 +143,7 @@
             populateIntelSelector(true);
         };
         document.getElementById('lang-toggle-btn').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'zh' : 'en'));
+        
         const sanitizePath = (path) => { if (!path) return ''; let correctedPath = path.replace(/\\/g, '/'); const prefixMatch = correctedPath.match(/^(.*?)images\//i); if (prefixMatch && prefixMatch.length > 1) { correctedPath = correctedPath.substring(prefixMatch[1].length); } return correctedPath; };
         
         const quill = new Quill('#intel_full_content_editor', {
@@ -167,6 +158,16 @@
                 ]
             }
         });
+
+        // 【修复】: 重写编辑器的“图片”按钮功能
+        function imageHandler() {
+            const url = prompt('Enter the image URL (e.g., images/uploads/my-chart.png)');
+            if (url) {
+                const range = quill.getSelection();
+                quill.insertEmbed(range.index, 'image', url);
+            }
+        }
+        quill.getModule('toolbar').addHandler('image', imageHandler);
 
         const modelsForm = document.getElementById('models-form');
         const modelsJsonOutput = document.getElementById('json-output');
@@ -251,7 +252,7 @@
             updateIntelJsonOutput(); populateIntelSelector(true);
         });
         document.getElementById('delete-intel-btn-unique').addEventListener('click', () => {
-            const idToDelete = intelForm.intel_id.value.trim(); if (!idToDelete) return alert(translations[currentLang].intelSelectorLabel);
+            const idToDelete = intelForm.id.value.trim(); if (!idToDelete) return alert(translations[currentLang].intelSelectorLabel);
             const index = intelData.findIndex(i => i.id === idToDelete);
             if (index > -1) { if (confirm(`Delete intel "${intelData[index].title}"?`)) { intelData.splice(index, 1); intelForm.reset(); quill.setText(''); updateIntelJsonOutput(); populateIntelSelector(); } }
         });
