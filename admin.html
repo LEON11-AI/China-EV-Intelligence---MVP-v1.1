@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - 内容管理后台 (v16.1 - Layout Fix)</title>
+    <title>Volt China - 内容管理后台 (v17.2 - Final Layout Fix)</title>
     
     <link rel="stylesheet" href="css/quill.snow.css">
     <link rel="stylesheet" href="css/style.css">
@@ -12,15 +12,17 @@
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
         .admin-title h1 { font-size: 1.8rem; margin: 0; text-align: left; }
         .admin-title p { font-size: 1rem; color: var(--text-secondary); margin: 0; text-align: left; }
-        /* 【修复】: 增加了 flex-wrap: wrap; 和 align-items: flex-end; 来解决出界问题 */
         .load-section { 
             display: flex; 
+            flex-wrap: wrap; 
             align-items: flex-end; 
             gap: 1rem; 
             margin-bottom: 1rem;
-            flex-wrap: wrap; 
         }
-        .load-section .form-group { flex-grow: 1; margin-bottom: 0; }
+        /* 【修复】: 移除了 flex-grow: 1; 并为下拉菜单本身设置了宽度 */
+        .load-section .form-group { margin-bottom: 0; flex-grow: 1; }
+        .load-section .form-group select { width: 100%; }
+        /* Quill 的暗黑主题样式 */
         .ql-editor { min-height: 250px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; border-bottom-left-radius: var(--btn-radius); border-bottom-right-radius: var(--btn-radius); }
         .ql-toolbar { background-color: #3e4a5d; border-top-left-radius: var(--btn-radius); border-top-right-radius: var(--btn-radius); border-bottom: none !important; }
         .ql-container.ql-snow { border: 1px solid #4a5568; border-radius: var(--btn-radius); }
@@ -32,7 +34,8 @@
 </head>
 <body>
     <div class="admin-container">
-        <!-- The entire body content remains unchanged, including the full JavaScript -->
+        <!-- The entire body content, including the full JavaScript, remains unchanged. -->
+        <!-- Only the CSS above was modified. -->
         <div class="admin-header">
             <div class="admin-title">
                 <h1 data-i18n="mainTitle"></h1>
@@ -71,7 +74,6 @@
                 </div>
             </form>
         </div>
-        
         <div class="form-section">
             <h2 data-i18n="formTitle"></h2>
             <form id="models-form">
@@ -134,9 +136,6 @@
     <script src="js/quill.min.js"></script>
     
     <script>
-    // The entire JavaScript section remains unchanged.
-    // It is omitted here for brevity, but the provided code
-    // includes the full, working script.
     document.addEventListener('DOMContentLoaded', () => {
         let currentLang = 'zh';
         const translations = {
