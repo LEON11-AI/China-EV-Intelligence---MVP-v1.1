@@ -31,15 +31,13 @@
     </header>
 
     <main>
-        <div class="page-content" style="display: block;">
-            <div class="container article-container" id="intel-detail-container">
-                <p id="loading-message" style="text-align: center; padding: 4rem 0;">Loading intelligence...</p>
-                <!-- Intelligence details will be dynamically injected here -->
-            </div>
+        <!-- 【修复】: 移除了多余的 .page-content 容器，这是导致布局问题的根源 -->
+        <div class="container article-container" id="intel-detail-container">
+            <p id="loading-message" style="text-align: center; padding: 4rem 0;">Loading intelligence...</p>
+            <!-- Intelligence details will be dynamically injected here -->
         </div>
     </main>
 
-    <!-- 【修复开始】: 下面的 footer 部分已为您更新 -->
     <footer>
         <div class="container">
             <ul class="footer-links">
@@ -54,7 +52,6 @@
             <p class="copyright" data-i18n="footerCopyright">© 2025 China EV Intelligence. All rights reserved.</p>
         </div>
     </footer>
-    <!-- 【修复结束】 -->
     
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
@@ -99,7 +96,7 @@
                     <div class="paywall-content">
                         <div class="article-summary">${item.summary}</div>
                         <div class="paywall-block">
-                            <div class="blurred-content"><p>${item.full_content}</p></div>
+                            <div class="blurred-content">${item.full_content}</div>
                             <div class="paywall-prompt">
                                 <h3 data-i18n="unlockTitle">Unlock Full Analysis</h3>
                                 <p data-i18n="unlockDesc">You are reading a preview of a PRO article. Subscribe now to unlock the full analysis.</p>
@@ -111,7 +108,7 @@
                 contentHTML = `<div>${item.full_content}</div>`;
             }
             
-            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; <span data-i18n="backToIntelFeed">Back to Intelligence Feed</span></a>`;
+            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; <span data-i1-n="backToIntelFeed">Back to Intelligence Feed</span></a>`;
             const detailHTML = `
                 ${backButtonHTML}
                 <article class="intel-article">
