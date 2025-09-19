@@ -1,5 +1,5 @@
 :root {
-    --bg-primary: #1a20c;
+    --bg-primary: #1a202c;
     --text-primary: #e2e8f0;
     --text-secondary: #a0aec0;
     --accent-blue: #3182ce;
@@ -244,4 +244,30 @@ footer { background-color: var(--header-blue); padding: 2rem 0; text-align: cent
     margin: 1.5rem auto;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
+}
+
+/* 【新增】: 首页新版情报卡片的专属样式 */
+.intel-card-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.intel-title-home .intel-type {
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+.intel-byline {
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-top: 1px solid #4a5568;
+    margin-top: 1rem;
+}
+.intel-byline .intel-tag {
+    font-weight: 500;
+    color: var(--accent-blue);
 }
