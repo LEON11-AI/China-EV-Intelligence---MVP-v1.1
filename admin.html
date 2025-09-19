@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>Volt China - 内容管理后台 (v20 - Final)</title>
     
     <link rel="stylesheet" href="css/quill.snow.css">
@@ -46,8 +47,9 @@
                 <hr class="full-width" style="border-color: #4a5568;">
                 <div class="form-grid">
                     <div class="form-group full-width"><label for="intel_id" data-i18n="intel_id"></label><input type="text" id="intel_id" required></div>
-                    <div class="form-group"><label for="intel_date" data-i18n="intel_date"></label><input type="text" id="intel_date" required></div>
+                    <div class="form-group"><label for="intel_date" data-i18n="intel_date"></label><input type="date" id="intel_date" required></div>
                     <div class="form-group"><label for="intel_brand" data-i18n="intel_brand"></label><input type="text" id="intel_brand"></div>
+                    <div class="form-group"><label for="intel_model" data-i18n="intel_model"></label><input type="text" id="intel_model"></div>
                     <div class="form-group"><label for="intel_type" data-i18n="intel_type"></label><input type="text" id="intel_type"></div>
                     <div class="form-group"><label for="intel_is_pro" data-i18n="intel_is_pro"></label><select id="intel_is_pro"><option value="false">否 (免费)</option><option value="true">是 (PRO)</option></select></div>
                     <div class="form-group full-width"><label for="intel_title" data-i18n="intel_title"></label><input type="text" id="intel_title" required></div>
@@ -55,6 +57,9 @@
                     <div class="form-group full-width">
                         <label for="intel_full_content_editor" data-i18n="intel_full_content"></label>
                         <div id="intel_full_content_editor"></div>
+                        <div class="btn-group" style="justify-content:flex-start; margin-top: 1rem;">
+                            <button type="button" class="btn" id="insert-chartimage-btn">插入图表图</button>
+                        </div>
                     </div>
                 </div>
                 <div class="btn-group">
@@ -153,7 +158,7 @@
                     [{ 'header': [1, 2, 3, false] }],
                     ['bold', 'italic', 'underline'],
                     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    ['link', 'image'],
+                    ['link', 'image', 'chartImage'],
                     ['clean']
                 ]
             }
@@ -162,11 +167,50 @@
         function imageHandler() {
             const url = prompt('Enter image URL (e.g., https://voltchina.net/images/uploads/my-chart.png)');
             if (url) {
-                const range = quill.getSelection(true);
+                const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
                 quill.insertEmbed(range.index, 'image', url);
+                quill.setSelection(range.index + 1);
             }
         }
         quill.getModule('toolbar').addHandler('image', imageHandler);
+
+        function chartImageHandler() {
+            const input = prompt('输入图表图片：文件名（位于 images/uploads/）或完整图片URL', '');
+            if (!input) return;
+            const url = normalizeChartImageUrl(input);
+            if (!url) { alert('无效的图片地址或文件名'); return; }
+            const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
+            quill.insertEmbed(range.index, 'image', url);
+            quill.setSelection(range.index + 1);
+        }
+
+        function normalizeChartImageUrl(raw) {
+            try {
+                let s = (raw || '').trim();
+                if (!s) return '';
+                if (/^https?:\/\//i.test(s)) return s;
+                s = s.replace(/^\/+/, '');
+                s = s.replace(/^images\//i, '');
+                s = s.replace(/^\/?images\//i, '');
+                s = s.replace(/^uploads\//i, '');
+                return `/images/uploads/${s}`;
+            } catch { return ''; }
+        }
+
+        setTimeout(() => {
+            const toolbar = quill.getModule('toolbar');
+            if (toolbar) {
+                toolbar.addHandler('chartImage', chartImageHandler);
+            }
+            const chartImageBtn = document.querySelector('.ql-toolbar .ql-chartImage');
+            if (chartImageBtn) {
+                chartImageBtn.textContent = '图表图';
+                chartImageBtn.title = '插入事先准备好的图表图片';
+                chartImageBtn.addEventListener('mousedown', (e) => e.preventDefault());
+            }
+        }, 0);
+
+        document.getElementById('insert-chartimage-btn')?.addEventListener('click', chartImageHandler);
 
         const modelsForm = document.getElementById('models-form');
         const modelsJsonOutput = document.getElementById('json-output');
@@ -276,6 +320,4 @@
     });
     </script>
 </body>
-</html>
-
 </html>
