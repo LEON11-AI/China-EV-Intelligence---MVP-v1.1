@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - 内容管理后台 (v20 - Final)</title>
+    <title>Volt China - 内容管理后台 (v21 - Final Working Version)</title>
     
     <link rel="stylesheet" href="css/quill.snow.css">
     <link rel="stylesheet" href="css/style.css">
@@ -41,17 +41,14 @@
                         <label for="intel-selector" data-i18n="intelSelectorLabel"></label>
                         <select id="intel-selector"></select>
                     </div>
-                    <button type="button" class="btn" id="load-intel-btn-unique" data-i18n="loadIntelBtn"></button>
+                    <button type="button" class="btn" id="load-intel-btn" data-i18n="loadIntelBtn"></button>
                 </div>
                 <hr class="full-width" style="border-color: #4a5568;">
                 <div class="form-grid">
                     <div class="form-group full-width"><label for="intel_id" data-i18n="intel_id"></label><input type="text" id="intel_id" required></div>
                     <div class="form-group"><label for="intel_date" data-i18n="intel_date"></label><input type="text" id="intel_date" required></div>
                     <div class="form-group"><label for="intel_brand" data-i18n="intel_brand"></label><input type="text" id="intel_brand"></div>
-                    <div class="form-group">
-                        <label for="intel_type" data-i18n="intel_type"></label>
-                        <input type="text" id="intel_type" placeholder="e.g., Analysis, News...">
-                    </div>
+                    <div class="form-group"><label for="intel_type" data-i18n="intel_type"></label><input type="text" id="intel_type"></div>
                     <div class="form-group"><label for="intel_is_pro" data-i18n="intel_is_pro"></label><select id="intel_is_pro"><option value="false">否 (免费)</option><option value="true">是 (PRO)</option></select></div>
                     <div class="form-group full-width"><label for="intel_title" data-i18n="intel_title"></label><input type="text" id="intel_title" required></div>
                     <div class="form-group full-width"><label for="intel_summary" data-i18n="intel_summary"></label><textarea id="intel_summary" required></textarea></div>
@@ -61,9 +58,9 @@
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-red" id="delete-intel-btn-unique" data-i18n="deleteIntelBtn"></button>
-                    <button type="button" class="btn" id="add-intel-btn-unique" data-i18n="addIntelBtn"></button>
-                    <button type="reset" class="btn" id="clear-intel-btn-unique" data-i18n="clearIntelFormBtn"></button>
+                    <button type="button" class="btn btn-red" id="delete-intel-btn" data-i18n="deleteIntelBtn"></button>
+                    <button type="button" class="btn" id="add-intel-btn" data-i18n="addIntelBtn"></button>
+                    <button type="reset" class="btn" id="clear-intel-btn" data-i18n="clearIntelFormBtn"></button>
                 </div>
             </form>
         </div>
@@ -75,7 +72,7 @@
                          <label for="model-selector" data-i18n="modelSelectorLabel"></label>
                          <select id="model-selector"></select>
                      </div>
-                     <button type="button" class="btn" id="load-model-btn-unique" data-i18n="loadModelBtn"></button>
+                     <button type="button" class="btn" id="load-model-btn" data-i18n="loadModelBtn"></button>
                 </div>
                 <hr class="full-width" style="border-color: #4a5568;">
                  <div class="form-grid">
@@ -106,9 +103,9 @@
                     <div class="form-group"><label for="global_rollout" data-i18n="global_rollout"></label><input type="text" id="global_rollout"></div>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-red" id="delete-model-btn-unique" data-i18n="deleteModelBtn"></button>
-                    <button type="button" class="btn" id="add-model-btn-unique" data-i18n="addModelBtn"></button>
-                    <button type="reset" class="btn" id="clear-model-btn-unique" data-i18n="clearFormBtn"></button>
+                    <button type="button" class="btn btn-red" id="delete-model-btn" data-i18n="deleteModelBtn"></button>
+                    <button type="button" class="btn" id="add-model-btn" data-i18n="addModelBtn"></button>
+                    <button type="reset" class="btn" id="clear-model-btn" data-i18n="clearFormBtn"></button>
                 </div>
             </form>
         </div>
@@ -188,13 +185,13 @@
             if (keepSelection) modelSelector.value = selectedValue;
         }
         fetch(`https://voltchina.net/data/models.json?_v=${new Date().getTime()}`).then(res => res.ok ? res.json() : []).then(data => { modelsData = data; updateModelsJsonOutput(); populateModelSelector(); }).catch(console.warn);
-        document.getElementById('load-model-btn-unique').addEventListener('click', () => {
+        document.getElementById('load-model-btn').addEventListener('click', () => {
             const idToLoad = modelSelector.value;
             if (!idToLoad) return alert(translations[currentLang].modelSelectorLabel);
             const modelToLoad = modelsData.find(m => m.id === idToLoad);
             if (modelToLoad) { modelsForm.reset(); Object.keys(modelToLoad).forEach(key => { if (typeof modelToLoad[key] === 'object' && modelToLoad[key] !== null) { Object.keys(modelToLoad[key]).forEach(subKey => { if(modelsForm[subKey]) modelsForm[subKey].value = modelToLoad[key][subKey]; }); } else { if(modelsForm[key]) modelsForm[key].value = modelToLoad[key]; } }); }
         });
-        document.getElementById('add-model-btn-unique').addEventListener('click', () => {
+        document.getElementById('add-model-btn').addEventListener('click', () => {
             const model = { id: modelsForm.id.value.trim(), brand: modelsForm.brand.value.trim(), model_name: modelsForm.model_name.value.trim(), subtitle: modelsForm.subtitle.value.trim(), status: modelsForm.status.value.trim(), image_card: sanitizePath(modelsForm.image_card.value), image_detail: sanitizePath(modelsForm.image_detail.value), youtube_id: modelsForm.youtube_id.value.trim(), ceo_note: modelsForm.ceo_note.value.trim(), key_specs: { range_cltc: modelsForm.range_cltc.value.trim(), zero_to_100: modelsForm.zero_to_100.value.trim(), power_kw: modelsForm.power_kw.value.trim(), battery_kwh: modelsForm.battery_kwh.value.trim(), price_usd_estimated: modelsForm.price_usd_estimated.value.trim() }, full_specs: { dimensions: modelsForm.dimensions.value.trim(), wheelbase: modelsForm.wheelbase.value.trim(), powertrain: modelsForm.powertrain.value.trim(), battery: modelsForm.battery.value.trim(), charging: modelsForm.charging.value.trim(), adas: modelsForm.adas.value.trim() }, market_plan: { china_launch: modelsForm.china_launch.value.trim(), global_rollout: modelsForm.global_rollout.value.trim() } };
             if (!model.id) return alert('Model ID is required!');
             const index = modelsData.findIndex(m => m.id === model.id);
@@ -202,12 +199,12 @@
             else { modelsData.push(model); alert(`Model "${model.model_name}" added.`); }
             updateModelsJsonOutput(); populateModelSelector(true);
         });
-        document.getElementById('delete-model-btn-unique').addEventListener('click', () => {
+        document.getElementById('delete-model-btn').addEventListener('click', () => {
             const idToDelete = modelsForm.id.value.trim(); if (!idToDelete) return alert(translations[currentLang].modelSelectorLabel);
             const index = modelsData.findIndex(m => m.id === idToDelete);
             if (index > -1) { if (confirm(`Delete model "${modelsData[index].model_name}"?`)) { modelsData.splice(index, 1); modelsForm.reset(); updateModelsJsonOutput(); populateModelSelector(); } }
         });
-        document.getElementById('clear-model-btn-unique').addEventListener('click', () => modelsForm.reset());
+        document.getElementById('clear-model-btn').addEventListener('click', () => modelsForm.reset());
         document.getElementById('generate-btn').addEventListener('click', () => { navigator.clipboard.writeText(modelsJsonOutput.value).then(() => alert('Models JSON copied!')); });
         function updateModelsJsonOutput() { modelsJsonOutput.value = JSON.stringify(modelsData, null, 2); }
 
@@ -228,7 +225,7 @@
             if (keepSelection) intelSelector.value = selectedValue;
         }
         fetch(`https://voltchina.net/data/intelligence.json?_v=${new Date().getTime()}`).then(res => res.ok ? res.json() : []).then(data => { intelData = data; updateIntelJsonOutput(); populateIntelSelector(); }).catch(console.warn);
-        document.getElementById('load-intel-btn-unique').addEventListener('click', () => {
+        document.getElementById('load-intel-btn').addEventListener('click', () => {
             const idToLoad = intelSelector.value;
             if (!idToLoad) return alert(translations[currentLang].intelSelectorLabel);
             const itemToLoad = intelData.find(i => i.id === idToLoad);
@@ -244,7 +241,7 @@
                 });
             }
         });
-        document.getElementById('add-intel-btn-unique').addEventListener('click', () => {
+        document.getElementById('add-intel-btn').addEventListener('click', () => {
             const fullContentFromEditor = quill.root.innerHTML;
             const item = { 
                 id: intelForm.intel_id.value.trim(), 
@@ -263,12 +260,12 @@
             else { intelData.unshift(item); alert(`Intel "${item.title}" added.`); }
             updateIntelJsonOutput(); populateIntelSelector(true);
         });
-        document.getElementById('delete-intel-btn-unique').addEventListener('click', () => {
+        document.getElementById('delete-intel-btn').addEventListener('click', () => {
             const idToDelete = intelForm.intel_id.value.trim(); if (!idToDelete) return alert(translations[currentLang].intelSelectorLabel);
             const index = intelData.findIndex(i => i.id === idToDelete);
             if (index > -1) { if (confirm(`Delete intel "${intelData[index].title}"?`)) { intelData.splice(index, 1); intelForm.reset(); quill.setText(''); updateIntelJsonOutput(); populateIntelSelector(); } }
         });
-        document.getElementById('clear-intel-btn-unique').addEventListener('click', () => {
+        document.getElementById('clear-intel-btn').addEventListener('click', () => {
             intelForm.reset();
             quill.setText('');
         });
@@ -278,5 +275,8 @@
         setLanguage(currentLang);
     });
     </script>
+</body>
+</html>
+script>
 </body>
 </html>
