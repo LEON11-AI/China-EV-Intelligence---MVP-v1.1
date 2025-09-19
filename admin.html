@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - 内容管理后台 (v18 - Final Image Fix)</title>
+    <title>Volt China - 内容管理后台 (v19 - Content Type Update)</title>
     
     <link rel="stylesheet" href="css/quill.snow.css">
     <link rel="stylesheet" href="css/style.css">
@@ -48,7 +48,12 @@
                     <div class="form-group full-width"><label for="intel_id" data-i18n="intel_id"></label><input type="text" id="intel_id" required></div>
                     <div class="form-group"><label for="intel_date" data-i18n="intel_date"></label><input type="text" id="intel_date" required></div>
                     <div class="form-group"><label for="intel_brand" data-i18n="intel_brand"></label><input type="text" id="intel_brand"></div>
-                    <div class="form-group"><label for="intel_model" data-i18n="intel_model"></label><input type="text" id="intel_model"></div>
+                    
+                    <div class="form-group">
+                        <label for="intel_type" data-i18n="intel_type"></label>
+                        <input type="text" id="intel_type" placeholder="e.g., Analysis, News...">
+                    </div>
+
                     <div class="form-group"><label for="intel_is_pro" data-i18n="intel_is_pro"></label><select id="intel_is_pro"><option value="false">否 (免费)</option><option value="true">是 (PRO)</option></select></div>
                     <div class="form-group full-width"><label for="intel_title" data-i18n="intel_title"></label><input type="text" id="intel_title" required></div>
                     <div class="form-group full-width"><label for="intel_summary" data-i18n="intel_summary"></label><textarea id="intel_summary" required></textarea></div>
@@ -129,8 +134,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         let currentLang = 'zh';
         const translations = {
-            en: { mainTitle: "Volt China", mainSubtitle: "Content Management", langToggle: "切换到中文", intelFormTitle: "Manage Intelligence Feed", intelSelectorLabel: "Select Intel to Load/Edit", loadIntelBtn: "Load", intel_id: "Intel ID (for new entries)", intel_date: "Date (YYYY-MM-DD)", intel_brand: "Brand", intel_model: "Model", intel_title: "Title", intel_summary: "Summary (For list view)", intel_full_content: "Full Content (Rich Text Editor)", intel_is_pro: "Is PRO Content?", deleteIntelBtn: "Delete", addIntelBtn: "Add/Update", clearIntelFormBtn: "Clear Form", intelJsonOutputTitle: "Generated intelligence.json", intelJsonOutputDesc: "Copy this and paste into `data/intelligence.json`.", intelGenerateBtn: "Generate & Copy", formTitle: "Manage EV Models", modelSelectorLabel: "Select Model to Load/Edit", id: "Model ID (e.g., xiaomi_su7)", brand: "Brand", model_name: "Model Name", subtitle: "Subtitle", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load", deleteModelBtn: "Delete", addModelBtn: "Add/Update", clearFormBtn: "Clear Form", jsonOutputTitle: "Generated models.json", jsonOutputDesc: "Copy this and paste into `data/models.json`.", generateBtn: "Generate & Copy" },
-            zh: { mainTitle: "Volt China", mainSubtitle: "内容管理后台", langToggle: "Switch to English", intelFormTitle: "管理情报文章", intelSelectorLabel: "选择已有情报进行加载/编辑", loadIntelBtn: "加载", intel_id: "情报ID (用于新条目)", intel_date: "日期 (YYYY-MM-DD)", intel_brand: "品牌", intel_model: "车型", intel_title: "标题", intel_summary: "摘要 (用于列表页)", intel_full_content: "完整内容 (富文本编辑器)", intel_is_pro: "是否为PRO内容?", deleteIntelBtn: "删除", addIntelBtn: "添加/更新", clearIntelFormBtn: "清空表单", intelJsonOutputTitle: "生成的 intelligence.json", intelJsonOutputDesc: "复制并粘贴到 `data/intelligence.json` 文件。", intelGenerateBtn: "生成并复制", formTitle: "管理电动车型", modelSelectorLabel: "选择已有车型进行加载/编辑", id: "车型ID (用于新条目)", brand: "品牌", model_name: "车型名称", subtitle: "副标题", status: "状态", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评", keySpecs: "核心规格", range_cltc: "续航 (CLTC)", zero_to_100: "0-100 km/h", power_kw: "功率 (kW)", battery_kwh: "电池 (kWh)", price_usd_estimated: "价格", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市", global_rollout: "全球上市", loadModelBtn: "加载", deleteModelBtn: "删除", addModelBtn: "添加/更新", clearFormBtn: "清空表单", jsonOutputTitle: "生成的 models.json", jsonOutputDesc: "复制并粘贴到 `data/models.json` 文件。", generateBtn: "生成并复制" }
+            en: { mainTitle: "Volt China", mainSubtitle: "Content Management", langToggle: "切换到中文", intelFormTitle: "Manage Intelligence Feed", intelSelectorLabel: "Select Intel to Load/Edit", loadIntelBtn: "Load", intel_id: "Intel ID (for new entries)", intel_date: "Date (YYYY-MM-DD)", intel_brand: "Brand", intel_model: "Model", intel_type: "Type", intel_title: "Title", intel_summary: "Summary (For list view)", intel_full_content: "Full Content (Rich Text Editor)", intel_is_pro: "Is PRO Content?", deleteIntelBtn: "Delete", addIntelBtn: "Add/Update", clearIntelFormBtn: "Clear Form", intelJsonOutputTitle: "Generated intelligence.json", intelJsonOutputDesc: "Copy this and paste into `data/intelligence.json`.", intelGenerateBtn: "Generate & Copy", formTitle: "Manage EV Models", modelSelectorLabel: "Select Model to Load/Edit", id: "Model ID (e.g., xiaomi_su7)", brand: "Brand", model_name: "Model Name", subtitle: "Subtitle", status: "Status", image_card: "Card Image Path", image_detail: "Detail Image Path", youtube_id: "YouTube Video ID", ceo_note: "CEO's Note", keySpecs: "Key Specifications", range_cltc: "Range (CLTC)", zero_to_100: "0-100 km/h", power_kw: "Power (kW)", battery_kwh: "Battery (kWh)", price_usd_estimated: "Price (USD)", fullSpecs: "Full Specifications", dimensions: "Dimensions", wheelbase: "Wheelbase", powertrain: "Powertrain", battery: "Battery Details", charging: "Charging", adas: "ADAS", marketPlan: "Market Plan", china_launch: "China Launch", global_rollout: "Global Rollout", loadModelBtn: "Load", deleteModelBtn: "Delete", addModelBtn: "Add/Update", clearFormBtn: "Clear Form", jsonOutputTitle: "Generated models.json", jsonOutputDesc: "Copy this and paste into `data/models.json`.", generateBtn: "Generate & Copy" },
+            zh: { mainTitle: "Volt China", mainSubtitle: "内容管理后台", langToggle: "Switch to English", intelFormTitle: "管理情报文章", intelSelectorLabel: "选择已有情报进行加载/编辑", loadIntelBtn: "加载", intel_id: "情报ID (用于新条目)", intel_date: "日期 (YYYY-MM-DD)", intel_brand: "品牌", intel_model: "车型", intel_type: "类型", intel_title: "标题", intel_summary: "摘要 (用于列表页)", intel_full_content: "完整内容 (富文本编辑器)", intel_is_pro: "是否为PRO内容?", deleteIntelBtn: "删除", addIntelBtn: "添加/更新", clearIntelFormBtn: "清空表单", intelJsonOutputTitle: "生成的 intelligence.json", intelJsonOutputDesc: "复制并粘贴到 `data/intelligence.json` 文件。", intelGenerateBtn: "生成并复制", formTitle: "管理电动车型", modelSelectorLabel: "选择已有车型进行加载/编辑", id: "车型ID (用于新条目)", brand: "品牌", model_name: "车型名称", subtitle: "副标题", status: "状态", image_card: "卡片图路径", image_detail: "详情图路径", youtube_id: "YouTube 视频ID", ceo_note: "CEO点评", keySpecs: "核心规格", range_cltc: "续航 (CLTC)", zero_to_100: "0-100 km/h", power_kw: "功率 (kW)", battery_kwh: "电池 (kWh)", price_usd_estimated: "价格", fullSpecs: "完整规格", dimensions: "尺寸", wheelbase: "轴距", powertrain: "动力系统", battery: "电池详情", charging: "充电", adas: "辅助驾驶", marketPlan: "市场计划", china_launch: "中国上市", global_rollout: "全球上市", loadModelBtn: "加载", deleteModelBtn: "删除", addModelBtn: "添加/更新", clearFormBtn: "清空表单", jsonOutputTitle: "生成的 models.json", jsonOutputDesc: "复制并粘贴到 `data/models.json` 文件。", generateBtn: "生成并复制" }
         };
 
         const setLanguage = (lang) => {
@@ -159,11 +164,10 @@
             }
         });
 
-        // 【修复】: 重写编辑器的“图片”按钮功能
         function imageHandler() {
-            const url = prompt('Enter the image URL (e.g., images/uploads/my-chart.png)');
+            const url = prompt('Enter the image URL (e.g., https://voltchina.net/images/uploads/my-chart.png)');
             if (url) {
-                const range = quill.getSelection();
+                const range = quill.getSelection(true);
                 quill.insertEmbed(range.index, 'image', url);
             }
         }
@@ -244,7 +248,7 @@
         });
         document.getElementById('add-intel-btn-unique').addEventListener('click', () => {
             const fullContentFromEditor = quill.root.innerHTML;
-            const item = { id: intelForm.intel_id.value.trim(), date: intelForm.intel_date.value.trim(), brand: intelForm.intel_brand.value.trim(), model: intelForm.intel_model.value.trim(), title: intelForm.intel_title.value.trim(), is_pro: intelForm.intel_is_pro.value === 'true', summary: intelForm.intel_summary.value.trim(), full_content: fullContentFromEditor };
+            const item = { id: intelForm.intel_id.value.trim(), date: intelForm.intel_date.value.trim(), brand: intelForm.intel_brand.value.trim(), model: intelForm.intel_model.value.trim(), type: intelForm.intel_type.value.trim(), title: intelForm.intel_title.value.trim(), is_pro: intelForm.intel_is_pro.value === 'true', summary: intelForm.intel_summary.value.trim(), full_content: fullContentFromEditor };
             if (!item.id) return alert('Intel ID is required!');
             const index = intelData.findIndex(i => i.id === item.id);
             if (index > -1) { intelData[index] = item; alert(`Intel "${item.title}" updated.`); } 
@@ -252,7 +256,7 @@
             updateIntelJsonOutput(); populateIntelSelector(true);
         });
         document.getElementById('delete-intel-btn-unique').addEventListener('click', () => {
-            const idToDelete = intelForm.id.value.trim(); if (!idToDelete) return alert(translations[currentLang].intelSelectorLabel);
+            const idToDelete = intelForm.intel_id.value.trim(); if (!idToDelete) return alert(translations[currentLang].intelSelectorLabel);
             const index = intelData.findIndex(i => i.id === idToDelete);
             if (index > -1) { if (confirm(`Delete intel "${intelData[index].title}"?`)) { intelData.splice(index, 1); intelForm.reset(); quill.setText(''); updateIntelJsonOutput(); populateIntelSelector(); } }
         });
