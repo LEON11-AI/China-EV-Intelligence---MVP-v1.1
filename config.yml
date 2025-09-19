@@ -1,41 +1,41 @@
 backend:
   name: git-gateway
-  branch: main # Or master, depending on your main branch name
+  branch: main
 
-media_folder: "images/uploads" # Where media files will be stored
-public_folder: "/images/uploads" # The src attribute for uploaded media
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
-  - name: "intelligence" # Used in routes, e.g., /admin/collections/intelligence
-    label: "Intelligence Feed" # Used in the UI
-    folder: "data" # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{{id}}" # Filename template, e.g., VC-IR-2025-001.json
-    path: "{{slug}}/index"
-    format: "json"
-    fields: # The fields for each document, usually in front matter
+  - name: "intelligence"
+    label: "Intelligence Feed"
+    label_singular: "Article"
+    # 【修复】: 告诉后台，我们操作的是一个单独的文件
+    file: "data/intelligence.json" 
+    # 【修复】: 告诉后台，这个文件里的内容是一个列表 (Array)
+    widget: "list" 
+    fields:
       - { label: "ID", name: "id", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
       - { label: "Brand", name: "brand", widget: "string", required: false }
-      - { label: "Type", name: "type", widget: "string", required: false }
+      - { label: "Type", name: "type", widget: "string", required: false, hint: "e.g., Analysis, News, Report" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Is PRO Content?", name: "is_pro", widget: "boolean", default: false }
       - { label: "Summary", name: "summary", widget: "text" }
+      # 【修复】: 将 widget 改为 markdown，这会启用一个功能完备的富文本编辑器
       - { label: "Full Content", name: "full_content", widget: "markdown" }
 
   - name: "models"
     label: "EV Models"
-    folder: "data"
-    create: true
-    slug: "{{id}}"
-    path: "{{slug}}/index"
-    format: "json"
+    label_singular: "Model"
+    file: "data/models.json"
+    widget: "list"
     fields:
       - { label: "ID", name: "id", widget: "string" }
       - { label: "Brand", name: "brand", widget: "string" }
       - { label: "Model Name", name: "model_name", widget: "string" }
       - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
       - { label: "Status", name: "status", widget: "string", required: false }
+      # 【修复】: 将 widget 改为 image，这会自动打开媒体库
       - { label: "Card Image", name: "image_card", widget: "image", required: false }
       - { label: "Detail Image", name: "image_detail", widget: "image", required: false }
       - { label: "YouTube ID", name: "youtube_id", widget: "string", required: false }
@@ -48,7 +48,7 @@ collections:
           - { label: "0-100 km/h", name: "zero_to_100", widget: "string", required: false }
           - { label: "Power (kW)", name: "power_kw", widget: "string", required: false }
           - { label: "Battery (kWh)", name: "battery_kwh", widget: "string", required: false }
-          - { label: "Price (USD)", name: "price_usd_estimated", widget: "string", required: false }
+          - { label: "Price", name: "price_usd_estimated", widget: "string", required: false }
       - label: "Full Specs"
         name: "full_specs"
         widget: "object"
