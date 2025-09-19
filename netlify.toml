@@ -8,6 +8,7 @@
   from = "/admin/"
   to = "/admin/index.html"
   status = 200
+  force = true # This is the key! It ensures this rule always wins.
 
 # These are your existing rules for clean URLs.
 [[redirects]]
