@@ -87,11 +87,22 @@
             }
             
             document.title = `${title} - Volt China`;
-            let contentHTML = '';
+            
+            // 【修复】: 第一步，先创建并渲染文章的“空架子”
+            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; <span data-i18n="backToIntelFeed">Back to Intelligence Feed</span></a>`;
+            const skeletonHTML = `
+                ${backButtonHTML}
+                <article class="intel-article">
+                    <header class="article-header"><h1>${title}</h1><div class="article-meta"><span>${item.brand || ''}</span><span>${item.date}</span></div></header>
+                    <div class="article-content"></div>
+                </article>`;
+            contentContainer.innerHTML = skeletonHTML;
+
+            // 【修复】: 第二步，找到刚刚创建的那个空的 .article-content 容器
+            const articleContentDiv = contentContainer.querySelector('.article-content');
 
             if (item.is_pro && !isUserSubscribed) {
-                // 【修改】: 将 blurred-content 里的 <p> 标签移除，直接渲染 full_content
-                contentHTML = `
+                const paywallHTML = `
                     <div class="paywall-content">
                         <div class="article-summary">${item.summary}</div>
                         <div class="paywall-block">
@@ -103,20 +114,12 @@
                             </div>
                         </div>
                     </div>`;
+                // 【修复】: 用 .innerHTML 的方式，将带有 HTML 的内容“注入”进去
+                articleContentDiv.innerHTML = paywallHTML;
             } else {
-                // 【修改】: 移除了多余的 <div> 标签，直接渲染 full_content
-                contentHTML = item.full_content;
+                // 【修复】: 用 .innerHTML 的方式，将带有 HTML 的内容“注入”进去
+                articleContentDiv.innerHTML = item.full_content;
             }
-            
-            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; <span data-i18n="backToIntelFeed">Back to Intelligence Feed</span></a>`;
-            const detailHTML = `
-                ${backButtonHTML}
-                <article class="intel-article">
-                    <header class="article-header"><h1>${title}</h1><div class="article-meta"><span>${item.brand || ''}</span><span>${item.date}</span></div></header>
-                    <div class="article-content">${contentHTML}</div>
-                </article>`;
-            
-            contentContainer.innerHTML = detailHTML;
             
             if (window.updateTranslations) {
                 window.updateTranslations(window.currentLang || 'en');
