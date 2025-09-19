@@ -78,6 +78,13 @@
             })
             .catch(error => console.error('Error fetching intelligence data:', error));
 
+        function normalizeContent(html) {
+            return (html || '')
+                .replace(/<img[^>]*src=["']\/\/:0["'][^>]*>/gi, '')
+                .replace(/src=["']\/images\/uploads\//gi, 'src="https://voltchina.net/images/uploads/')
+                .replace(/src=["']images\/uploads\//gi, 'src="https://voltchina.net/images/uploads/');
+        }
+
         function renderIntelDetail(item) {
             let title = '';
             if (typeof item.title === 'object' && item.title !== null) {
@@ -88,7 +95,6 @@
             
             document.title = `${title} - Volt China`;
             
-            // 【修复】: 第一步，先创建并渲染文章的“空架子”
             const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; <span data-i18n="backToIntelFeed">Back to Intelligence Feed</span></a>`;
             const skeletonHTML = `
                 ${backButtonHTML}
@@ -98,15 +104,15 @@
                 </article>`;
             contentContainer.innerHTML = skeletonHTML;
 
-            // 【修复】: 第二步，找到刚刚创建的那个空的 .article-content 容器
             const articleContentDiv = contentContainer.querySelector('.article-content');
+            const normalizedFull = normalizeContent(item.full_content);
 
             if (item.is_pro && !isUserSubscribed) {
                 const paywallHTML = `
                     <div class="paywall-content">
-                        <div class="article-summary">${item.summary}</div>
+                        <div class="article-summary">${item.summary || ''}</div>
                         <div class="paywall-block">
-                            <div class="blurred-content">${item.full_content}</div>
+                            <div class="blurred-content">${normalizedFull}</div>
                             <div class="paywall-prompt">
                                 <h3 data-i18n="unlockTitle">Unlock Full Analysis</h3>
                                 <p data-i18n="unlockDesc">You are reading a preview of a PRO article. Subscribe now to unlock the full analysis.</p>
@@ -114,11 +120,9 @@
                             </div>
                         </div>
                     </div>`;
-                // 【修复】: 用 .innerHTML 的方式，将带有 HTML 的内容“注入”进去
                 articleContentDiv.innerHTML = paywallHTML;
             } else {
-                // 【修复】: 用 .innerHTML 的方式，将带有 HTML 的内容“注入”进去
-                articleContentDiv.innerHTML = item.full_content;
+                articleContentDiv.innerHTML = normalizedFull;
             }
             
             if (window.updateTranslations) {

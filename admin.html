@@ -193,7 +193,7 @@
                 s = s.replace(/^images\//i, '');
                 s = s.replace(/^\/?images\//i, '');
                 s = s.replace(/^uploads\//i, '');
-                return `images/uploads/${s}`;
+                return `https://voltchina.net/images/uploads/${s}`;
             } catch { return ''; }
         }
 
@@ -288,7 +288,7 @@
         document.getElementById('add-intel-btn-unique').addEventListener('click', () => {
             const fullContentFromEditor = quill.root.innerHTML
               .replace(/<img[^>]*src=["']\/\/:0["'][^>]*>/gi, '')
-              .replace(/src=["']\/?images\/uploads\//gi, 'src="images/uploads/');
+              .replace(/src=["']\/?images\/uploads\//gi, 'src="https://voltchina.net/images/uploads/');
             const item = { 
                 id: intelForm.intel_id.value.trim(), 
                 date: intelForm.intel_date.value.trim(), 
