@@ -31,10 +31,8 @@
     </header>
 
     <main>
-        <!-- 【修复】: 移除了多余的 .page-content 容器，这是导致布局问题的根源 -->
         <div class="container article-container" id="intel-detail-container">
             <p id="loading-message" style="text-align: center; padding: 4rem 0;">Loading intelligence...</p>
-            <!-- Intelligence details will be dynamically injected here -->
         </div>
     </main>
 
@@ -92,6 +90,7 @@
             let contentHTML = '';
 
             if (item.is_pro && !isUserSubscribed) {
+                // 【修改】: 将 blurred-content 里的 <p> 标签移除，直接渲染 full_content
                 contentHTML = `
                     <div class="paywall-content">
                         <div class="article-summary">${item.summary}</div>
@@ -105,10 +104,11 @@
                         </div>
                     </div>`;
             } else {
-                contentHTML = `<div>${item.full_content}</div>`;
+                // 【修改】: 移除了多余的 <div> 标签，直接渲染 full_content
+                contentHTML = item.full_content;
             }
             
-            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; <span data-i1-n="backToIntelFeed">Back to Intelligence Feed</span></a>`;
+            const backButtonHTML = `<a href="intelligence.html" class="back-button">&larr; <span data-i18n="backToIntelFeed">Back to Intelligence Feed</span></a>`;
             const detailHTML = `
                 ${backButtonHTML}
                 <article class="intel-article">
