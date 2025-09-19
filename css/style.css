@@ -1,5 +1,5 @@
 :root {
-    --bg-primary: #1a202c;
+    --bg-primary: #1a20c;
     --text-primary: #e2e8f0;
     --text-secondary: #a0aec0;
     --accent-blue: #3182ce;
@@ -30,12 +30,6 @@ main {
 header {
     background-color: var(--header-blue);
     padding: 1rem 0;
-    /* 
-      【修复】: 
-      这行代码就是本次修复的关键！
-      我们将 position: sticky; 改回了默认值 (或者直接删除这行也可以)。
-      这能彻底解决所有页面上的遮挡和悬浮问题。
-    */
     position: static; 
     z-index: 100;
     box-shadow: var(--shadow);
@@ -208,13 +202,13 @@ footer { background-color: var(--header-blue); padding: 2rem 0; text-align: cent
 .author-info span { font-size: 0.9em; color: var(--text-secondary); }
 .latest-intel { padding: 4rem 0; background-color: var(--bg-primary); }
 .intel-list-home { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-.intel-item-home { background-color: var(--card-bg); padding: 1.5rem; border-radius: var(--border-radius); text-decoration: none; color: var(--text-primary); transition: all 0.3s ease; display: flex; flex-direction: column; box-shadow: var(--shadow); border: 1px solid transparent; }
+.intel-item-home { background-color: var(--card-bg); padding: 1.5rem; border-radius: var(--border-radius); text-decoration: none; color: var(--text-primary); transition: all 0.3s ease; display: flex; flex-direction: column; box-shadow: var(--shadow); border: 1px solid transparent; position: relative; }
 .intel-item-home:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
 .intel-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
 .intel-brand-home { display: inline-block; padding: 0.3rem 0.8rem; background-color: var(--accent-blue); color: white; border-radius: 20px; font-size: 0.8rem; }
 .intel-date-home { font-size: 0.9em; color: var(--text-secondary); }
 .intel-title-home { font-size: 1.1rem; font-weight: 500; line-height: 1.5; flex-grow: 1; margin-bottom: 1rem; }
-.intel-pro-badge-home { display: inline-block; padding: 0.2rem 0.6rem; background-color: var(--accent-orange); color: white; border-radius: 4px; font-size: 0.7rem; align-self: flex-start; }
+.intel-pro-badge-home { position: absolute; top: 1.5rem; right: 1.5rem; display: inline-block; padding: 0.2rem 0.6rem; background-color: var(--accent-orange); color: white; border-radius: 4px; font-size: 0.7rem; }
 .intel-list-full { max-width: 800px; margin: 0 auto; }
 .intel-item { display: block; background-color: var(--card-bg); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 1rem; text-decoration: none; transition: all 0.3s ease; border: 1px solid transparent; }
 .intel-item:hover { border-color: var(--accent-blue); }
@@ -223,7 +217,7 @@ footer { background-color: var(--header-blue); padding: 2rem 0; text-align: cent
 .pro-badge { display: inline-block; padding: 0.2rem 0.6rem; background-color: var(--accent-orange); color: white; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; vertical-align: middle; }
 .intel-date { color: var(--text-secondary); font-size: 0.9rem; }
 .intel-summary { color: var(--text-secondary); line-height: 1.7; }
-.article-container { max-width: 800px; margin: 0 auto; padding-top: 2rem; padding-bottom: 2rem; } 
+.article-container { max-width: 800px; margin: 0 auto; padding-top: 2rem; padding-bottom: 2rem; isolation: isolate; } 
 .intel-article { background-color: var(--card-bg); padding: 2rem 3rem; border-radius: var(--border-radius); box-shadow: var(--shadow); }
 .article-header { text-align: center; border-bottom: 1px solid #4a5568; padding-bottom: 1.5rem; margin-bottom: 2rem; }
 .article-header h1 { font-size: 2.2rem; line-height: 1.3; color: var(--text-primary); margin-bottom: 1rem; }
