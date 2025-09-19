@@ -286,7 +286,9 @@
             }
         });
         document.getElementById('add-intel-btn-unique').addEventListener('click', () => {
-            const fullContentFromEditor = quill.root.innerHTML;
+            const fullContentFromEditor = quill.root.innerHTML
+              .replace(/<img[^>]*src=["']\/\/:0["'][^>]*>/gi, '')
+              .replace(/src=["']\/?images\/uploads\//gi, 'src="images/uploads/');
             const item = { 
                 id: intelForm.intel_id.value.trim(), 
                 date: intelForm.intel_date.value.trim(), 
