@@ -1,11 +1,52 @@
 # Netlify Configuration File
 
-# This is the most important part for fixing the CORS issue.
-# It tells Netlify to add a special "header" to every response.
-# This header is like a permission slip that says:
-# "It's okay for ANYONE from ANYWHERE (*) to access this data."
-# This will allow your local admin.html file to fetch the online data.
+# This is the most important part.
+# This rule tells Netlify: "When someone visits /admin/,
+# show them the contents of /admin/index.html".
+# This forces Netlify to load your NEW admin backend.
+[[redirects]]
+  from = "/admin/"
+  to = "/admin/index.html"
+  status = 200
 
+# These are your existing rules for clean URLs.
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/database"
+  to = "/database.html"
+  status = 200
+
+[[redirects]]
+  from = "/intelligence"
+  to = "/intelligence.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing"
+  to = "/pricing.html"
+  status = 200
+
+# These are your existing rules for detail pages.
+[[redirects]]
+  from = "/models/:id"
+  to = "/model-detail.html?id=:id"
+  status = 200
+
+[[redirects]]
+  from = "/intelligence/:id"
+  to = "/intelligence-detail.html?id=:id"
+  status = 200
+
+# This is the CORS header rule we added before.
 [[headers]]
   for = "/*"
   [headers.values]
