@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>China EV Intelligence Platform</title>
+    
+    <!-- 【修复】: 这行代码就是我们之前遗漏的关键，现在已经为您补上了 -->
     <link rel="stylesheet" href="css/style.css"> 
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -138,7 +141,6 @@
                             title = item.title;
                         }
 
-                        // 【修改】: 创建了全新的卡片内容结构
                         intelHTML += `
                         <a href="intelligence-detail.html?id=${item.id}" class="intel-item-home">
                             <div class="intel-card-content">
