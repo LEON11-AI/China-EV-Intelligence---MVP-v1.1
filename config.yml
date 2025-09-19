@@ -1,0 +1,67 @@
+backend:
+  name: git-gateway
+  branch: main # Or master, depending on your main branch name
+
+media_folder: "images/uploads" # Where media files will be stored
+public_folder: "/images/uploads" # The src attribute for uploaded media
+
+collections:
+  - name: "intelligence" # Used in routes, e.g., /admin/collections/intelligence
+    label: "Intelligence Feed" # Used in the UI
+    folder: "data" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{id}}" # Filename template, e.g., VC-IR-2025-001.json
+    path: "{{slug}}/index"
+    format: "json"
+    fields: # The fields for each document, usually in front matter
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Brand", name: "brand", widget: "string", required: false }
+      - { label: "Type", name: "type", widget: "string", required: false }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Is PRO Content?", name: "is_pro", widget: "boolean", default: false }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Full Content", name: "full_content", widget: "markdown" }
+
+  - name: "models"
+    label: "EV Models"
+    folder: "data"
+    create: true
+    slug: "{{id}}"
+    path: "{{slug}}/index"
+    format: "json"
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Brand", name: "brand", widget: "string" }
+      - { label: "Model Name", name: "model_name", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+      - { label: "Status", name: "status", widget: "string", required: false }
+      - { label: "Card Image", name: "image_card", widget: "image", required: false }
+      - { label: "Detail Image", name: "image_detail", widget: "image", required: false }
+      - { label: "YouTube ID", name: "youtube_id", widget: "string", required: false }
+      - { label: "CEO's Note", name: "ceo_note", widget: "text", required: false }
+      - label: "Key Specs"
+        name: "key_specs"
+        widget: "object"
+        fields:
+          - { label: "Range (CLTC)", name: "range_cltc", widget: "string", required: false }
+          - { label: "0-100 km/h", name: "zero_to_100", widget: "string", required: false }
+          - { label: "Power (kW)", name: "power_kw", widget: "string", required: false }
+          - { label: "Battery (kWh)", name: "battery_kwh", widget: "string", required: false }
+          - { label: "Price (USD)", name: "price_usd_estimated", widget: "string", required: false }
+      - label: "Full Specs"
+        name: "full_specs"
+        widget: "object"
+        fields:
+          - { label: "Dimensions", name: "dimensions", widget: "string", required: false }
+          - { label: "Wheelbase", name: "wheelbase", widget: "string", required: false }
+          - { label: "Powertrain", name: "powertrain", widget: "string", required: false }
+          - { label: "Battery Details", name: "battery", widget: "string", required: false }
+          - { label: "Charging", name: "charging", widget: "string", required: false }
+          - { label: "ADAS", name: "adas", widget: "string", required: false }
+      - label: "Market Plan"
+        name: "market_plan"
+        widget: "object"
+        fields:
+          - { label: "China Launch", name: "china_launch", widget: "string", required: false }
+          - { label: "Global Rollout", name: "global_rollout", widget: "string", required: false }
