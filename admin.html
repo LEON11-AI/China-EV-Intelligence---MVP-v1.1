@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volt China - 内容管理后台 (v20 - Final)</title>
+    <title>Volt China - 内容管理后台 (v19 - Content Type Update)</title>
     
     <link rel="stylesheet" href="css/quill.snow.css">
     <link rel="stylesheet" href="css/style.css">
@@ -12,7 +12,7 @@
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
         .admin-title h1 { font-size: 1.8rem; margin: 0; text-align: left; }
         .admin-title p { font-size: 1rem; color: var(--text-secondary); margin: 0; text-align: left; }
-        .load-section { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1rem; margin-bottom: 1rem; }
+        .load-section { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1rem; }
         .load-section .form-group { flex-grow: 1; margin-bottom: 0; }
         .load-section .form-group select { width: 100%; }
         .ql-editor { min-height: 250px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; border-bottom-left-radius: var(--btn-radius); border-bottom-right-radius: var(--btn-radius); }
@@ -48,7 +48,10 @@
                     <div class="form-group full-width"><label for="intel_id" data-i18n="intel_id"></label><input type="text" id="intel_id" required></div>
                     <div class="form-group"><label for="intel_date" data-i18n="intel_date"></label><input type="text" id="intel_date" required></div>
                     <div class="form-group"><label for="intel_brand" data-i18n="intel_brand"></label><input type="text" id="intel_brand"></div>
-                    <div class="form-group"><label for="intel_type" data-i18n="intel_type"></label><input type="text" id="intel_type"></div>
+                    <div class="form-group">
+                        <label for="intel_type" data-i18n="intel_type"></label>
+                        <input type="text" id="intel_type" placeholder="e.g., Analysis, News...">
+                    </div>
                     <div class="form-group"><label for="intel_is_pro" data-i18n="intel_is_pro"></label><select id="intel_is_pro"><option value="false">否 (免费)</option><option value="true">是 (PRO)</option></select></div>
                     <div class="form-group full-width"><label for="intel_title" data-i18n="intel_title"></label><input type="text" id="intel_title" required></div>
                     <div class="form-group full-width"><label for="intel_summary" data-i18n="intel_summary"></label><textarea id="intel_summary" required></textarea></div>
@@ -243,7 +246,17 @@
         });
         document.getElementById('add-intel-btn-unique').addEventListener('click', () => {
             const fullContentFromEditor = quill.root.innerHTML;
-            const item = { id: intelForm.intel_id.value.trim(), date: intelForm.intel_date.value.trim(), brand: intelForm.intel_brand.value.trim(), model: intelForm.intel_model.value.trim(), type: intelForm.intel_type.value.trim(), title: intelForm.intel_title.value.trim(), is_pro: intelForm.intel_is_pro.value === 'true', summary: intelForm.intel_summary.value.trim(), full_content: fullContentFromEditor };
+            const item = { 
+                id: intelForm.intel_id.value.trim(), 
+                date: intelForm.intel_date.value.trim(), 
+                brand: intelForm.intel_brand.value.trim(), 
+                model: intelForm.intel_model.value.trim(), 
+                type: intelForm.intel_type.value.trim(), 
+                title: intelForm.intel_title.value.trim(), 
+                is_pro: intelForm.intel_is_pro.value === 'true', 
+                summary: intelForm.intel_summary.value.trim(), 
+                full_content: fullContentFromEditor 
+            };
             if (!item.id) return alert('Intel ID is required!');
             const index = intelData.findIndex(i => i.id === item.id);
             if (index > -1) { intelData[index] = item; alert(`Intel "${item.title}" updated.`); } 
@@ -266,4 +279,6 @@
     });
     </script>
 </body>
+</html>
+
 </html>
