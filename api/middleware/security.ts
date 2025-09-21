@@ -1,4 +1,3 @@
-import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { Request, Response, NextFunction } from 'express';
@@ -51,7 +50,7 @@ export const createRateLimit = (windowMs: number, max: number, message?: string)
     message: message || 'Too many requests from this IP, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,
-    handler: (req: Request, res: Response) => {
+    handler: (_req: Request, res: Response) => {
       res.status(429).json({
         success: false,
         error: {
@@ -111,7 +110,7 @@ export const helmetConfig = helmet({
 /**
  * Request sanitization middleware
  */
-export const sanitizeInput = (req: Request, res: Response, next: NextFunction) => {
+export const sanitizeInput = (req: Request, _res: Response, next: NextFunction) => {
   // Remove any potential XSS attempts
   const sanitize = (obj: any): any => {
     if (typeof obj === 'string') {
@@ -143,30 +142,32 @@ export const sanitizeInput = (req: Request, res: Response, next: NextFunction) =
 /**
  * API Key validation middleware
  */
-export const validateApiKey = (req: Request, res: Response, next: NextFunction) => {
+export const validateApiKey = (req: Request, res: Response, next: NextFunction): void => {
   const apiKey = req.headers['x-api-key'] as string;
   
   if (!apiKey) {
-    return res.status(401).json({
+    res.status(401).json({
       success: false,
       error: {
         message: 'API key required',
         statusCode: 401
       }
     });
+    return;
   }
 
   // In production, validate against stored API keys
   const validApiKeys = process.env.VALID_API_KEYS?.split(',') || [];
   
   if (validApiKeys.length > 0 && !validApiKeys.includes(apiKey)) {
-    return res.status(401).json({
+    res.status(401).json({
       success: false,
       error: {
         message: 'Invalid API key',
         statusCode: 401
       }
     });
+    return;
   }
 
   next();
