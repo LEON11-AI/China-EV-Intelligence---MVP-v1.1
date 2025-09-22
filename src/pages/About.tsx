@@ -395,3 +395,6 @@ const About: React.FC = () => {
     </div>
   );
 };
+
+// 【修复】: 在文件的最底部，加上这一行关键的“默认导出”声明
+export default About;
