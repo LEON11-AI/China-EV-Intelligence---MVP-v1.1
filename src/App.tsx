@@ -42,49 +42,7 @@ const Pricing: React.FC = () => (
 );
 
 // Placeholder components for missing profile routes
-const ProfileSettings: React.FC = () => (
-  <div className="min-h-screen bg-gray-50 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">个人设置</h1>
-        <p className="text-gray-600">此页面正在开发中...</p>
-      </div>
-    </div>
-  </div>
-);
 
-const ActivityLog: React.FC = () => (
-  <div className="min-h-screen bg-gray-50 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">活动日志</h1>
-        <p className="text-gray-600">此页面正在开发中...</p>
-      </div>
-    </div>
-  </div>
-);
-
-const FavoritesList: React.FC = () => (
-  <div className="min-h-screen bg-gray-50 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">收藏列表</h1>
-        <p className="text-gray-600">此页面正在开发中...</p>
-      </div>
-    </div>
-  </div>
-);
-
-const NotificationsList: React.FC = () => (
-  <div className="min-h-screen bg-gray-50 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">通知列表</h1>
-        <p className="text-gray-600">此页面正在开发中...</p>
-      </div>
-    </div>
-  </div>
-);
 
 // Placeholder components for missing intelligence routes
 const VehiclesList: React.FC = () => (
@@ -98,27 +56,7 @@ const VehiclesList: React.FC = () => (
   </div>
 );
 
-const VehicleDetail: React.FC = () => (
-  <div className="min-h-screen bg-gray-50 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">车型详情</h1>
-        <p className="text-gray-600">此页面正在开发中...</p>
-      </div>
-    </div>
-  </div>
-);
 
-const VehicleCompare: React.FC = () => (
-  <div className="min-h-screen bg-gray-50 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">车型对比</h1>
-        <p className="text-gray-600">此页面正在开发中...</p>
-      </div>
-    </div>
-  </div>
-);
 
 function App() {
   return (
@@ -291,16 +229,7 @@ const ReportDetail: React.FC = () => (
   </div>
 );
 
-const VehiclesList: React.FC = () => (
-  <div className="min-h-screen bg-gray-50 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">车型数据</h1>
-        <p className="text-gray-600">此页面正在开发中...</p>
-      </div>
-    </div>
-  </div>
-);
+
 
 const VehicleDetail: React.FC = () => (
   <div className="min-h-screen bg-gray-50 py-8">

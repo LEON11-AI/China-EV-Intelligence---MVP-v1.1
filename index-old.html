@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China EV Intelligence Platform</title>
+    
+    <!-- 【修复】: 这行代码就是我们之前遗漏的关键，现在已经为您补上了 -->
+    <link rel="stylesheet" href="css/style.css"> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body data-page-key="pageTitleHome">
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo" style="text-decoration: none;">
+                    <img src="images/logo.png" alt="Volt China Logo" class="nav-logo-img">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html" data-i18n="navHome">Home</a></li>
+                    <li><a href="intelligence.html" data-i18n="navIntelligence">Intelligence</a></li>
+                    <li><a href="database.html" data-i18n="navDatabase">Focused Database</a></li>
+                    <li><a href="pricing.html" data-i18n="navPricing">Pricing</a></li>
+                    <li><a href="about.html" data-i18n="navAbout">About</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="lang-toggle" data-i18n="navLanguage">English</button>
+                    <button class="login-btn" data-i18n="navLogin">Login</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 data-i18n="homeHeroTitle">China EV Intelligence Platform</h1>
+                <p data-i18n="homeHeroSubtitle">Your premier source for exclusive insights, data, and analysis on China's electric vehicle market</p>
+                <a href="pricing.html" class="cta-button" style="text-decoration: none;" data-i18n="homeHeroButton">Get Instant Access</a>
+            </div>
+        </section>
+
+        <section class="latest-intel">
+            <div class="container">
+                <h2 class="section-title" data-i18n="homeLatestIntelTitle">Latest Intelligence</h2>
+                <div class="intel-list-home" id="latest-intel-container">
+                    <!-- Intelligence items will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title" data-i18n="homeFeaturesTitle">Why Choose Our Platform</h2>
+                <div class="features-grid">
+                    <div class="feature-card"><div class="feature-icon">🔍</div><h3 data-i18n="homeFeature1Title">Focused Coverage</h3><p data-i18n="homeFeature1Desc">We concentrate on the most important Chinese EV brands and models, ensuring the highest quality intelligence.</p></div>
+                    <div class="feature-card"><div class="feature-icon">💡</div><h3 data-i18n="homeFeature2Title">Expert Insights</h3><p data-i18n="homeFeature2Desc">Our Chief Experience Officer provides exclusive commentary that goes beyond raw data.</p></div>
+                    <div class="feature-card"><div class="feature-icon">📈</div><h3 data-i18n="homeFeature3Title">Actionable Intelligence</h3><p data-i18n="homeFeature3Desc">Get beyond the news with analysis that helps you make informed decisions.</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="brands">
+            <div class="container">
+                <h2 class="section-title" data-i18n="homeBrandsTitle">Focused Brands</h2>
+                <div class="brands-grid">
+                    <div class="brand-item"><img src="images/logo-byd.png" alt="BYD Logo" class="brand-logo-img"></div>
+                    <div class="brand-item"><img src="images/logo-nio.png" alt="NIO Logo" class="brand-logo-img"></div>
+                    <div class="brand-item"><img src="images/logo-xpeng.png" alt="XPeng Logo" class="brand-logo-img"></div>
+                    <div class="brand-item"><img src="images/logo-li-auto.png" alt="Li Auto Logo" class="brand-logo-img"></div>
+                    <div class="brand-item"><img src="images/logo-xiaomi.png" alt="Xiaomi Logo" class="brand-logo-img"></div>
+                    <div class="brand-item"><img src="images/logo-zeekr.png" alt="Zeekr Logo" class="brand-logo-img"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing">
+            <div class="container">
+                <h2 class="section-title" data-i18n="homePricingTitle">Subscription Plans</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header"><h3 data-i18n="homePricingFreeTier">Free Tier</h3><div class="price">$0 <span data-i18n="homePricingMonth">/month</span></div></div>
+                        <ul class="pricing-features">
+                            <li data-i18n="homePricingFreeFeat1">Basic model specifications</li>
+                            <li data-i18n="homePricingFreeFeat2">Limited intelligence updates</li>
+                            <li data-i18n="homePricingFreeFeat3">Delayed data access</li>
+                            <li data-i18n="homePricingFreeFeat4">Community support</li>
+                        </ul>
+                        <button class="pricing-btn" data-i18n="homePricingFreeBtn">Sign Up</button>
+                    </div>
+                    <div class="pricing-card pro">
+                        <div class="pricing-header"><h3 data-i18n="homePricingProTier">Pro Intelligence</h3><div class="price">$49 <span data-i18n="homePricingMonth">/month</span></div></div>
+                        <ul class="pricing-features">
+                            <li data-i18n="homePricingProFeat1">Full detailed specifications</li>
+                            <li data-i18n="homePricingProFeat2">Exclusive intelligence reports</li>
+                            <li data-i18n="homePricingProFeat3">Real-time updates</li>
+                            <li data-i18n="homePricingProFeat4">CEO insights and analysis</li>
+                            <li data-i18n="homePricingProFeat5">Priority support</li>
+                        </ul>
+                        <button class="pricing-btn orange" data-i18n="homePricingProBtn">Subscribe Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="about.html" data-i18n="footerAbout">About Us</a></li>
+                <li><a href="contact.html" data-i18n="footerContact">Contact</a></li>
+                <li><a href="#" data-i18n="footerPrivacy">Privacy Policy</a></li>
+                <li><a href="#" data-i18n="footerTerms">Terms of Service</a></li>
+            </ul>
+            <div class="footer-contact" style="margin: 1rem 0;">
+                <a href="mailto:business@voltchina.net" style="color: var(--text-secondary); text-decoration: none;">business@voltchina.net</a>
+            </div>
+            <p class="copyright" data-i18n="footerCopyright">© 2025 China EV Intelligence. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const intelContainer = document.getElementById('latest-intel-container');
+            const renderIntel = (lang) => {
+                fetch('data/intelligence.json')
+                .then(response => response.json())
+                .then(data => {
+                    const latestIntel = data.slice(0, 3); let intelHTML = '';
+                    latestIntel.forEach(item => {
+                        const proBadge = item.is_pro ? '<div class="intel-pro-badge-home">PRO</div>' : '';
+                        
+                        let title = '';
+                        if (typeof item.title === 'object' && item.title !== null) {
+                            title = item.title[lang] || item.title['en'];
+                        } else {
+                            title = item.title;
+                        }
+
+                        intelHTML += `
+                        <a href="intelligence-detail.html?id=${item.id}" class="intel-item-home">
+                            <div class="intel-card-content">
+                                <h3 class="intel-title-home">
+                                    <span class="intel-type">Analysis:</span>
+                                    ${title}
+                                </h3>
+                                <div class="intel-byline">
+                                    By Leon for VOLT CHINA | Tag: <span class="intel-tag">${item.brand || 'General'}</span>
+                                </div>
+                            </div>
+                            ${proBadge}
+                        </a>`;
+                    });
+                    intelContainer.innerHTML = intelHTML;
+                })
+                .catch(error => { console.error('Error fetching intelligence data:', error); });
+            };
+            renderIntel(window.currentLang || 'en');
+            document.addEventListener('languageUpdated', event => renderIntel(event.detail.lang));
+        });
+    </script>
+</body>
+</html>

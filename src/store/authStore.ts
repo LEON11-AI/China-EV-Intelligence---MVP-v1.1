@@ -43,6 +43,8 @@ export interface AuthActions {
   verifyEmail: (token: string) => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
+  checkAuth: () => void;
+  isAuthenticated: boolean;
 }
 
 type AuthStore = AuthState & AuthActions;
@@ -300,6 +302,19 @@ export const useAuthStore = create<AuthStore>()(
           });
           throw error;
         }
+      },
+
+      checkAuth: () => {
+        const { token } = get();
+        if (token) {
+          // Token exists, user is authenticated
+          // In a real app, you might want to validate the token here
+        }
+      },
+
+      get isAuthenticated() {
+        const { user, token } = get();
+        return !!(user && token);
       }
     }),
     {

@@ -85,8 +85,8 @@ class ApiService {
     return response.data;
   }
 
-  async delete<T>(url: string): Promise<ApiResponse<T>> {
-    const response = await this.api.delete(url);
+  async delete<T>(url: string, config?: any): Promise<ApiResponse<T>> {
+    const response = await this.api.delete(url, config);
     return response.data;
   }
 
@@ -98,6 +98,11 @@ class ApiService {
       },
     });
     return response.data;
+  }
+
+  // Get base URL
+  getBaseURL(): string {
+    return this.api.defaults.baseURL || '';
   }
 
   // Get raw axios instance for special cases

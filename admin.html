@@ -58,7 +58,7 @@
                         <label for="intel_full_content_editor" data-i18n="intel_full_content"></label>
                         <div id="intel_full_content_editor"></div>
                         <div class="btn-group" style="justify-content:flex-start; margin-top: 1rem;">
-                            <button type="button" class="btn" id="insert-chartimage-btn">插入图表图</button>
+                            <button type="button" class="btn" id="insert-chartimage-btn">快速插入图片</button>
                         </div>
                     </div>
                 </div>
@@ -158,59 +158,39 @@
                     [{ 'header': [1, 2, 3, false] }],
                     ['bold', 'italic', 'underline'],
                     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    ['link', 'image', 'chartImage'],
+                    ['link', 'image'],
                     ['clean']
                 ]
             }
         });
 
-        function imageHandler() {
-            const url = prompt('Enter image URL (e.g., https://voltchina.net/images/uploads/my-chart.png)');
-            if (url) {
-                const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
-                quill.insertEmbed(range.index, 'image', url);
-                quill.setSelection(range.index + 1);
+        // 简化的图片插入功能
+        function simpleImageHandler() {
+            const url = prompt('请输入图片URL或文件名（位于 images/uploads/）:', '');
+            if (!url) return;
+            
+            let imageUrl = url.trim();
+            if (!imageUrl) return;
+            
+            // 如果不是完整URL，则构建为voltchina.net的路径
+            if (!/^https?:\/\//i.test(imageUrl)) {
+                imageUrl = imageUrl.replace(/^\/+/, '');
+                imageUrl = imageUrl.replace(/^images\//i, '');
+                imageUrl = imageUrl.replace(/^\/?images\//i, '');
+                imageUrl = imageUrl.replace(/^uploads\//i, '');
+                imageUrl = `https://voltchina.net/images/uploads/${imageUrl}`;
             }
-        }
-        quill.getModule('toolbar').addHandler('image', imageHandler);
-
-        function chartImageHandler() {
-            const input = prompt('输入图表图片：文件名（位于 images/uploads/）或完整图片URL', '');
-            if (!input) return;
-            const url = normalizeChartImageUrl(input);
-            if (!url) { alert('无效的图片地址或文件名'); return; }
+            
             const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
-            quill.insertEmbed(range.index, 'image', url);
+            quill.insertEmbed(range.index, 'image', imageUrl);
             quill.setSelection(range.index + 1);
         }
+            
+        
+        quill.getModule('toolbar').addHandler('image', simpleImageHandler);
 
-        function normalizeChartImageUrl(raw) {
-            try {
-                let s = (raw || '').trim();
-                if (!s) return '';
-                if (/^https?:\/\//i.test(s)) return s;
-                s = s.replace(/^\/+/, '');
-                s = s.replace(/^images\//i, '');
-                s = s.replace(/^\/?images\//i, '');
-                s = s.replace(/^uploads\//i, '');
-                return `https://voltchina.net/images/uploads/${s}`;
-            } catch { return ''; }
-        }
-
-        setTimeout(() => {
-            const toolbar = quill.getModule('toolbar');
-            if (toolbar) {
-                toolbar.addHandler('chartImage', chartImageHandler);
-            }
-            const chartImageBtn = document.querySelector('.ql-toolbar .ql-chartImage');
-            if (chartImageBtn) {
-                chartImageBtn.textContent = '图表图';
-                chartImageBtn.title = '插入事先准备好的图表图片';
-                chartImageBtn.addEventListener('mousedown', (e) => e.preventDefault());
-            }
-        }, 0);
-
-        document.getElementById('insert-chartimage-btn')?.addEventListener('click', chartImageHandler);
+        // 快捷图片插入按钮使用相同的简化处理器
+        document.getElementById('insert-chartimage-btn')?.addEventListener('click', simpleImageHandler);
 
         const modelsForm = document.getElementById('models-form');
         const modelsJsonOutput = document.getElementById('json-output');
