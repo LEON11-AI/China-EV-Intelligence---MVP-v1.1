@@ -172,13 +172,14 @@
             let imageUrl = url.trim();
             if (!imageUrl) return;
             
-            // 如果不是完整URL，则构建为voltchina.net的路径
+            // 如果不是完整URL，则构建为本地路径
             if (!/^https?:\/\//i.test(imageUrl)) {
                 imageUrl = imageUrl.replace(/^\/+/, '');
                 imageUrl = imageUrl.replace(/^images\//i, '');
                 imageUrl = imageUrl.replace(/^\/?images\//i, '');
                 imageUrl = imageUrl.replace(/^uploads\//i, '');
-                imageUrl = `https://voltchina.net/images/uploads/${imageUrl}`;
+                // 在本地开发环境中使用相对路径
+                imageUrl = `images/uploads/${imageUrl}`;
             }
             
             const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
@@ -268,7 +269,7 @@
         document.getElementById('add-intel-btn-unique').addEventListener('click', () => {
             const fullContentFromEditor = quill.root.innerHTML
               .replace(/<img[^>]*src=["']\/\/:0["'][^>]*>/gi, '')
-              .replace(/src=["']\/?images\/uploads\//gi, 'src="https://voltchina.net/images/uploads/');
+              .replace(/src=["']\/?images\/uploads\//gi, 'src="images/uploads/');
             const item = { 
                 id: intelForm.intel_id.value.trim(), 
                 date: intelForm.intel_date.value.trim(), 
